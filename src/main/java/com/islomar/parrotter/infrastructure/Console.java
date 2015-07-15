@@ -3,9 +3,8 @@ package com.islomar.parrotter.infrastructure;
 /**
  *
  */
-public class Console {
+public interface Console {
 
-  public void printLine(String text) {
-    //TODO
-  }
+  public void printLine(String text);
+
 }
