@@ -1,20 +1,15 @@
 package com.islomar.parrotter.actions;
 
-import com.islomar.parrotter.actions.PublishMessage;
-import com.islomar.parrotter.actions.ViewUserTimeline;
 import com.islomar.parrotter.infrastructure.Console;
+import com.islomar.parrotter.infrastructure.repositories.InMemoryMessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.services.MessageService;
 
 import org.mockito.Mock;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Collections;
-
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @Test
@@ -28,17 +23,16 @@ public class ViewUserTimelineTest {
   Console console;
 
   @Mock
-  MessageService messageService;
-
-  @Mock
   MessageRepository messageRepository;
 
-  private PublishMessage publishMessage;
   private ViewUserTimeline viewUserTimeline;
+  private PublishMessage publishMessage;
 
   @BeforeClass
   public void setUp() {
     initMocks(this);
+
+    MessageService messageService = new MessageService(console, new InMemoryMessageRepository());
 
     viewUserTimeline = new ViewUserTimeline(console, messageService);
     publishMessage = new PublishMessage();
