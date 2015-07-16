@@ -79,9 +79,6 @@ TO DO:
 * Use Spock.
 
 
-
-IN PROGRESS:
-
-
-DONE:
-*
+* http://www.emoji-cheat-sheet.com/
+* Scanner: http://alvinalexander.com/java/edu/pj/pj010005
+* Create a Console implementation with sout, which implements something like OutputWriter.
