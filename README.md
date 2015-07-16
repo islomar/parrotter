@@ -58,7 +58,6 @@ Alice - I love the weather today (5 minutes ago)
 
 
 # My notes
-http://www.emoji-cheat-sheet.com/
-
-Scanner:
-http://alvinalexander.com/java/edu/pj/pj010005
+* http://www.emoji-cheat-sheet.com/
+* Scanner: http://alvinalexander.com/java/edu/pj/pj010005
+* Create a Console implementation with sout, which implements something like OutputWriter.
