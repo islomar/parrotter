@@ -47,13 +47,14 @@ public class MessageServiceTest {
     verify(messageOutput).printMessage(helloWorldMessage);
   }
 
-  public void save_a_message_for_a_user() {
+  public void publish_a_message_for_a_user() {
 
     Message message = new Message(ALICE, "I love the weather today", Instant.now());
 
-    messageService.saveMessage(message);
+    messageService.publishMessage(message);
 
     verify(messageRepository).saveMessage(message);
+    verify(messageOutput).printMessage(message);
   }
 
 }

@@ -23,8 +23,9 @@ public class MessageService {
     userMessages.forEach(messageOutput::printMessage);
   }
 
-  public void saveMessage(Message message) {
+  public void publishMessage(Message message) {
     messageRepository.saveMessage(message);
+    messageOutput.printMessage(message);
   }
 
 }
