@@ -62,3 +62,26 @@ http://www.emoji-cheat-sheet.com/
 
 Scanner:
 http://alvinalexander.com/java/edu/pj/pj010005
+
+while (true) {
+ executeCommand(scanner.nextLine);
+}
+
+
+Times:
+Clock.systemUTC()
+
+
+
+TO DO:
+* Read lines from CLI.
+* Create Feature test (add Feature and Should prefixes to Maven).
+* Use Spock.
+
+
+
+IN PROGRESS:
+
+
+DONE:
+*

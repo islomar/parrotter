@@ -6,6 +6,8 @@ import org.hamcrest.collection.IsCollectionWithSize;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.time.Clock;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.hasSize;
@@ -18,7 +20,7 @@ public class InMemoryMessageRepositoryTest {
 
   @BeforeClass
   public void setUp() {
-    inMemoryMessageRepository = new InMemoryMessageRepository();
+    inMemoryMessageRepository = new InMemoryMessageRepository(Clock.systemUTC());
   }
 
   public void save_one_message() {

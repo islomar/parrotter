@@ -3,11 +3,15 @@ package com.islomar.parrotter.actions;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.repositories.InMemoryMessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
+import com.islomar.parrotter.model.Message;
 import com.islomar.parrotter.services.MessageService;
 
 import org.mockito.Mock;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.time.Clock;
+import java.time.Instant;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -17,7 +21,7 @@ public class ViewUserTimelineTest {
 
   private static final String ALICE = "Alice";
   private static final String NON_EXISTING_USER = "NonExistingUser";
-  public static final String EMPTY_MESSAGE = "";
+  public static final String EMPTY_TEXT = "";
 
   @Mock
   Console console;
@@ -32,7 +36,7 @@ public class ViewUserTimelineTest {
   public void setUp() {
     initMocks(this);
 
-    MessageService messageService = new MessageService(console, new InMemoryMessageRepository());
+    MessageService messageService = new MessageService(console, new InMemoryMessageRepository(Clock.systemUTC()));
 
     viewUserTimeline = new ViewUserTimeline(console, messageService);
     publishMessage = new PublishMessage();
@@ -41,17 +45,19 @@ public class ViewUserTimelineTest {
   public void no_message_shown_for_non_existing_user() {
 
     viewUserTimeline.view(NON_EXISTING_USER);
+    Message emptyMessage = new Message(EMPTY_TEXT, Instant.now());
 
-    verify(console).printLine(EMPTY_MESSAGE);
+    verify(console).printLine(emptyMessage);
   }
 
   public void given_that_Alice_published_one_message_When_I_view_her_messages_Then_I_see_it() {
 
     String messageText = "Hello world";
+    Message helloWorldMessage = new Message(messageText, Instant.now());
     publishMessage.publishMessage(ALICE, messageText);
 
     viewUserTimeline.view(ALICE);
 
-    verify(console).printLine(messageText);
+    verify(console).printLine(helloWorldMessage);
   }
 }

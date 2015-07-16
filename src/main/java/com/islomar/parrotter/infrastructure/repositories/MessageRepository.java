@@ -1,11 +1,13 @@
 package com.islomar.parrotter.infrastructure.repositories;
 
+import com.islomar.parrotter.model.Message;
+
 import java.util.List;
 
 
 public interface MessageRepository {
 
-      List<String> findAllMessagesForUser(String username);
+      List<Message> findAllMessagesForUser(String username);
       void saveMessage(String username, String textMessage);
 
 }
