@@ -8,6 +8,6 @@ import java.util.List;
 public interface MessageRepository {
 
       List<Message> findAllMessagesForUser(String username);
-      void saveMessage(String username, String textMessage);
+      void saveMessage(Message message);
 
 }

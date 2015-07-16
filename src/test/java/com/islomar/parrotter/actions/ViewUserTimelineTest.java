@@ -45,7 +45,7 @@ public class ViewUserTimelineTest {
   public void no_message_shown_for_non_existing_user() {
 
     viewUserTimeline.view(NON_EXISTING_USER);
-    Message emptyMessage = new Message(EMPTY_TEXT, Instant.now());
+    Message emptyMessage = new Message(NON_EXISTING_USER, EMPTY_TEXT, Instant.now());
 
     verify(console).printLine(emptyMessage);
   }
@@ -53,8 +53,8 @@ public class ViewUserTimelineTest {
   public void given_that_Alice_published_one_message_When_I_view_her_messages_Then_I_see_it() {
 
     String messageText = "Hello world";
-    Message helloWorldMessage = new Message(messageText, Instant.now());
-    publishMessage.publishMessage(ALICE, messageText);
+    Message helloWorldMessage = new Message(ALICE, messageText, Instant.now());
+    publishMessage.publishMessage(helloWorldMessage);
 
     viewUserTimeline.view(ALICE);
 

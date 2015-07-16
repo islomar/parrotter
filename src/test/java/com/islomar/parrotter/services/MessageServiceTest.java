@@ -38,13 +38,22 @@ public class MessageServiceTest {
   public void view_the_timeline_for_a_user() {
 
     String helloWorldText = "Hello world";
-    Message helloWorldMessage = new Message(helloWorldText, Instant.now());
+    Message helloWorldMessage = new Message(ALICE, helloWorldText, Instant.now());
     given(messageRepository.findAllMessagesForUser(ALICE)).willReturn(asList(helloWorldMessage));
 
     messageService.viewTimelineFor(ALICE);
 
     verify(messageRepository).findAllMessagesForUser(ALICE);
     verify(console).printLine(helloWorldMessage);
+  }
+
+  public void save_a_message_for_a_user() {
+
+    Message message = new Message(ALICE, "I love the weather today", Instant.now());
+
+    messageService.saveMessage(message);
+
+    verify(messageRepository).saveMessage(message);
   }
 
 }

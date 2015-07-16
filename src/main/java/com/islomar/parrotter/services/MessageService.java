@@ -23,8 +23,8 @@ public class MessageService {
     userMessages.forEach(console::printLine);
   }
 
-  public void saveMessage(String username, String textMessage) {
-    messageRepository.saveMessage(username, textMessage);
+  public void saveMessage(Message message) {
+    messageRepository.saveMessage(message);
   }
 
 }

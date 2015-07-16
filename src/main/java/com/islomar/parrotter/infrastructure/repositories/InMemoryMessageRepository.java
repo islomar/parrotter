@@ -7,13 +7,9 @@ import com.islomar.parrotter.model.Message;
 
 import java.time.Clock;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-/**
- *
- */
+
 public class InMemoryMessageRepository implements MessageRepository {
 
   private final Clock clock;
@@ -30,8 +26,7 @@ public class InMemoryMessageRepository implements MessageRepository {
   }
 
   @Override
-  public void saveMessage(String username, String textMessage) {
-    Message message = new Message(textMessage, clock.instant());
-    messages.put(username, message);
+  public void saveMessage(Message message) {
+    messages.put(message.getUsername(), message);
   }
 }
