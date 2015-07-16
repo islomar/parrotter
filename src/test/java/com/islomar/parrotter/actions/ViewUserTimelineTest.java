@@ -1,6 +1,6 @@
 package com.islomar.parrotter.actions;
 
-import com.islomar.parrotter.infrastructure.Console;
+import com.islomar.parrotter.infrastructure.MessageOutput;
 import com.islomar.parrotter.infrastructure.repositories.InMemoryMessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.model.Message;
@@ -24,7 +24,7 @@ public class ViewUserTimelineTest {
   public static final String EMPTY_TEXT = "";
 
   @Mock
-  Console console;
+  MessageOutput messageOutput;
 
   @Mock
   MessageRepository messageRepository;
@@ -36,9 +36,9 @@ public class ViewUserTimelineTest {
   public void setUp() {
     initMocks(this);
 
-    MessageService messageService = new MessageService(console, new InMemoryMessageRepository(Clock.systemUTC()));
+    MessageService messageService = new MessageService(messageOutput, new InMemoryMessageRepository(Clock.systemUTC()));
 
-    viewUserTimeline = new ViewUserTimeline(console, messageService);
+    viewUserTimeline = new ViewUserTimeline(messageOutput, messageService);
     publishMessage = new PublishMessage();
   }
 
@@ -47,7 +47,7 @@ public class ViewUserTimelineTest {
     viewUserTimeline.view(NON_EXISTING_USER);
     Message emptyMessage = new Message(NON_EXISTING_USER, EMPTY_TEXT, Instant.now());
 
-    verify(console).printLine(emptyMessage);
+    verify(messageOutput).printMessage(emptyMessage);
   }
 
   public void given_that_Alice_published_one_message_When_I_view_her_messages_Then_I_see_it() {
@@ -58,6 +58,6 @@ public class ViewUserTimelineTest {
 
     viewUserTimeline.view(ALICE);
 
-    verify(console).printLine(helloWorldMessage);
+    verify(messageOutput).printMessage(helloWorldMessage);
   }
 }

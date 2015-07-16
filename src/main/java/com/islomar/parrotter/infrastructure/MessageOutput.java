@@ -5,8 +5,8 @@ import com.islomar.parrotter.model.Message;
 /**
  *
  */
-public interface Console {
+public interface MessageOutput {
 
-  public void printLine(Message message);
+  public void printMessage(Message message);
 
 }
