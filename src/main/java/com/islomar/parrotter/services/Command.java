@@ -1,11 +1,7 @@
 package com.islomar.parrotter.services;
 
-/**
- *
- */
-public class Command {
 
-  public void execute() {
+public interface Command {
 
-  }
+  public void execute();
 }

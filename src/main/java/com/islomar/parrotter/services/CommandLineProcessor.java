@@ -5,16 +5,16 @@ import com.islomar.parrotter.infrastructure.MessageOutput;
 /**
  *
  */
-public class CommandProcessor {
+public class CommandLineProcessor {
 
   private final MessageOutput messageOutput;
 
-  public CommandProcessor(MessageOutput messageOutput) {
+  public CommandLineProcessor(MessageOutput messageOutput) {
 
     this.messageOutput = messageOutput;
   }
 
-  public void executeCommandLine(String inputCommandLine) {
+  public void execute(String inputCommandLine) {
 
     MessageParser messageParser = new MessageParser();
     Command command = messageParser.parse(inputCommandLine);
