@@ -35,6 +35,6 @@ public class Message {
 
   @Override
   public String toString() {
-    return messageFormatter.formatWithTextAndTimeElapsed(this);
+    return messageFormatter.formatForViewUserTimeline(this);
   }
 }

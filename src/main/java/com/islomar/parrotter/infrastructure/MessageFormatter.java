@@ -16,7 +16,7 @@ public class MessageFormatter {
    * @param message
    * @return message with time elapsed, e.g. "I love the weather today (5 minutes ago)"
    */
-  public String formatWithTextAndTimeElapsed(Message message) {
+  public String formatForViewUserTimeline(Message message) {
     return message.getTextMessage() + " " + renderTimeElapsed(message.getPublicationInstant());
   }
 

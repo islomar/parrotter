@@ -2,7 +2,6 @@ package com.islomar.parrotter.infrastructure;
 
 import com.islomar.parrotter.model.Message;
 
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -30,7 +29,7 @@ public class MessageFormatterTest {
 
     Message message = new Message(ALICE, MESSAGE, Instant.now().minus(32, ChronoUnit.SECONDS));
 
-    String formattedMessage = messageFormatter.formatWithTextAndTimeElapsed(message);
+    String formattedMessage = messageFormatter.formatForViewUserTimeline(message);
 
     assertThat(formattedMessage, is(MESSAGE + " (32 seconds ago)"));
   }
@@ -39,7 +38,7 @@ public class MessageFormatterTest {
 
     Message message = new Message(ALICE, MESSAGE, Instant.now().minus(321, ChronoUnit.SECONDS));
 
-    String formattedMessage = messageFormatter.formatWithTextAndTimeElapsed(message);
+    String formattedMessage = messageFormatter.formatForViewUserTimeline(message);
 
     assertThat(formattedMessage, is(MESSAGE + " (5 minutes ago)"));
   }
@@ -48,7 +47,7 @@ public class MessageFormatterTest {
 
     Message message = new Message(ALICE, MESSAGE, Instant.now().minus(23*60, ChronoUnit.MINUTES));
 
-    String formattedMessage = messageFormatter.formatWithTextAndTimeElapsed(message);
+    String formattedMessage = messageFormatter.formatForViewUserTimeline(message);
 
     assertThat(formattedMessage, is(MESSAGE + " (23 hours ago)"));
   }
@@ -57,7 +56,7 @@ public class MessageFormatterTest {
 
     Message message = new Message(ALICE, MESSAGE, Instant.now().minus(78, ChronoUnit.HOURS));
 
-    String formattedMessage = messageFormatter.formatWithTextAndTimeElapsed(message);
+    String formattedMessage = messageFormatter.formatForViewUserTimeline(message);
 
     assertThat(formattedMessage, is(MESSAGE + " (3 days ago)"));
   }
