@@ -19,12 +19,12 @@ public class PublishMessageFeatureTest {
   private static final String ALICE = "Alice";
   private static final String MESSAGE = "I love the weather today";
 
-  @Mock
-  private MessageOutput messageOutput;
+  @Mock private MessageOutput messageOutput;
+  @Mock private PublishMessage publishMessage;
 
   public void a_user_publishing_a_message_gets_printed_in_the_console() {
 
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(messageOutput);
+    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(messageOutput, publishMessage);
 
     commandLineProcessor.execute(ALICE + " -> " + MESSAGE);
 

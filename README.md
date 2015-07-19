@@ -85,6 +85,7 @@ TO DO:
 * Review I do not return anything MODIFIABLE.
 * Create CommandPrinter?
 * Review the levels of abstractions.
+* Clean up comments, TODOs, etc.
 
 
 * http://www.emoji-cheat-sheet.com/

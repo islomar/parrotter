@@ -39,7 +39,7 @@ public class ViewUserTimelineTest {
     MessageService messageService = new MessageService(messageOutput, new InMemoryMessageRepository(Clock.systemUTC()));
 
     viewUserTimeline = new ViewUserTimeline(messageOutput, messageService);
-    publishMessage = new PublishMessage();
+    publishMessage = new PublishMessage(messageRepository, messageOutput);
   }
 
   public void no_message_shown_for_non_existing_user() {
@@ -47,7 +47,7 @@ public class ViewUserTimelineTest {
     viewUserTimeline.view(NON_EXISTING_USER);
     Message emptyMessage = new Message(NON_EXISTING_USER, EMPTY_TEXT, Instant.now());
 
-    verify(messageOutput).printMessage(emptyMessage);
+    verify(messageOutput).printMessage(emptyMessage.toString());
   }
 
   public void given_that_Alice_published_one_message_When_I_view_her_messages_Then_I_see_it() {
@@ -58,6 +58,6 @@ public class ViewUserTimelineTest {
 
     viewUserTimeline.view(ALICE);
 
-    verify(messageOutput).printMessage(helloWorldMessage);
+    verify(messageOutput).printMessage(helloWorldMessage.toString());
   }
 }

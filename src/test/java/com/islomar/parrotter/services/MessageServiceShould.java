@@ -17,7 +17,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 
 @Test
-public class MessageServiceTest {
+public class MessageServiceShould {
 
   private static final String ALICE = "Alice";
 

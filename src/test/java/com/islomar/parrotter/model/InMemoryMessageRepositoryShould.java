@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 
 @Test
-public class InMemoryMessageRepositoryTest {
+public class InMemoryMessageRepositoryShould {
 
   private static final String ALICE = "Alice";
   private static final String BOB = "Bob";
