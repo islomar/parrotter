@@ -4,7 +4,6 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
-import com.islomar.parrotter.model.Message;
 
 import java.time.Clock;
 import java.util.ArrayList;
@@ -22,13 +21,11 @@ public class InMemoryMessageRepository implements MessageRepository {
     this.messages = ArrayListMultimap.create();
   }
 
-  @Override
-  public List<Message> findAllMessagesForUser(String username) {
+  public List<Message> findAllMessagesForUser(final String username) {
     return Collections.unmodifiableList(new ArrayList<>(messages.get(username)));
   }
 
-  @Override
-  public void saveMessage(Message message) {
+  public void saveMessage(final Message message) {
     messages.put(message.getUsername(), message);
   }
 }
