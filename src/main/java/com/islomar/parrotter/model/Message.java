@@ -1,7 +1,5 @@
 package com.islomar.parrotter.model;
 
-import com.islomar.parrotter.infrastructure.MessageFormatter;
-
 import java.time.Instant;
 
 
@@ -35,6 +33,10 @@ public class Message {
 
   @Override
   public String toString() {
+    return messageFormatter.formatForViewUserTimeline(this);
+  }
+
+  public String formatForViewUserTimeline() {
     return messageFormatter.formatForViewUserTimeline(this);
   }
 }
