@@ -62,6 +62,8 @@ Alice - I love the weather today (5 minutes ago)
 # My notes
 http://www.emoji-cheat-sheet.com/
 
+Crafted Design: 15:53
+
 Scanner:
 http://alvinalexander.com/java/edu/pj/pj010005
 
@@ -79,6 +81,10 @@ TO DO:
 * Read lines from CLI.
 * Create Feature test (add Feature and Should prefixes to Maven).
 * Use Spock.
+* Use Google Style Guide.
+* Review I do not return anything MODIFIABLE.
+* Create CommandPrinter?
+* Review the levels of abstractions.
 
 
 * http://www.emoji-cheat-sheet.com/
