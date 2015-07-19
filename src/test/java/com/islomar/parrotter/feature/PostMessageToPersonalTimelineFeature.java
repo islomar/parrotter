@@ -1,6 +1,6 @@
 package com.islomar.parrotter.feature;
 
-import com.islomar.parrotter.actions.PublishMessage;
+import com.islomar.parrotter.actions.PostMessage;
 import com.islomar.parrotter.controller.CommandLineProcessor;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
@@ -23,12 +23,11 @@ public class PostMessageToPersonalTimelineFeature {
 
   private static final String ALICE = "Alice";
   private static final String MESSAGE = "I love the weather today";
-  //private static final java.time.Instant TWO_MINUTES_AGO = Instant.now().minus(2, ChronoUnit.MINUTES);
 
   @Mock private Console console;
   @Mock private Clock clock;
 
-  private PublishMessage publishMessage;
+  private PostMessage postMessage;
 
 
   @BeforeMethod
@@ -36,14 +35,12 @@ public class PostMessageToPersonalTimelineFeature {
     initMocks(this);
 
     MessageRepository messageRepository = new InMemoryMessageRepository(clock);
-    publishMessage = new PublishMessage(messageRepository);
+    postMessage = new PostMessage(messageRepository);
   }
 
   public void a_user_publishes_a_message_to_her_personal_timeline() {
 
-    //when(clock.instant()).thenReturn(TWO_MINUTES_AGO);
-
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(publishMessage);
+    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(postMessage);
     commandLineProcessor.execute(ALICE + " -> " + MESSAGE);
 
     verify(console, never()).printMessage(anyString());

@@ -1,8 +1,7 @@
 package com.islomar.parrotter.commands;
 
 
-import com.islomar.parrotter.actions.PublishMessage;
-import com.islomar.parrotter.commands.Command;
+import com.islomar.parrotter.actions.PostMessage;
 import com.islomar.parrotter.model.Message;
 
 /**
@@ -10,17 +9,17 @@ import com.islomar.parrotter.model.Message;
  */
 public class PublishMessageCommand implements Command {
 
-  private final PublishMessage publishMessage;
+  private final PostMessage postMessage;
   private final Message message;
 
-  public PublishMessageCommand(final PublishMessage publishMessage, final Message message) {
+  public PublishMessageCommand(final PostMessage postMessage, final Message message) {
 
-    this.publishMessage = publishMessage;
+    this.postMessage = postMessage;
     this.message = message;
   }
 
   @Override
   public void execute() {
-    publishMessage.execute(message);
+    postMessage.execute(message);
   }
 }

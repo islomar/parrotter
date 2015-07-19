@@ -3,11 +3,11 @@ package com.islomar.parrotter.actions;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.model.Message;
 
-public class PublishMessage {
+public class PostMessage {
 
   private MessageRepository messageRepository;
 
-  public PublishMessage(MessageRepository messageRepository) {
+  public PostMessage(MessageRepository messageRepository) {
 
     this.messageRepository = messageRepository;
   }

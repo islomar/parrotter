@@ -1,22 +1,22 @@
 package com.islomar.parrotter.controller;
 
-import com.islomar.parrotter.actions.PublishMessage;
+import com.islomar.parrotter.actions.PostMessage;
 import com.islomar.parrotter.commands.Command;
 import com.islomar.parrotter.commands.CommandGenerator;
 
 
 public class CommandLineProcessor {
 
-  private final PublishMessage publishMessage;
+  private final PostMessage postMessage;
 
-  public CommandLineProcessor(PublishMessage publishMessage) {
+  public CommandLineProcessor(PostMessage postMessage) {
 
-    this.publishMessage = publishMessage;
+    this.postMessage = postMessage;
   }
 
   public void execute(String inputCommandLine) {
 
-    CommandGenerator commandGenerator = new CommandGenerator(publishMessage);
+    CommandGenerator commandGenerator = new CommandGenerator(postMessage);
     Command command = commandGenerator.createCommandFromInputLine(inputCommandLine);
 
     command.execute();

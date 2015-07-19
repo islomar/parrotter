@@ -24,21 +24,21 @@ public class PostMessageShould {
   @Mock MessageRepository messageRepository;
   @Mock Console console;
 
-  private PublishMessage publishMessage;
+  private PostMessage postMessage;
 
 
   @BeforeMethod
   public void setUpMethod() {
 
     initMocks(this);
-    publishMessage = new PublishMessage(messageRepository);
+    postMessage = new PostMessage(messageRepository);
   }
 
   public void save_a_message_and_show_it_on_timeline() {
 
     Message postedMessage = new Message(ALICE, MESSAGE, Instant.now().minus(FIVE, ChronoUnit.SECONDS));
 
-    publishMessage.execute(postedMessage);
+    postMessage.execute(postedMessage);
 
     verify(messageRepository).saveMessage(postedMessage);
   }
