@@ -1,7 +1,7 @@
 package com.islomar.parrotter.actions;
 
-import com.islomar.parrotter.infrastructure.MessageOutput;
-import com.islomar.parrotter.infrastructure.repositories.InMemoryMessageRepository;
+import com.islomar.parrotter.model.MessageOutput;
+import com.islomar.parrotter.model.InMemoryMessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.model.Message;
 import com.islomar.parrotter.services.MessageService;
@@ -54,7 +54,7 @@ public class ViewUserTimelineTest {
 
     String messageText = "Hello world";
     Message helloWorldMessage = new Message(ALICE, messageText, Instant.now());
-    publishMessage.publishMessage(helloWorldMessage);
+    publishMessage.execute(helloWorldMessage);
 
     viewUserTimeline.view(ALICE);
 

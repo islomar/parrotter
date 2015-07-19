@@ -1,6 +1,6 @@
 package com.islomar.parrotter.services;
 
-import com.islomar.parrotter.infrastructure.MessageOutput;
+import com.islomar.parrotter.model.MessageOutput;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.model.Message;
 
@@ -20,12 +20,12 @@ public class MessageService {
 
   public void viewTimelineFor(String username) {
     List<Message> userMessages = messageRepository.findAllMessagesForUser(username);
-    userMessages.forEach(messageOutput::printMessage);
+    //userMessages.forEach(messageOutput::printMessage);
   }
 
   public void publishMessage(Message message) {
     messageRepository.saveMessage(message);
-    messageOutput.printMessage(message);
+    messageOutput.printMessage(message.toString());
   }
 
 }

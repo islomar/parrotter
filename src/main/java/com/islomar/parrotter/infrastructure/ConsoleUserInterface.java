@@ -1,6 +1,6 @@
 package com.islomar.parrotter.infrastructure;
 
-import com.islomar.parrotter.model.Message;
+import com.islomar.parrotter.model.MessageOutput;
 
 /**
  *
@@ -8,7 +8,7 @@ import com.islomar.parrotter.model.Message;
 public class ConsoleUserInterface implements MessageOutput {
 
   @Override
-  public void printMessage(Message message) {
-    System.out.println(message);
+  public void printMessage(String textMessage) {
+    System.out.println(textMessage);
   }
 }

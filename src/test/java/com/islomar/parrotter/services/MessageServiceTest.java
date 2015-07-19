@@ -1,6 +1,6 @@
 package com.islomar.parrotter.services;
 
-import com.islomar.parrotter.infrastructure.MessageOutput;
+import com.islomar.parrotter.model.MessageOutput;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.model.Message;
 
@@ -44,7 +44,7 @@ public class MessageServiceTest {
     messageService.viewTimelineFor(ALICE);
 
     verify(messageRepository).findAllMessagesForUser(ALICE);
-    verify(messageOutput).printMessage(helloWorldMessage);
+    verify(messageOutput).printMessage(helloWorldMessage.toString());
   }
 
   public void publish_a_message_for_a_user() {
@@ -54,7 +54,7 @@ public class MessageServiceTest {
     messageService.publishMessage(message);
 
     verify(messageRepository).saveMessage(message);
-    verify(messageOutput).printMessage(message);
+    verify(messageOutput).printMessage(message.toString());
   }
 
 }

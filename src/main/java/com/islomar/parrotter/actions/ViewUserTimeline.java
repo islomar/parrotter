@@ -1,6 +1,6 @@
 package com.islomar.parrotter.actions;
 
-import com.islomar.parrotter.infrastructure.MessageOutput;
+import com.islomar.parrotter.model.MessageOutput;
 import com.islomar.parrotter.services.MessageService;
 
 /**
