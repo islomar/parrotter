@@ -1,18 +1,15 @@
 package com.islomar.parrotter.actions;
 
-import com.islomar.parrotter.model.MessageOutput;
+import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.services.MessageService;
 
-/**
- *
- */
 public class ViewUserTimeline {
 
-  private MessageOutput messageOutput;
+  private Console messageOutput;
   private MessageService messageService;
 
-  public ViewUserTimeline(MessageOutput messageOutput, MessageService messageService) {
-    this.messageOutput = messageOutput;
+  public ViewUserTimeline(Console console, MessageService messageService) {
+    this.messageOutput = console;
     this.messageService = messageService;
   }
 

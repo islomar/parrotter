@@ -1,6 +1,6 @@
 package com.islomar.parrotter.actions;
 
-import com.islomar.parrotter.model.MessageOutput;
+import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.model.InMemoryMessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.model.Message;
@@ -17,14 +17,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @Test
-public class ViewUserTimelineTest {
+public class ReadUserTimelineFeature {
 
   private static final String ALICE = "Alice";
   private static final String NON_EXISTING_USER = "NonExistingUser";
   public static final String EMPTY_TEXT = "";
 
   @Mock
-  MessageOutput messageOutput;
+  Console messageOutput;
 
   @Mock
   MessageRepository messageRepository;

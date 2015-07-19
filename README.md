@@ -81,7 +81,6 @@ TO DO:
 * Read lines from CLI.
 * Create Feature test (add Feature and Should prefixes to Maven).
 * Use Spock.
-* Use Google Style Guide.
 * Review I do not return anything MODIFIABLE.
 * Create CommandPrinter?
 * Review the levels of abstractions.

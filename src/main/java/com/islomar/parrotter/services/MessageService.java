@@ -1,6 +1,6 @@
 package com.islomar.parrotter.services;
 
-import com.islomar.parrotter.model.MessageOutput;
+import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.model.Message;
 
@@ -9,12 +9,12 @@ import java.util.List;
 
 public class MessageService {
 
-  private final MessageOutput messageOutput;
+  private final Console messageOutput;
   private final MessageRepository messageRepository;
 
 
-  public MessageService(MessageOutput messageOutput, MessageRepository messageRepository) {
-    this.messageOutput = messageOutput;
+  public MessageService(Console console, MessageRepository messageRepository) {
+    this.messageOutput = console;
     this.messageRepository = messageRepository;
   }
 

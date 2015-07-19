@@ -1,22 +1,22 @@
 package com.islomar.parrotter.actions;
 
+import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.model.Message;
-import com.islomar.parrotter.model.MessageOutput;
 
 public class PublishMessage {
 
   private MessageRepository messageRepository;
-  private MessageOutput messageOutput;
+  private Console console;
 
-  public PublishMessage(MessageRepository messageRepository, MessageOutput messageOutput) {
+  public PublishMessage(MessageRepository messageRepository, Console console) {
 
     this.messageRepository = messageRepository;
-    this.messageOutput = messageOutput;
+    this.console = console;
   }
 
   public void execute(Message message) {
     messageRepository.saveMessage(message);
-    messageOutput.printMessage(message.toString());
+    console.printMessage(message.toString());
   }
 }

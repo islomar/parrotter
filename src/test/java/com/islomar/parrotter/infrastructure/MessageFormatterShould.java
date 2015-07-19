@@ -13,7 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 @Test
-public class MessageFormatterTest {
+public class MessageFormatterShould {
 
   private static final String MESSAGE = "Hello world";
   private static final String ALICE = "Alice";

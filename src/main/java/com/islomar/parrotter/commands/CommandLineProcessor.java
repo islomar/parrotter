@@ -1,20 +1,18 @@
 package com.islomar.parrotter.commands;
 
 import com.islomar.parrotter.actions.PublishMessage;
-import com.islomar.parrotter.model.MessageOutput;
+import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.model.CommandGenerator;
 
-/**
- *
- */
+
 public class CommandLineProcessor {
 
-  private final MessageOutput messageOutput;
+  private final Console console;
   private final PublishMessage publishMessage;
 
-  public CommandLineProcessor(MessageOutput messageOutput, PublishMessage publishMessage) {
+  public CommandLineProcessor(Console console, PublishMessage publishMessage) {
 
-    this.messageOutput = messageOutput;
+    this.console = console;
     this.publishMessage = publishMessage;
   }
 
