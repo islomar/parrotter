@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/islomar/parrotter.svg)](https://travis-ci.org/islomar/parrotter)
+
 # Exercise
 
 Implement a console-based social networking application (similar to Twitter) satisfying the scenarios below.
