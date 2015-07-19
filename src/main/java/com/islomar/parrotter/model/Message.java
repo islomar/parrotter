@@ -31,11 +31,6 @@ public class Message {
     return publicationInstant;
   }
 
-  @Override
-  public String toString() {
-    return messageFormatter.formatForViewUserTimeline(this);
-  }
-
   public String formatForViewUserTimeline() {
     return messageFormatter.formatForViewUserTimeline(this);
   }
