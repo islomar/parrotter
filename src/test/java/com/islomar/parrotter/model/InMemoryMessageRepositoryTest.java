@@ -1,17 +1,15 @@
-package com.islomar.parrotter.infrastructure.repositories;
+package com.islomar.parrotter.model;
 
 
-import com.islomar.parrotter.infrastructure.repositories.InMemoryMessageRepository;
+import com.islomar.parrotter.model.InMemoryMessageRepository;
 import com.islomar.parrotter.model.Message;
 
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Clock;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
