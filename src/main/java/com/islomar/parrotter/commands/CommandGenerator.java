@@ -1,15 +1,11 @@
-package com.islomar.parrotter.model;
+package com.islomar.parrotter.commands;
 
 import com.islomar.parrotter.actions.PublishMessage;
-import com.islomar.parrotter.commands.Command;
-import com.islomar.parrotter.commands.NothingToExecuteCommand;
-import com.islomar.parrotter.commands.PublishMessageCommand;
+import com.islomar.parrotter.model.Message;
 
 import java.time.Instant;
 
-/**
- *
- */
+
 public class CommandGenerator {
 
   private final PublishMessage publishMessage;
@@ -21,7 +17,6 @@ public class CommandGenerator {
 
   public Command createCommandFromInputLine(String inputCommandLine) {
 
-    // Use regex? only name, -> , wall, follow
     Command command = new NothingToExecuteCommand();
     if (inputCommandLine.contains("->")) {
       command = generatePublishMessageCommand(inputCommandLine);
@@ -49,6 +44,7 @@ public class CommandGenerator {
   }
 
   private Command generatePublishMessageCommand(String inputCommandLine) {
+
     String[] inputArguments = inputCommandLine.split("->");
     String username = inputArguments[0].trim();
     String textMessage = inputArguments[1].trim();

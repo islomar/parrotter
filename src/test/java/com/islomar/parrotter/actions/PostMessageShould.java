@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
-import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -32,7 +31,7 @@ public class PostMessageShould {
   public void setUpMethod() {
 
     initMocks(this);
-    publishMessage = new PublishMessage(messageRepository, console);
+    publishMessage = new PublishMessage(messageRepository);
   }
 
   public void save_a_message_and_show_it_on_timeline() {
@@ -41,8 +40,6 @@ public class PostMessageShould {
 
     publishMessage.execute(postedMessage);
 
-    inOrder(messageRepository, console);
     verify(messageRepository).saveMessage(postedMessage);
-    verify(console).printMessage(MESSAGE + " (" + FIVE + " seconds ago)");
   }
 }
