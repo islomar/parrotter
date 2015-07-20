@@ -1,9 +1,11 @@
 package com.islomar.parrotter.feature;
 
+import com.islomar.parrotter.actions.PostMessage;
 import com.islomar.parrotter.actions.ReadUserTimeline;
+import com.islomar.parrotter.controller.CommandLineProcessor;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
-import com.islomar.parrotter.model.Message;
+import com.islomar.parrotter.model.InMemoryMessageRepository;
 
 import org.mockito.Mock;
 import org.testng.annotations.BeforeMethod;
@@ -12,7 +14,6 @@ import org.testng.annotations.Test;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -23,32 +24,34 @@ public class ReadUserTimelineFeature {
 
   private static final String ALICE = "Alice";
   private static final String MESSAGE_TEXT = "I love the weather today";
-  private static final int TWO = 2;
-  private static final java.time.Instant TWO_MINUTES_AGO = Instant.now().minus(TWO, ChronoUnit.MINUTES);
+  private static final int FIVE = 5;
+  private static final java.time.Instant FIVE_SECONDS_AGO = Instant.now().minus(FIVE, ChronoUnit.SECONDS);
 
   @Mock private Console console;
   @Mock private Clock clock;
-  @Mock private MessageRepository messageRepository;
 
   private ReadUserTimeline readUserTimeline;
+  private PostMessage postMessage;
 
 
   @BeforeMethod
   public void setUpMethod() {
     initMocks(this);
 
+    MessageRepository messageRepository = new InMemoryMessageRepository(clock);
+    postMessage = new PostMessage(messageRepository);
     readUserTimeline = new ReadUserTimeline(messageRepository, console);
   }
 
-  public void a_user_can_read_any_user_timeline() {
+  public void a_user_publishes_a_message_to_her_personal_timeline() {
 
-    Message postedMessaged = new Message(ALICE, MESSAGE_TEXT, TWO_MINUTES_AGO);
-    given(messageRepository.findAllMessagesForUser(ALICE)).willReturn(Arrays.asList(postedMessaged));
+    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(clock, postMessage, readUserTimeline);
+    given(clock.instant()).willReturn(FIVE_SECONDS_AGO, Instant.now());
+    commandLineProcessor.execute(ALICE + " -> " + MESSAGE_TEXT);
 
-    readUserTimeline.execute(ALICE);
+    commandLineProcessor.execute(ALICE);
 
-    verify(console).printMessage(MESSAGE_TEXT + " (" + TWO + " minutes ago)");
-
+    verify(console).printMessage(MESSAGE_TEXT + " (" + FIVE + " seconds ago)");
   }
 
 }

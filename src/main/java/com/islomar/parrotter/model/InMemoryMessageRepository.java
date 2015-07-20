@@ -25,7 +25,8 @@ public class InMemoryMessageRepository implements MessageRepository {
     return Collections.unmodifiableList(new ArrayList<>(messages.get(username)));
   }
 
-  public void saveMessage(final Message message) {
+  public void saveMessage(final String username, final String messageText) {
+    Message message = new Message(username, messageText, clock.instant());
     messages.put(message.getUsername(), message);
   }
 }

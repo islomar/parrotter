@@ -1,6 +1,7 @@
 package com.islomar.parrotter.feature;
 
 import com.islomar.parrotter.actions.PostMessage;
+import com.islomar.parrotter.actions.ReadUserTimeline;
 import com.islomar.parrotter.controller.CommandLineProcessor;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
@@ -22,12 +23,13 @@ import static org.mockito.MockitoAnnotations.initMocks;
 public class PostMessageToPersonalTimelineFeature {
 
   private static final String ALICE = "Alice";
-  private static final String MESSAGE = "I love the weather today";
+  private static final String MESSAGE_TEXT = "I love the weather today";
 
   @Mock private Console console;
   @Mock private Clock clock;
 
   private PostMessage postMessage;
+  private ReadUserTimeline readUserTimeline;
 
 
   @BeforeMethod
@@ -36,12 +38,13 @@ public class PostMessageToPersonalTimelineFeature {
 
     MessageRepository messageRepository = new InMemoryMessageRepository(clock);
     postMessage = new PostMessage(messageRepository);
+    readUserTimeline = new ReadUserTimeline(messageRepository, console);
   }
 
   public void a_user_publishes_a_message_to_her_personal_timeline() {
 
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(postMessage);
-    commandLineProcessor.execute(ALICE + " -> " + MESSAGE);
+    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(clock, postMessage, readUserTimeline);
+    commandLineProcessor.execute(ALICE + " -> " + MESSAGE_TEXT);
 
     verify(console, never()).printMessage(anyString());
   }

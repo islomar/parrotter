@@ -12,7 +12,7 @@ public class PostMessage {
     this.messageRepository = messageRepository;
   }
 
-  public void execute(Message message) {
-    messageRepository.saveMessage(message);
+  public void execute(String username, String textMessage) {
+    messageRepository.saveMessage(username, textMessage);
   }
 }

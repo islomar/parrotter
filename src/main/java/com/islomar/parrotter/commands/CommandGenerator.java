@@ -1,18 +1,22 @@
 package com.islomar.parrotter.commands;
 
 import com.islomar.parrotter.actions.PostMessage;
-import com.islomar.parrotter.model.Message;
+import com.islomar.parrotter.actions.ReadUserTimeline;
 
-import java.time.Instant;
+import java.time.Clock;
 
 
 public class CommandGenerator {
 
+  private final Clock clock;
   private final PostMessage postMessage;
+  private final ReadUserTimeline readUserTimeline;
 
-  public CommandGenerator(PostMessage postMessage) {
+  public CommandGenerator(Clock clock, PostMessage postMessage, ReadUserTimeline readUserTimeline) {
+    this.clock = clock;
 
     this.postMessage = postMessage;
+    this.readUserTimeline = readUserTimeline;
   }
 
   public Command createCommandFromInputLine(String inputCommandLine) {
@@ -31,8 +35,8 @@ public class CommandGenerator {
     return command;
   }
 
-  private Command generateViewUserTimelineCommand(String inputCommandLine) {
-    throw new UnsupportedOperationException();
+  private Command generateViewUserTimelineCommand(String username) {
+    return new ReadUserTimelineCommand(readUserTimeline, username);
   }
 
   private Command generateFollowUserCommand(String inputCommandLine) {
@@ -48,7 +52,6 @@ public class CommandGenerator {
     String[] inputArguments = inputCommandLine.split("->");
     String username = inputArguments[0].trim();
     String textMessage = inputArguments[1].trim();
-    Message message = new Message(username, textMessage, Instant.now());
-    return new PublishMessageCommand(postMessage, message);
+    return new PostMessageCommand(postMessage, username, textMessage);
   }
 }
