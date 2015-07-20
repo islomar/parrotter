@@ -15,7 +15,6 @@ public class PostMessageShould {
 
   private static final String ALICE = "Alice";
   private static final String MESSAGE_TEXT = "I love the weather today";
-  private static final int FIVE = 5;
 
   @Mock MessageRepository messageRepository;
   @Mock Console console;
