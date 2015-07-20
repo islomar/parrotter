@@ -20,11 +20,6 @@ public class InMemoryUserRepository implements UserRepository {
   }
 
   @Override
-  public void updateUser(String username) {
-    throw new UnsupportedOperationException();
-  }
-
-  @Override
   public User getUser(String username) {
     return users.stream().filter(user -> user.getUsername().equalsIgnoreCase(username)).findFirst().orElse(new NullUser());
   }

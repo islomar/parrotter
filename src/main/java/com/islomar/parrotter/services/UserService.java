@@ -12,7 +12,6 @@ public class UserService {
   }
 
   public void saveUser(String username) {
-    //TODO: check if it exists
     userRepository.saveUser(username);
   }
 

@@ -37,5 +37,4 @@ public class PostMessageServiceShould {
     verify(messageRepository).saveMessage(ALICE, MESSAGE_TEXT);
   }
 
-  //TODO: another test to verify the order of the messages
 }
