@@ -7,6 +7,7 @@ import java.time.Instant;
 
 public class MessageFormatter {
 
+  private static final int MILLISECONDS_IN_A_SECOND = 1000;
 
   private Clock clock;
 
@@ -18,7 +19,6 @@ public class MessageFormatter {
   /**
    * Formats a Message to be shown in user timeline.
    *
-   * @param message
    * @return message with time elapsed, e.g. "I love the weather today (5 minutes ago)"
    */
   public String formatForViewUserTimeline(Message message) {
@@ -28,7 +28,6 @@ public class MessageFormatter {
   /**
    * Formats a Message to be shown in a user wall.
    *
-   * @param message
    * @return message with username and time elapsed, e.g. "Alice - I love the weather today (5 minutes ago)"
    */
   public String formatForTheWall(Message message) {
@@ -39,14 +38,33 @@ public class MessageFormatter {
 
     Duration timeElapsed = Duration.between(publicationInstant, clock.instant());
 
-    if (timeElapsed.toMinutes() == 0) {
-      return "(" + timeElapsed.toMillis() / 1000 + " seconds ago)";
+    if (lessThanOneMinuteElapsed(timeElapsed)) {
+
+      return generateMessage(timeElapsed.toMillis()/MILLISECONDS_IN_A_SECOND, "second");
+
     } else if (timeElapsed.toHours() == 0) {
-      return "(" + timeElapsed.toMinutes() + " minutes ago)";
+
+      return generateMessage(timeElapsed.toMinutes(), "minute");
+
     } else if (timeElapsed.toDays() == 0) {
-      return "(" + timeElapsed.toHours() + " hours ago)";
+
+      return generateMessage(timeElapsed.toHours(), "hour");
+
     } else {
-      return "(" + timeElapsed.toDays() + " days ago)";
+      return generateMessage(timeElapsed.toDays(), "day");
     }
   }
+
+  private boolean lessThanOneMinuteElapsed(Duration timeElapsed) {
+    return timeElapsed.toMinutes() == 0;
+  }
+
+  private String generateMessage(long numberOfUnits, String unitInSingular) {
+    return "(" +
+           numberOfUnits +
+           " " +
+           (numberOfUnits == 1 ? unitInSingular : unitInSingular + "s") +
+           " ago)";
+  }
+
 }

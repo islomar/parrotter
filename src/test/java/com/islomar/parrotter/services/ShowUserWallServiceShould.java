@@ -75,7 +75,7 @@ public class ShowUserWallServiceShould {
 
     InOrder inOrder = inOrder(console);
     inOrder.verify(console).printMessage("Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)");
-    inOrder.verify(console).printMessage("Bob - Good game though. (1 minutes ago)");
+    inOrder.verify(console).printMessage("Bob - Good game though. (1 minute ago)");
     inOrder.verify(console).printMessage("Bob - Damn! We lost! (2 minutes ago)");
     inOrder.verify(console).printMessage("Alice - I love the weather today (5 minutes ago)");
   }
