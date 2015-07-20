@@ -4,12 +4,11 @@ import com.google.common.base.Charsets;
 
 import com.islomar.parrotter.controller.CommandLineProcessor;
 import com.islomar.parrotter.infrastructure.Console;
+import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
 import com.islomar.parrotter.model.message.InMemoryMessageRepository;
-import com.islomar.parrotter.model.message.MessageFormatter;
 import com.islomar.parrotter.model.user.InMemoryUserRepository;
-import com.islomar.parrotter.services.FollowUserService;
 import com.islomar.parrotter.services.PostMessageService;
 import com.islomar.parrotter.services.ReadUserTimelineService;
 import com.islomar.parrotter.services.ShowUserWallService;
@@ -61,10 +60,11 @@ public class ParrotterApplicationLauncher {
     MessageFormatter messageFormatter = new MessageFormatter(Clock.systemUTC());
     ReadUserTimelineService readUserTimelineService = new ReadUserTimelineService(messageRepository, console, messageFormatter);
     UserService userService = new UserService(userRepository);
-    FollowUserService followUserService = new FollowUserService(userRepository);
     ShowUserWallService showUserWallService = new ShowUserWallService(messageRepository, userRepository, console, messageFormatter);
 
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, postMessageService, readUserTimelineService, followUserService, showUserWallService);
+    CommandLineProcessor
+        commandLineProcessor =
+        new CommandLineProcessor(userService, postMessageService, readUserTimelineService, showUserWallService);
 
     return commandLineProcessor;
   }

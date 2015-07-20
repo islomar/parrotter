@@ -23,5 +23,6 @@ public class NullUser extends User {
   }
 
   @Override
-  public void follow(String username) {}
+  public void follow(String username) {
+  }
 }

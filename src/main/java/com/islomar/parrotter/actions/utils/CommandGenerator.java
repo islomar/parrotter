@@ -1,30 +1,35 @@
-package com.islomar.parrotter.actions;
+package com.islomar.parrotter.actions.utils;
 
+import com.islomar.parrotter.actions.Command;
+import com.islomar.parrotter.actions.FollowUserCommand;
+import com.islomar.parrotter.actions.NothingToExecuteCommand;
+import com.islomar.parrotter.actions.PostMessageCommand;
+import com.islomar.parrotter.actions.ReadUserTimelineCommand;
+import com.islomar.parrotter.actions.ShowWallCommand;
 import com.islomar.parrotter.model.user.User;
-import com.islomar.parrotter.services.FollowUserService;
 import com.islomar.parrotter.services.PostMessageService;
 import com.islomar.parrotter.services.ReadUserTimelineService;
 import com.islomar.parrotter.services.ShowUserWallService;
 import com.islomar.parrotter.services.UserService;
 
-import static com.islomar.parrotter.actions.CommandType.FOLLOWS;
-import static com.islomar.parrotter.actions.CommandType.POST;
-import static com.islomar.parrotter.actions.CommandType.WALL;
+import static com.islomar.parrotter.actions.utils.CommandType.FOLLOWS;
+import static com.islomar.parrotter.actions.utils.CommandType.POST;
+import static com.islomar.parrotter.actions.utils.CommandType.WALL;
 
 public class CommandGenerator {
 
   private final PostMessageService postMessageService;
   private final ReadUserTimelineService readUserTimelineService;
-  private final FollowUserService followUserService;
   private final ShowUserWallService showUserWallService;
   private final UserService userService;
 
-  public CommandGenerator(UserService userService, PostMessageService postMessageService, ReadUserTimelineService readUserTimelineService, FollowUserService followUserService, ShowUserWallService showUserWallService) {
+  public CommandGenerator(UserService userService, PostMessageService postMessageService,
+                          ReadUserTimelineService readUserTimelineService,
+                          ShowUserWallService showUserWallService) {
 
     this.userService = userService;
     this.postMessageService = postMessageService;
     this.readUserTimelineService = readUserTimelineService;
-    this.followUserService = followUserService;
     this.showUserWallService = showUserWallService;
   }
 
@@ -36,7 +41,7 @@ public class CommandGenerator {
     } else if (inputCommandLine.contains(WALL.symbol())) {
       command = generateShowUserWallCommand(inputCommandLine);
     } else if (inputCommandLine.contains(FOLLOWS.symbol())) {
-      command = generateFollowUserCommand(inputCommandLine, followUserService);
+      command = generateFollowUserCommand(inputCommandLine);
     } else {
       command = generateViewUserTimelineCommand(inputCommandLine);
     }
@@ -48,7 +53,7 @@ public class CommandGenerator {
     return new ReadUserTimelineCommand(readUserTimelineService, username);
   }
 
-  private Command generateFollowUserCommand(String inputCommandLine, FollowUserService followUserService) {
+  private Command generateFollowUserCommand(String inputCommandLine) {
     String[] inputArguments = inputCommandLine.split(FOLLOWS.symbol());
     String followingUsername = inputArguments[0].trim();
     String followedUsername = inputArguments[1].trim();
@@ -57,7 +62,7 @@ public class CommandGenerator {
 
     followingUser.follow(followedUsername);
 
-    return new FollowUserCommand(userService, followUserService, followingUsername, followedUsername);
+    return new FollowUserCommand(userService, followingUsername, followedUsername);
   }
 
   private Command generateShowUserWallCommand(String inputCommandLine) {

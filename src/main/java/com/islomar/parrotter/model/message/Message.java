@@ -31,8 +31,8 @@ public class Message implements Comparable {
 
   @Override
   public int compareTo(Object o) {
-    Message message = (Message) o;
-    return message.getPublicationInstant().compareTo(publicationInstant);
+    Message anotherMessage = (Message) o;
+    return anotherMessage.getPublicationInstant().compareTo(publicationInstant);
   }
 
   @Override

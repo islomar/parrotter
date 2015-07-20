@@ -1,9 +1,9 @@
 package com.islomar.parrotter.services;
 
 import com.islomar.parrotter.infrastructure.Console;
+import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.model.message.Message;
-import com.islomar.parrotter.model.message.MessageFormatter;
 
 import java.util.List;
 

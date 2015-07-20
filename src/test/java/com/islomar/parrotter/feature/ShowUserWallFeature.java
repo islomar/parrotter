@@ -5,9 +5,8 @@ import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
 import com.islomar.parrotter.model.message.InMemoryMessageRepository;
-import com.islomar.parrotter.model.message.MessageFormatter;
+import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
 import com.islomar.parrotter.model.user.InMemoryUserRepository;
-import com.islomar.parrotter.services.FollowUserService;
 import com.islomar.parrotter.services.PostMessageService;
 import com.islomar.parrotter.services.ReadUserTimelineService;
 import com.islomar.parrotter.services.ShowUserWallService;
@@ -22,7 +21,7 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
-import static com.islomar.parrotter.actions.CommandType.*;
+import static com.islomar.parrotter.actions.utils.CommandType.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -33,11 +32,8 @@ public class ShowUserWallFeature {
 
   private static final String ALICE = "Alice";
   private static final String CHARLIE = "Charlie";
-  private static final String BOB = "Bob";
   private static final String CHARLIE_MESSAGE_TEXT = "I'm in New York today! Anyone wants to have a coffee?";
   private static final String ALICE_MESSAGE_TEXT = "I love the weather today";
-  private static final String BOB_MESSAGE_TEXT_1 = "Good game though.";
-  private static final String BOB_MESSAGE_TEXT_2 = "Damn! We lost!";
   private static final int TWO = 2;
   private static final int FIVE = 5;
   private static final java.time.Instant NOW = Instant.now();
@@ -51,7 +47,6 @@ public class ShowUserWallFeature {
   private ReadUserTimelineService readUserTimelineService;
   private PostMessageService postMessageService;
   private ShowUserWallService showUserWallService;
-  private FollowUserService followUserService;
   private UserService userService;
 
 
@@ -69,13 +64,12 @@ public class ShowUserWallFeature {
 
     userService = new UserService(userRepository);
     readUserTimelineService = new ReadUserTimelineService(messageRepository, console, messageFormatter);
-    followUserService = new FollowUserService(userRepository);
   }
 
 
   public void when_charlie_follows_alice_then_his_wall_shows_both_his_personal_timeline_and_alice_timeline() {
 
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, postMessageService, readUserTimelineService, followUserService, showUserWallService);
+    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, postMessageService, readUserTimelineService, showUserWallService);
     given(clock.instant()).willReturn(FIVE_MINUTES_AGO, TWO_SECONDS_AGO);
 
     commandLineProcessor.execute(ALICE + POST.symbol() + ALICE_MESSAGE_TEXT);

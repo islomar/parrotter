@@ -1,4 +1,6 @@
-package com.islomar.parrotter.model.message;
+package com.islomar.parrotter.infrastructure.formatters;
+
+import com.islomar.parrotter.model.message.Message;
 
 import java.time.Clock;
 import java.time.Duration;
@@ -40,7 +42,7 @@ public class MessageFormatter {
 
     if (lessThanOneMinuteElapsed(timeElapsed)) {
 
-      return generateMessage(timeElapsed.toMillis()/MILLISECONDS_IN_A_SECOND, "second");
+      return generateMessage(timeElapsed.toMillis() / MILLISECONDS_IN_A_SECOND, "second");
 
     } else if (timeElapsed.toHours() == 0) {
 

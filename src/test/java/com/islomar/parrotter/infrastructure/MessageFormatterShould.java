@@ -1,7 +1,7 @@
 package com.islomar.parrotter.infrastructure;
 
+import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
 import com.islomar.parrotter.model.message.Message;
-import com.islomar.parrotter.model.message.MessageFormatter;
 
 import org.mockito.Mock;
 import org.testng.annotations.BeforeMethod;

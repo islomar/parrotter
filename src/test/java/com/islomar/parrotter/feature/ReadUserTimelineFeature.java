@@ -1,7 +1,6 @@
 package com.islomar.parrotter.feature;
 
-import com.islomar.parrotter.model.message.MessageFormatter;
-import com.islomar.parrotter.services.FollowUserService;
+import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
 import com.islomar.parrotter.services.PostMessageService;
 import com.islomar.parrotter.services.ReadUserTimelineService;
 import com.islomar.parrotter.services.ShowUserWallService;
@@ -38,7 +37,6 @@ public class ReadUserTimelineFeature {
 
   private ReadUserTimelineService readUserTimelineService;
   private PostMessageService postMessageService;
-  private FollowUserService followUserService;
   private ShowUserWallService showUserWallService;
   private UserService userService;
 
@@ -54,14 +52,13 @@ public class ReadUserTimelineFeature {
 
     UserRepository userRepository = new InMemoryUserRepository();
     userService = new UserService(userRepository);
-    followUserService = new FollowUserService(userRepository);
 
     showUserWallService = new ShowUserWallService(messageRepository, userRepository, console, messageFormatter);
   }
 
   public void a_user_publishes_a_message_to_her_personal_timeline() {
 
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, postMessageService, readUserTimelineService, followUserService, showUserWallService);
+    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, postMessageService, readUserTimelineService, showUserWallService);
     given(clock.instant()).willReturn(FIVE_SECONDS_AGO, Instant.now());
     commandLineProcessor.execute(ALICE + " -> " + MESSAGE_TEXT);
 

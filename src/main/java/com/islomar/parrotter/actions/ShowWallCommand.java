@@ -14,7 +14,6 @@ public class ShowWallCommand implements Command {
     this.username = username;
   }
 
-
   @Override
   public void execute() {
     showUserWallService.execute(username);

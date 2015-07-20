@@ -1,16 +1,15 @@
 package com.islomar.parrotter.feature;
 
-import com.islomar.parrotter.model.message.MessageFormatter;
-import com.islomar.parrotter.services.FollowUserService;
-import com.islomar.parrotter.services.PostMessageService;
-import com.islomar.parrotter.services.ReadUserTimelineService;
-import com.islomar.parrotter.services.ShowUserWallService;
 import com.islomar.parrotter.controller.CommandLineProcessor;
 import com.islomar.parrotter.infrastructure.Console;
+import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
 import com.islomar.parrotter.model.message.InMemoryMessageRepository;
 import com.islomar.parrotter.model.user.InMemoryUserRepository;
+import com.islomar.parrotter.services.PostMessageService;
+import com.islomar.parrotter.services.ReadUserTimelineService;
+import com.islomar.parrotter.services.ShowUserWallService;
 import com.islomar.parrotter.services.UserService;
 
 import org.mockito.Mock;
@@ -35,7 +34,6 @@ public class FollowUserTimelineFeature {
 
   private ReadUserTimelineService readUserTimelineService;
   private PostMessageService postMessageService;
-  private FollowUserService followUserService;
   private ShowUserWallService showUserWallService;
   private UserService userService;
 
@@ -49,7 +47,6 @@ public class FollowUserTimelineFeature {
     MessageFormatter messageFormatter = new MessageFormatter(clock);
     readUserTimelineService = new ReadUserTimelineService(messageRepository, console, messageFormatter);
     UserRepository userRepository = new InMemoryUserRepository();
-    followUserService = new FollowUserService(userRepository);
 
     userService = new UserService(userRepository);
     showUserWallService = new ShowUserWallService(messageRepository, userRepository, console, messageFormatter);
@@ -57,7 +54,7 @@ public class FollowUserTimelineFeature {
 
   public void a_user_follows_another_user() {
 
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, postMessageService, readUserTimelineService, followUserService, showUserWallService);
+    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, postMessageService, readUserTimelineService, showUserWallService);
     commandLineProcessor.execute(CHARLIE + " follows " + BOB);
 
     verify(console, never()).printMessage(anyString());

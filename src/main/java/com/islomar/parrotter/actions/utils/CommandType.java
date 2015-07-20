@@ -1,4 +1,4 @@
-package com.islomar.parrotter.actions;
+package com.islomar.parrotter.actions.utils;
 
 public enum CommandType {
   POST (" -> "),

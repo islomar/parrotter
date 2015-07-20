@@ -4,9 +4,6 @@ package com.islomar.parrotter.actions;
 import com.islomar.parrotter.services.PostMessageService;
 import com.islomar.parrotter.services.UserService;
 
-/**
- *
- */
 public class PostMessageCommand implements Command {
 
   private final PostMessageService postMessageService;
