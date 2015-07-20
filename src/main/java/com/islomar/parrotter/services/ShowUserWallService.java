@@ -29,6 +29,10 @@ public class ShowUserWallService {
     List<Message> personalTimelineMessages = messageService.findPersonalMessagesFor(username);
     List<Message> followedUserMessages = getFollowedUserMessages(username);
 
+    printMessages(personalTimelineMessages, followedUserMessages);
+  }
+
+  private void printMessages(List<Message> personalTimelineMessages, List<Message> followedUserMessages) {
     Stream.concat(personalTimelineMessages.stream(), followedUserMessages.stream())
         .sorted()
         .forEach(message -> console.printMessage(messageFormatter.formatForTheWall(message)));

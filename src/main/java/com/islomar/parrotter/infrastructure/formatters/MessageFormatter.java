@@ -18,23 +18,14 @@ public class MessageFormatter {
     this.clock = clock;
   }
 
-  /**
-   * Formats a Message to be shown in user timeline.
-   *
-   * @return message with time elapsed, e.g. "I love the weather today (5 minutes ago)"
-   */
+  public String formatForTheWall(Message message) {
+    return message.getUsername() + " - " + formatForViewUserTimeline(message);
+  }
+
   public String formatForViewUserTimeline(Message message) {
     return message.getTextMessage() + " " + renderTimeElapsed(message.getPublicationInstant());
   }
 
-  /**
-   * Formats a Message to be shown in a user wall.
-   *
-   * @return message with username and time elapsed, e.g. "Alice - I love the weather today (5 minutes ago)"
-   */
-  public String formatForTheWall(Message message) {
-    return message.getUsername() + " - " + formatForViewUserTimeline(message);
-  }
 
   private String renderTimeElapsed(Instant publicationInstant) {
 
@@ -44,17 +35,25 @@ public class MessageFormatter {
 
       return generateMessage(timeElapsed.toMillis() / MILLISECONDS_IN_A_SECOND, "second");
 
-    } else if (timeElapsed.toHours() == 0) {
+    } else if (lessThanOneHourElapsed(timeElapsed)) {
 
       return generateMessage(timeElapsed.toMinutes(), "minute");
 
-    } else if (timeElapsed.toDays() == 0) {
+    } else if (lessThanOneDay(timeElapsed)) {
 
       return generateMessage(timeElapsed.toHours(), "hour");
 
     } else {
       return generateMessage(timeElapsed.toDays(), "day");
     }
+  }
+
+  private boolean lessThanOneDay(Duration timeElapsed) {
+    return timeElapsed.toDays() == 0;
+  }
+
+  private boolean lessThanOneHourElapsed(Duration timeElapsed) {
+    return timeElapsed.toHours() == 0;
   }
 
   private boolean lessThanOneMinuteElapsed(Duration timeElapsed) {
