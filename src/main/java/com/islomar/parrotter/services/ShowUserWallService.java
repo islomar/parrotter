@@ -25,8 +25,8 @@ public class ShowUserWallService {
     this.messageFormatter = messageFormatter;
   }
 
-  public void execute(String username) {
-    List<Message> personalTimelineMessages = messageService.findAllMessagesForUser(username);
+  public void printUserWallFor(String username) {
+    List<Message> personalTimelineMessages = messageService.findPersonalMessagesFor(username);
     List<Message> followedUserMessages = getFollowedUserMessages(username);
 
     Stream.concat(personalTimelineMessages.stream(), followedUserMessages.stream())
@@ -38,7 +38,7 @@ public class ShowUserWallService {
     Set<String> followedUsers = userService.findUserByUsername(username).getFollowedUsers();
 
     return followedUsers.stream()
-        .map(user -> messageService.findAllMessagesForUser(user))
+        .map(user -> messageService.findPersonalMessagesFor(user))
         .flatMap(messages -> messages.stream())
         .collect(Collectors.toList());
   }

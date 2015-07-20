@@ -63,16 +63,16 @@ public class ShowUserWallServiceShould {
   public void a_user_wall_shows_her_personal_timeline_and_her_followed_user_timelines() {
 
     userService.saveUser(CHARLIE);
-    given(messageService.findAllMessagesForUser(CHARLIE)).willReturn(charlieMessages());
-    given(messageService.findAllMessagesForUser(BOB)).willReturn(bobMessages());
-    given(messageService.findAllMessagesForUser(ALICE)).willReturn(aliceMessages());
+    given(messageService.findPersonalMessagesFor(CHARLIE)).willReturn(charlieMessages());
+    given(messageService.findPersonalMessagesFor(BOB)).willReturn(bobMessages());
+    given(messageService.findPersonalMessagesFor(ALICE)).willReturn(aliceMessages());
 
     User charlie = new User(CHARLIE);
     charlie.follow(ALICE);
     charlie.follow(BOB);
     given(userService.findUserByUsername(CHARLIE)).willReturn(charlie);
 
-    showUserWallService.execute(CHARLIE);
+    showUserWallService.printUserWallFor(CHARLIE);
 
     InOrder inOrder = inOrder(console);
     inOrder.verify(console).printMessage("Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)");

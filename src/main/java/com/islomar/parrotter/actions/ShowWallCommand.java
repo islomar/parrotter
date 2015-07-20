@@ -16,6 +16,6 @@ public class ShowWallCommand implements Command {
 
   @Override
   public void execute() {
-    showUserWallService.execute(username);
+    showUserWallService.printUserWallFor(username);
   }
 }

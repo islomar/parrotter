@@ -26,11 +26,11 @@ public class MessageService {
 
   public void printTimelineFor(String username) {
 
-    List<Message> allMessagesForUser = findAllMessagesForUser(username);
+    List<Message> allMessagesForUser = findPersonalMessagesFor(username);
     allMessagesForUser.stream().forEach(message -> printMessage(message));
   }
 
-  public List<Message> findAllMessagesForUser(String username) {
+  public List<Message> findPersonalMessagesFor(String username) {
     return messageRepository.findAllMessagesForUser(username);
   }
 
