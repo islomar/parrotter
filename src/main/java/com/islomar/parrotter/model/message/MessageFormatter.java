@@ -1,10 +1,7 @@
-package com.islomar.parrotter.model;
-
-import com.islomar.parrotter.model.Message;
+package com.islomar.parrotter.model.message;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 
 
 public class MessageFormatter {

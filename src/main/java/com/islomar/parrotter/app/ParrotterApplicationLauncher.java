@@ -2,12 +2,15 @@ package com.islomar.parrotter.app;
 
 import com.google.common.base.Charsets;
 
+import com.islomar.parrotter.actions.FollowUser;
 import com.islomar.parrotter.actions.PostMessage;
 import com.islomar.parrotter.actions.ReadUserTimeline;
 import com.islomar.parrotter.controller.CommandLineProcessor;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
-import com.islomar.parrotter.model.InMemoryMessageRepository;
+import com.islomar.parrotter.infrastructure.repositories.UserRepository;
+import com.islomar.parrotter.model.message.InMemoryMessageRepository;
+import com.islomar.parrotter.model.user.InMemoryUserRepository;
 
 import java.time.Clock;
 import java.util.Scanner;
@@ -49,11 +52,13 @@ public class ParrotterApplicationLauncher {
   private CommandLineProcessor createCommandLineProcessor() {
 
     MessageRepository messageRepository = new InMemoryMessageRepository(Clock.systemUTC());
-    Clock clock = Clock.systemUTC();
     PostMessage postMessage = new PostMessage(messageRepository);
     ReadUserTimeline readUserTimeline = new ReadUserTimeline(messageRepository, console);
 
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(clock, postMessage, readUserTimeline);
+    UserRepository userRepository = new InMemoryUserRepository();
+    FollowUser followUser = new FollowUser(userRepository);
+
+    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(postMessage, readUserTimeline, followUser);
 
     return commandLineProcessor;
   }

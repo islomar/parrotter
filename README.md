@@ -78,6 +78,8 @@ Clock.systemUTC()
 
 
 TO DO:
+* Redesign how the CommandLineProcessor constructor works: we should not pass every new action there... it's crazy.
+* Probably move some actions inside the models, not so aenemic.
 * Use Spock.
 * Review I do not return anything MODIFIABLE.
 * Show 1 minute, without S, in singular!

@@ -1,11 +1,14 @@
 package com.islomar.parrotter.feature;
 
+import com.islomar.parrotter.actions.FollowUser;
 import com.islomar.parrotter.actions.PostMessage;
 import com.islomar.parrotter.actions.ReadUserTimeline;
 import com.islomar.parrotter.controller.CommandLineProcessor;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
-import com.islomar.parrotter.model.InMemoryMessageRepository;
+import com.islomar.parrotter.infrastructure.repositories.UserRepository;
+import com.islomar.parrotter.model.message.InMemoryMessageRepository;
+import com.islomar.parrotter.model.user.InMemoryUserRepository;
 
 import org.mockito.Mock;
 import org.testng.annotations.BeforeMethod;
@@ -32,6 +35,7 @@ public class ReadUserTimelineFeature {
 
   private ReadUserTimeline readUserTimeline;
   private PostMessage postMessage;
+  private FollowUser followUser;
 
 
   @BeforeMethod
@@ -41,11 +45,14 @@ public class ReadUserTimelineFeature {
     MessageRepository messageRepository = new InMemoryMessageRepository(clock);
     postMessage = new PostMessage(messageRepository);
     readUserTimeline = new ReadUserTimeline(messageRepository, console);
+
+    UserRepository userRepository = new InMemoryUserRepository();
+    followUser = new FollowUser(userRepository);
   }
 
   public void a_user_publishes_a_message_to_her_personal_timeline() {
 
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(clock, postMessage, readUserTimeline);
+    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(postMessage, readUserTimeline, followUser);
     given(clock.instant()).willReturn(FIVE_SECONDS_AGO, Instant.now());
     commandLineProcessor.execute(ALICE + " -> " + MESSAGE_TEXT);
 

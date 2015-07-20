@@ -2,7 +2,7 @@ package com.islomar.parrotter.actions;
 
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
-import com.islomar.parrotter.model.Message;
+import com.islomar.parrotter.model.message.Message;
 
 import org.mockito.Mock;
 import org.testng.annotations.BeforeMethod;

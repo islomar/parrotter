@@ -1,4 +1,4 @@
-package com.islomar.parrotter.model;
+package com.islomar.parrotter.model.message;
 
 import java.time.Instant;
 

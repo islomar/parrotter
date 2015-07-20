@@ -1,4 +1,4 @@
-package com.islomar.parrotter.model;
+package com.islomar.parrotter.model.message;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;

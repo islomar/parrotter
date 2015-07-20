@@ -1,7 +1,7 @@
 package com.islomar.parrotter.infrastructure;
 
-import com.islomar.parrotter.model.Message;
-import com.islomar.parrotter.model.MessageFormatter;
+import com.islomar.parrotter.model.message.Message;
+import com.islomar.parrotter.model.message.MessageFormatter;
 
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

@@ -21,18 +21,17 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-
 @Test
-public class PostMessageToPersonalTimelineFeature {
+public class FollowUserTimelineFeature {
 
-  private static final String ALICE = "Alice";
-  private static final String MESSAGE_TEXT = "I love the weather today";
+  private static final String CHARLIE = "Charlie";
+  private static final String BOB = "Bob";
 
   @Mock private Console console;
   @Mock private Clock clock;
 
-  private PostMessage postMessage;
   private ReadUserTimeline readUserTimeline;
+  private PostMessage postMessage;
   private FollowUser followUser;
 
 
@@ -47,12 +46,13 @@ public class PostMessageToPersonalTimelineFeature {
     followUser = new FollowUser(userRepository);
   }
 
-  public void a_user_publishes_a_message_to_her_personal_timeline() {
+  public void a_user_follows_another_user() {
 
     CommandLineProcessor commandLineProcessor = new CommandLineProcessor(postMessage, readUserTimeline, followUser);
-    commandLineProcessor.execute(ALICE + " -> " + MESSAGE_TEXT);
+    commandLineProcessor.execute(CHARLIE + " follows " + BOB);
 
     verify(console, never()).printMessage(anyString());
   }
+
 
 }
