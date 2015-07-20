@@ -78,13 +78,16 @@ Clock.systemUTC()
 
 
 TO DO:
-* Read lines from CLI.
-* Create Feature test (add Feature and Should prefixes to Maven).
 * Use Spock.
 * Review I do not return anything MODIFIABLE.
+* Show 1 minute, without S, in singular!
 * Create CommandPrinter?
 * Review the levels of abstractions.
 * Clean up comments, TODOs, etc.
+* Checkstyle
+* Findbugs
+* Inspect code
+* Organize imports
 
 
 * http://www.emoji-cheat-sheet.com/
