@@ -9,9 +9,9 @@ import java.util.List;
 
 public class MessageService {
 
-  private final MessageRepository messageRepository;
-  private final Console console;
-  private final MessageFormatter messageFormatter;
+  private MessageRepository messageRepository;
+  private Console console;
+  private MessageFormatter messageFormatter;
 
   public MessageService(MessageRepository messageRepository, Console console, MessageFormatter messageFormatter) {
 

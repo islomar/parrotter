@@ -11,10 +11,10 @@ import java.util.stream.Stream;
 
 public class ShowUserWallService {
 
-  private final MessageService messageService;
-  private final UserService userService;
+  private MessageService messageService;
+  private UserService userService;
 
-  private final Console console;
+  private Console console;
   private MessageFormatter messageFormatter;
 
   public ShowUserWallService(MessageService messageService, UserService userService, Console console, MessageFormatter messageFormatter) {
