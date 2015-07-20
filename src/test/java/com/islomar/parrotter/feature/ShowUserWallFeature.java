@@ -63,7 +63,7 @@ public class ShowUserWallFeature {
     MessageRepository messageRepository = new InMemoryMessageRepository(clock);
     messageService = new MessageService(messageRepository, console, messageFormatter);
 
-    showUserWallService = new ShowUserWallService(messageService, userRepository, console, messageFormatter);
+    showUserWallService = new ShowUserWallService(messageService, userService, console, messageFormatter);
   }
 
 

@@ -1,10 +1,9 @@
 package com.islomar.parrotter.services;
 
 import com.islomar.parrotter.infrastructure.Console;
-import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
-import com.islomar.parrotter.infrastructure.repositories.UserRepository;
-import com.islomar.parrotter.model.message.Message;
 import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
+import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
+import com.islomar.parrotter.model.message.Message;
 import com.islomar.parrotter.model.user.User;
 
 import org.mockito.InOrder;
@@ -45,7 +44,7 @@ public class ShowUserWallServiceShould {
   @Mock Console console;
   @Mock Clock clock;
   @Mock MessageRepository messageRepository;
-  @Mock UserRepository userRepository;
+  @Mock UserService userService;
   @Mock MessageService messageService;
 
   private ShowUserWallService showUserWallService;
@@ -58,12 +57,12 @@ public class ShowUserWallServiceShould {
     given(clock.instant()).willReturn(NOW);
     MessageFormatter messageFormatter = new MessageFormatter(clock);
 
-    showUserWallService = new ShowUserWallService(messageService, userRepository, console, messageFormatter);
+    showUserWallService = new ShowUserWallService(messageService, userService, console, messageFormatter);
   }
 
   public void a_user_wall_shows_her_personal_timeline_and_her_followed_user_timelines() {
 
-    userRepository.saveUser(CHARLIE);
+    userService.saveUser(CHARLIE);
     given(messageService.findAllMessagesForUser(CHARLIE)).willReturn(charlieMessages());
     given(messageService.findAllMessagesForUser(BOB)).willReturn(bobMessages());
     given(messageService.findAllMessagesForUser(ALICE)).willReturn(aliceMessages());
@@ -71,7 +70,7 @@ public class ShowUserWallServiceShould {
     User charlie = new User(CHARLIE);
     charlie.follow(ALICE);
     charlie.follow(BOB);
-    given(userRepository.getUser(CHARLIE)).willReturn(charlie);
+    given(userService.findUserByUsername(CHARLIE)).willReturn(charlie);
 
     showUserWallService.execute(CHARLIE);
 

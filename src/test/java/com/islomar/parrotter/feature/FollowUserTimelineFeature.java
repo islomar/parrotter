@@ -46,7 +46,7 @@ public class FollowUserTimelineFeature {
     UserRepository userRepository = new InMemoryUserRepository();
 
     userService = new UserService(userRepository);
-    showUserWallService = new ShowUserWallService(messageService, userRepository, console, messageFormatter);
+    showUserWallService = new ShowUserWallService(messageService, userService, console, messageFormatter);
   }
 
   public void a_user_follows_another_user() {
