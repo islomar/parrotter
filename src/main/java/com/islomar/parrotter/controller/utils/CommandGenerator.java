@@ -1,4 +1,4 @@
-package com.islomar.parrotter.actions.utils;
+package com.islomar.parrotter.controller.utils;
 
 import com.islomar.parrotter.actions.Command;
 import com.islomar.parrotter.actions.FollowUserCommand;
@@ -12,9 +12,9 @@ import com.islomar.parrotter.services.ReadUserTimelineService;
 import com.islomar.parrotter.services.ShowUserWallService;
 import com.islomar.parrotter.services.UserService;
 
-import static com.islomar.parrotter.actions.utils.CommandType.FOLLOWS;
-import static com.islomar.parrotter.actions.utils.CommandType.POST;
-import static com.islomar.parrotter.actions.utils.CommandType.WALL;
+import static com.islomar.parrotter.controller.utils.CommandType.FOLLOWS;
+import static com.islomar.parrotter.controller.utils.CommandType.POST;
+import static com.islomar.parrotter.controller.utils.CommandType.WALL;
 
 public class CommandGenerator {
 

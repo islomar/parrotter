@@ -21,7 +21,7 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
-import static com.islomar.parrotter.actions.utils.CommandType.*;
+import static com.islomar.parrotter.controller.utils.CommandType.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.MockitoAnnotations.initMocks;

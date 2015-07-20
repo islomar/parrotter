@@ -77,6 +77,7 @@ TO DO:
 * Inspect code
 * Organize imports
 * Remove comments
+* Create tag!! (1.0.0)
 
 
 IN PROGRESS:

@@ -1,7 +1,7 @@
 package com.islomar.parrotter.controller;
 
 import com.islomar.parrotter.actions.Command;
-import com.islomar.parrotter.actions.utils.CommandGenerator;
+import com.islomar.parrotter.controller.utils.CommandGenerator;
 import com.islomar.parrotter.services.PostMessageService;
 import com.islomar.parrotter.services.ReadUserTimelineService;
 import com.islomar.parrotter.services.ShowUserWallService;
@@ -27,9 +27,7 @@ public class CommandLineProcessor {
 
   public void execute(String inputCommandLine) {
 
-    CommandGenerator
-        commandGenerator =
-        new CommandGenerator(userService, postMessageService, readUserTimelineService, showUserWallService);
+    CommandGenerator commandGenerator = new CommandGenerator(userService, postMessageService, readUserTimelineService, showUserWallService);
     Command command = commandGenerator.createCommandFromInputLine(inputCommandLine);
 
     command.execute();
