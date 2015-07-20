@@ -77,6 +77,7 @@ TO DO:
 * Inspect code
 * Organize imports
 * Remove comments
+* Review the FIVE, TWO... does it really improve anything?
 * Create tag!! (1.0.0)
 
 

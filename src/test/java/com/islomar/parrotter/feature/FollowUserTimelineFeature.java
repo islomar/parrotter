@@ -7,8 +7,7 @@ import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
 import com.islomar.parrotter.model.message.InMemoryMessageRepository;
 import com.islomar.parrotter.model.user.InMemoryUserRepository;
-import com.islomar.parrotter.services.PostMessageService;
-import com.islomar.parrotter.services.ReadUserTimelineService;
+import com.islomar.parrotter.services.MessageService;
 import com.islomar.parrotter.services.ShowUserWallService;
 import com.islomar.parrotter.services.UserService;
 
@@ -32,8 +31,7 @@ public class FollowUserTimelineFeature {
   @Mock Console console;
   @Mock Clock clock;
 
-  private ReadUserTimelineService readUserTimelineService;
-  private PostMessageService postMessageService;
+  private MessageService messageService;
   private ShowUserWallService showUserWallService;
   private UserService userService;
 
@@ -43,9 +41,8 @@ public class FollowUserTimelineFeature {
     initMocks(this);
 
     MessageRepository messageRepository = new InMemoryMessageRepository(clock);
-    postMessageService = new PostMessageService(messageRepository);
     MessageFormatter messageFormatter = new MessageFormatter(clock);
-    readUserTimelineService = new ReadUserTimelineService(messageRepository, console, messageFormatter);
+    messageService = new MessageService(messageRepository, console, messageFormatter);
     UserRepository userRepository = new InMemoryUserRepository();
 
     userService = new UserService(userRepository);
@@ -54,7 +51,7 @@ public class FollowUserTimelineFeature {
 
   public void a_user_follows_another_user() {
 
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, postMessageService, readUserTimelineService, showUserWallService);
+    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, messageService, showUserWallService);
     commandLineProcessor.execute(CHARLIE + " follows " + BOB);
 
     verify(console, never()).printMessage(anyString());

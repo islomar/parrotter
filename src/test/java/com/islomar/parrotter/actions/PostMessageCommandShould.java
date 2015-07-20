@@ -1,6 +1,6 @@
 package com.islomar.parrotter.actions;
 
-import com.islomar.parrotter.services.PostMessageService;
+import com.islomar.parrotter.services.MessageService;
 import com.islomar.parrotter.services.UserService;
 
 import org.mockito.Mock;
@@ -17,7 +17,7 @@ public class PostMessageCommandShould {
   private static final String MESSAGE_TEXT = "I love the weather today";
 
   @Mock UserService userService;
-  @Mock PostMessageService postMessageService;
+  @Mock MessageService messageService;
 
   private PostMessageCommand postMessageCommand;
 
@@ -26,7 +26,7 @@ public class PostMessageCommandShould {
   public void setUpMethod() {
     initMocks(this);
 
-    postMessageCommand = new PostMessageCommand(userService, postMessageService, ALICE, MESSAGE_TEXT);
+    postMessageCommand = new PostMessageCommand(userService, messageService, ALICE, MESSAGE_TEXT);
   }
 
   public void save_the_user_and_post_the_message() {
@@ -34,7 +34,7 @@ public class PostMessageCommandShould {
     postMessageCommand.execute();
 
     verify(userService).saveUser(ALICE);
-    verify(postMessageService).execute(ALICE, MESSAGE_TEXT);
+    verify(messageService).saveMessage(ALICE, MESSAGE_TEXT);
   }
 
 }

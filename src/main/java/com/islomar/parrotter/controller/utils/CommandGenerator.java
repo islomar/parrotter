@@ -7,8 +7,7 @@ import com.islomar.parrotter.actions.PostMessageCommand;
 import com.islomar.parrotter.actions.ReadUserTimelineCommand;
 import com.islomar.parrotter.actions.ShowWallCommand;
 import com.islomar.parrotter.model.user.User;
-import com.islomar.parrotter.services.PostMessageService;
-import com.islomar.parrotter.services.ReadUserTimelineService;
+import com.islomar.parrotter.services.MessageService;
 import com.islomar.parrotter.services.ShowUserWallService;
 import com.islomar.parrotter.services.UserService;
 
@@ -18,18 +17,15 @@ import static com.islomar.parrotter.controller.utils.CommandType.WALL;
 
 public class CommandGenerator {
 
-  private final PostMessageService postMessageService;
-  private final ReadUserTimelineService readUserTimelineService;
+  private final MessageService messageService;
   private final ShowUserWallService showUserWallService;
   private final UserService userService;
 
-  public CommandGenerator(UserService userService, PostMessageService postMessageService,
-                          ReadUserTimelineService readUserTimelineService,
+  public CommandGenerator(UserService userService, MessageService messageService,
                           ShowUserWallService showUserWallService) {
 
     this.userService = userService;
-    this.postMessageService = postMessageService;
-    this.readUserTimelineService = readUserTimelineService;
+    this.messageService = messageService;
     this.showUserWallService = showUserWallService;
   }
 
@@ -50,7 +46,7 @@ public class CommandGenerator {
   }
 
   private Command generateViewUserTimelineCommand(String username) {
-    return new ReadUserTimelineCommand(readUserTimelineService, username);
+    return new ReadUserTimelineCommand(messageService, username);
   }
 
   private Command generateFollowUserCommand(String inputCommandLine) {
@@ -76,6 +72,6 @@ public class CommandGenerator {
     String[] inputArguments = inputCommandLine.split(POST.symbol());
     String username = inputArguments[0].trim();
     String textMessage = inputArguments[1].trim();
-    return new PostMessageCommand(userService, postMessageService, username, textMessage);
+    return new PostMessageCommand(userService, messageService, username, textMessage);
   }
 }

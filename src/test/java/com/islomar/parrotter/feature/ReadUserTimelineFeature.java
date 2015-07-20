@@ -1,8 +1,7 @@
 package com.islomar.parrotter.feature;
 
 import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
-import com.islomar.parrotter.services.PostMessageService;
-import com.islomar.parrotter.services.ReadUserTimelineService;
+import com.islomar.parrotter.services.MessageService;
 import com.islomar.parrotter.services.ShowUserWallService;
 import com.islomar.parrotter.controller.CommandLineProcessor;
 import com.islomar.parrotter.infrastructure.Console;
@@ -35,8 +34,7 @@ public class ReadUserTimelineFeature {
   @Mock Console console;
   @Mock Clock clock;
 
-  private ReadUserTimelineService readUserTimelineService;
-  private PostMessageService postMessageService;
+  private MessageService messageService;
   private ShowUserWallService showUserWallService;
   private UserService userService;
 
@@ -46,9 +44,8 @@ public class ReadUserTimelineFeature {
     initMocks(this);
 
     MessageRepository messageRepository = new InMemoryMessageRepository(clock);
-    postMessageService = new PostMessageService(messageRepository);
     MessageFormatter messageFormatter = new MessageFormatter(clock);
-    readUserTimelineService = new ReadUserTimelineService(messageRepository, console, messageFormatter);
+    messageService = new MessageService(messageRepository, console, messageFormatter);
 
     UserRepository userRepository = new InMemoryUserRepository();
     userService = new UserService(userRepository);
@@ -58,7 +55,7 @@ public class ReadUserTimelineFeature {
 
   public void a_user_publishes_a_message_to_her_personal_timeline() {
 
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, postMessageService, readUserTimelineService, showUserWallService);
+    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, messageService, showUserWallService);
     given(clock.instant()).willReturn(FIVE_SECONDS_AGO, Instant.now());
     commandLineProcessor.execute(ALICE + " -> " + MESSAGE_TEXT);
 

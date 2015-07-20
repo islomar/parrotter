@@ -2,13 +2,12 @@ package com.islomar.parrotter.feature;
 
 import com.islomar.parrotter.controller.CommandLineProcessor;
 import com.islomar.parrotter.infrastructure.Console;
+import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
 import com.islomar.parrotter.model.message.InMemoryMessageRepository;
-import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
 import com.islomar.parrotter.model.user.InMemoryUserRepository;
-import com.islomar.parrotter.services.PostMessageService;
-import com.islomar.parrotter.services.ReadUserTimelineService;
+import com.islomar.parrotter.services.MessageService;
 import com.islomar.parrotter.services.ShowUserWallService;
 import com.islomar.parrotter.services.UserService;
 
@@ -21,7 +20,9 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
-import static com.islomar.parrotter.controller.utils.CommandType.*;
+import static com.islomar.parrotter.controller.utils.CommandType.FOLLOWS;
+import static com.islomar.parrotter.controller.utils.CommandType.POST;
+import static com.islomar.parrotter.controller.utils.CommandType.WALL;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -44,8 +45,7 @@ public class ShowUserWallFeature {
   @Mock Clock clockForMessageFormatter;
   @Mock Clock clock;
 
-  private ReadUserTimelineService readUserTimelineService;
-  private PostMessageService postMessageService;
+  private MessageService messageService;
   private ShowUserWallService showUserWallService;
   private UserService userService;
 
@@ -54,22 +54,22 @@ public class ShowUserWallFeature {
   public void setUpMethod() {
     initMocks(this);
 
-    MessageRepository messageRepository = new InMemoryMessageRepository(clock);
-    UserRepository userRepository = new InMemoryUserRepository();
-    postMessageService = new PostMessageService(messageRepository);
-
     given(clockForMessageFormatter.instant()).willReturn(NOW);
     MessageFormatter messageFormatter = new MessageFormatter(clockForMessageFormatter);
-    showUserWallService = new ShowUserWallService(messageRepository, userRepository, console, messageFormatter);
 
+    UserRepository userRepository = new InMemoryUserRepository();
     userService = new UserService(userRepository);
-    readUserTimelineService = new ReadUserTimelineService(messageRepository, console, messageFormatter);
+
+    MessageRepository messageRepository = new InMemoryMessageRepository(clock);
+    messageService = new MessageService(messageRepository, console, messageFormatter);
+
+    showUserWallService = new ShowUserWallService(messageRepository, userRepository, console, messageFormatter);
   }
 
 
   public void when_charlie_follows_alice_then_his_wall_shows_both_his_personal_timeline_and_alice_timeline() {
 
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, postMessageService, readUserTimelineService, showUserWallService);
+    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, messageService, showUserWallService);
     given(clock.instant()).willReturn(FIVE_MINUTES_AGO, TWO_SECONDS_AGO);
 
     commandLineProcessor.execute(ALICE + POST.symbol() + ALICE_MESSAGE_TEXT);

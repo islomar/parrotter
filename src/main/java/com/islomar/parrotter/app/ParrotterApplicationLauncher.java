@@ -9,8 +9,7 @@ import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
 import com.islomar.parrotter.model.message.InMemoryMessageRepository;
 import com.islomar.parrotter.model.user.InMemoryUserRepository;
-import com.islomar.parrotter.services.PostMessageService;
-import com.islomar.parrotter.services.ReadUserTimelineService;
+import com.islomar.parrotter.services.MessageService;
 import com.islomar.parrotter.services.ShowUserWallService;
 import com.islomar.parrotter.services.UserService;
 
@@ -57,11 +56,10 @@ public class ParrotterApplicationLauncher {
     UserRepository userRepository = new InMemoryUserRepository();
     MessageFormatter messageFormatter = new MessageFormatter(Clock.systemUTC());
 
-    PostMessageService postMessageService = new PostMessageService(messageRepository);
-    ReadUserTimelineService readUserTimelineService = new ReadUserTimelineService(messageRepository, console, messageFormatter);
+    MessageService messageService = new MessageService(messageRepository, console, messageFormatter);
     UserService userService = new UserService(userRepository);
     ShowUserWallService showUserWallService = new ShowUserWallService(messageRepository, userRepository, console, messageFormatter);
 
-    return new CommandLineProcessor(userService, postMessageService, readUserTimelineService, showUserWallService);
+    return new CommandLineProcessor(userService, messageService, showUserWallService);
   }
 }
