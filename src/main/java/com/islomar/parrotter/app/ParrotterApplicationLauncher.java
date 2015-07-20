@@ -57,8 +57,9 @@ public class ParrotterApplicationLauncher {
     MessageFormatter messageFormatter = new MessageFormatter(Clock.systemUTC());
 
     MessageService messageService = new MessageService(messageRepository, console, messageFormatter);
+    ShowUserWallService showUserWallService = new ShowUserWallService(messageService, userRepository, console, messageFormatter);
+
     UserService userService = new UserService(userRepository);
-    ShowUserWallService showUserWallService = new ShowUserWallService(messageRepository, userRepository, console, messageFormatter);
 
     return new CommandLineProcessor(userService, messageService, showUserWallService);
   }

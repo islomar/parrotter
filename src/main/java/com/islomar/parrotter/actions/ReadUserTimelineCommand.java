@@ -16,6 +16,6 @@ public class ReadUserTimelineCommand implements Command {
 
   @Override
   public void execute() {
-    messageService.readTimelineFrom(username);
+    messageService.printTimelineFor(username);
   }
 }

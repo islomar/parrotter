@@ -56,7 +56,7 @@ public class MessageServiceShould {
     Message postedMessaged = new Message(ALICE, MESSAGE_TEXT, TWO_MINUTES_AGO);
     given(messageRepository.findAllMessagesForUser(ALICE)).willReturn(Arrays.asList(postedMessaged));
 
-    messageService.readTimelineFrom(ALICE);
+    messageService.printTimelineFor(ALICE);
 
     verify(console).printMessage(MESSAGE_TEXT + " (" + TWO + " minutes ago)");
   }

@@ -24,10 +24,14 @@ public class MessageService {
     messageRepository.saveMessage(username, textMessage);
   }
 
-  public void readTimelineFrom(String username) {
+  public void printTimelineFor(String username) {
 
-    List<Message> allMessagesForUser = messageRepository.findAllMessagesForUser(username);
+    List<Message> allMessagesForUser = findAllMessagesForUser(username);
     allMessagesForUser.stream().forEach(message -> printMessage(message));
+  }
+
+  public List<Message> findAllMessagesForUser(String username) {
+    return messageRepository.findAllMessagesForUser(username);
   }
 
   private void printMessage(Message message) {

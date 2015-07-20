@@ -46,6 +46,7 @@ public class ShowUserWallServiceShould {
   @Mock Clock clock;
   @Mock MessageRepository messageRepository;
   @Mock UserRepository userRepository;
+  @Mock MessageService messageService;
 
   private ShowUserWallService showUserWallService;
 
@@ -56,15 +57,16 @@ public class ShowUserWallServiceShould {
 
     given(clock.instant()).willReturn(NOW);
     MessageFormatter messageFormatter = new MessageFormatter(clock);
-    showUserWallService = new ShowUserWallService(messageRepository, userRepository, console, messageFormatter);
+
+    showUserWallService = new ShowUserWallService(messageService, userRepository, console, messageFormatter);
   }
 
   public void a_user_wall_shows_her_personal_timeline_and_her_followed_user_timelines() {
 
     userRepository.saveUser(CHARLIE);
-    given(messageRepository.findAllMessagesForUser(CHARLIE)).willReturn(charlieMessages());
-    given(messageRepository.findAllMessagesForUser(BOB)).willReturn(bobMessages());
-    given(messageRepository.findAllMessagesForUser(ALICE)).willReturn(aliceMessages());
+    given(messageService.findAllMessagesForUser(CHARLIE)).willReturn(charlieMessages());
+    given(messageService.findAllMessagesForUser(BOB)).willReturn(bobMessages());
+    given(messageService.findAllMessagesForUser(ALICE)).willReturn(aliceMessages());
 
     User charlie = new User(CHARLIE);
     charlie.follow(ALICE);

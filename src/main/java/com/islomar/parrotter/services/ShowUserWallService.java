@@ -2,7 +2,6 @@ package com.islomar.parrotter.services;
 
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
-import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
 import com.islomar.parrotter.model.message.Message;
 
@@ -13,20 +12,22 @@ import java.util.stream.Stream;
 
 public class ShowUserWallService {
 
-  private final MessageRepository messageRepository;
+  private MessageService messageService;
+
   private final UserRepository userRepository;
   private final Console console;
   private MessageFormatter messageFormatter;
 
-  public ShowUserWallService(MessageRepository messageRepository, UserRepository userRepository, Console console, MessageFormatter messageFormatter) {
-    this.messageRepository = messageRepository;
+  public ShowUserWallService(MessageService messageService, UserRepository userRepository, Console console, MessageFormatter messageFormatter) {
+
+    this.messageService = messageService;
     this.userRepository = userRepository;
     this.console = console;
     this.messageFormatter = messageFormatter;
   }
 
   public void execute(String username) {
-    List<Message> personalTimelineMessages = messageRepository.findAllMessagesForUser(username);
+    List<Message> personalTimelineMessages = messageService.findAllMessagesForUser(username);
     List<Message> followedUserMessages = getFollowedUserMessages(username);
 
     Stream.concat(personalTimelineMessages.stream(), followedUserMessages.stream())
@@ -38,7 +39,7 @@ public class ShowUserWallService {
     Set<String> followedUsers = userRepository.getUser(username).getFollowedUsers();
 
     return followedUsers.stream()
-        .map(user -> messageRepository.findAllMessagesForUser(user))
+        .map(user -> messageService.findAllMessagesForUser(user))
         .flatMap(messages -> messages.stream())
         .collect(Collectors.toList());
   }
