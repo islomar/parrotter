@@ -40,9 +40,9 @@ public class ShowUserWallFeature {
   private static final java.time.Instant FIVE_MINUTES_AGO = NOW.minus(FIVE, ChronoUnit.MINUTES);
   private static final java.time.Instant TWO_SECONDS_AGO = NOW.minus(TWO, ChronoUnit.SECONDS);
 
-  @Mock private Console console;
-  @Mock private Clock clockForMessageFormatter;
-  @Mock private Clock clock;
+  @Mock Console console;
+  @Mock Clock clockForMessageFormatter;
+  @Mock Clock clock;
 
   private ReadUserTimelineService readUserTimelineService;
   private PostMessageService postMessageService;

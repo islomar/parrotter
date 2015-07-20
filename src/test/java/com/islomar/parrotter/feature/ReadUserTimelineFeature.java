@@ -32,8 +32,8 @@ public class ReadUserTimelineFeature {
   private static final int FIVE = 5;
   private static final java.time.Instant FIVE_SECONDS_AGO = Instant.now().minus(FIVE, ChronoUnit.SECONDS);
 
-  @Mock private Console console;
-  @Mock private Clock clock;
+  @Mock Console console;
+  @Mock Clock clock;
 
   private ReadUserTimelineService readUserTimelineService;
   private PostMessageService postMessageService;

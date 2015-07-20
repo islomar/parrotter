@@ -42,10 +42,10 @@ public class ShowUserWallServiceShould {
   private static final java.time.Instant ONE_MINUTE_AGO = NOW.minus(ONE, ChronoUnit.MINUTES);
   private static final java.time.Instant FIFTEEN_SECONDS_AGO = NOW.minus(FIFTEEN, ChronoUnit.SECONDS);
 
-  @Mock private Console console;
-  @Mock private Clock clock;
-  @Mock private MessageRepository messageRepository;
-  @Mock private UserRepository userRepository;
+  @Mock Console console;
+  @Mock Clock clock;
+  @Mock MessageRepository messageRepository;
+  @Mock UserRepository userRepository;
 
   private ShowUserWallService showUserWallService;
 

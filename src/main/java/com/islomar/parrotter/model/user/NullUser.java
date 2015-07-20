@@ -6,15 +6,13 @@ import java.util.Set;
 
 public class NullUser extends User {
 
-  private String username = null;
-
   public NullUser() {
     super(null);
   }
 
   @Override
   public String getUsername() {
-    return username;
+    return super.getUsername();
   }
 
   @Override

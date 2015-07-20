@@ -16,8 +16,8 @@ public class PostMessageCommandShould {
   private static final String ALICE = "Alice";
   private static final String MESSAGE_TEXT = "I love the weather today";
 
-  @Mock private UserService userService;
-  @Mock private PostMessageService postMessageService;
+  @Mock UserService userService;
+  @Mock PostMessageService postMessageService;
 
   private PostMessageCommand postMessageCommand;
 

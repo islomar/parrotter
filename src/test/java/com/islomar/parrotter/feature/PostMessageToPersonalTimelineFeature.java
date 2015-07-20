@@ -30,8 +30,8 @@ public class PostMessageToPersonalTimelineFeature {
   private static final String ALICE = "Alice";
   private static final String MESSAGE_TEXT = "I love the weather today";
 
-  @Mock private Console console;
-  @Mock private Clock clock;
+  @Mock Console console;
+  @Mock Clock clock;
 
   private PostMessageService postMessageService;
   private ReadUserTimelineService readUserTimelineService;

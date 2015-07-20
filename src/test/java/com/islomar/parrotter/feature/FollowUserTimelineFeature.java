@@ -29,8 +29,8 @@ public class FollowUserTimelineFeature {
   private static final String CHARLIE = "Charlie";
   private static final String BOB = "Bob";
 
-  @Mock private Console console;
-  @Mock private Clock clock;
+  @Mock Console console;
+  @Mock Clock clock;
 
   private ReadUserTimelineService readUserTimelineService;
   private PostMessageService postMessageService;

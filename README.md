@@ -69,7 +69,6 @@ TO DO:
 * Maybe the enum is not worthy and it is better a constant (symbol() is very annoying).
 * Use Spock.
 * Review I do not return anything MODIFIABLE.
-* FollowUserService not used
 
 * Review the levels of abstractions.
 * Clean up comments, TODOs, etc.

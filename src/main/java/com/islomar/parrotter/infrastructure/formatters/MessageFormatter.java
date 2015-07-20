@@ -62,11 +62,11 @@ public class MessageFormatter {
   }
 
   private String generateMessage(long numberOfUnits, String unitInSingular) {
-    return "(" +
-           numberOfUnits +
-           " " +
-           (numberOfUnits == 1 ? unitInSingular : unitInSingular + "s") +
-           " ago)";
+    return "("
+           + numberOfUnits
+           + " "
+           + (numberOfUnits == 1 ? unitInSingular : unitInSingular + "s")
+           + " ago)";
   }
 
 }
