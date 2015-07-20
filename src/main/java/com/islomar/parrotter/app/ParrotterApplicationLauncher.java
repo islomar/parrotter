@@ -55,14 +55,13 @@ public class ParrotterApplicationLauncher {
   private CommandLineProcessor createCommandLineProcessor() {
 
     MessageRepository messageRepository = new InMemoryMessageRepository(Clock.systemUTC());
+    UserRepository userRepository = new InMemoryUserRepository();
+
     PostMessageService postMessageService = new PostMessageService(messageRepository);
     MessageFormatter messageFormatter = new MessageFormatter(Clock.systemUTC());
     ReadUserTimelineService readUserTimelineService = new ReadUserTimelineService(messageRepository, console, messageFormatter);
-
-    UserRepository userRepository = new InMemoryUserRepository();
     UserService userService = new UserService(userRepository);
     FollowUserService followUserService = new FollowUserService(userRepository);
-
     ShowUserWallService showUserWallService = new ShowUserWallService(messageRepository, userRepository, console, messageFormatter);
 
     CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, postMessageService, readUserTimelineService, followUserService, showUserWallService);

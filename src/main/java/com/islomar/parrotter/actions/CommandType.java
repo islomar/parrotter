@@ -3,7 +3,7 @@ package com.islomar.parrotter.actions;
 public enum CommandType {
   POST (" -> "),
   FOLLOWS(" follows "),
-  WALL (" wall ");
+  WALL (" wall");
 
   private final String symbol;
 
