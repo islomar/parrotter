@@ -3,20 +3,17 @@ package com.islomar.parrotter.model.message;
 import java.time.Instant;
 
 
-public class Message {
+public class Message implements Comparable {
 
   private final String username;
   private final String textMessage;
   private final Instant publicationInstant;
-  private final MessageFormatter messageFormatter;
 
   public Message(final String username, final String textMessage, final Instant publicationInstant) {
 
     this.username = username;
     this.textMessage = textMessage;
     this.publicationInstant = publicationInstant;
-
-    this.messageFormatter = new MessageFormatter();
   }
 
   public String getUsername() {
@@ -31,8 +28,11 @@ public class Message {
     return publicationInstant;
   }
 
-  public String formatForViewUserTimeline() {
-    return messageFormatter.formatForViewUserTimeline(this);
+
+  @Override
+  public int compareTo(Object o) {
+    Message message = (Message) o;
+    return message.getPublicationInstant().compareTo(publicationInstant);
   }
 
   @Override

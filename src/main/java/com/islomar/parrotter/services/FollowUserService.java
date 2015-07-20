@@ -1,15 +1,15 @@
-package com.islomar.parrotter.actions;
+package com.islomar.parrotter.services;
 
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
 
 /**
  *
  */
-public class FollowUser {
+public class FollowUserService {
 
   private final UserRepository userRepository;
 
-  public FollowUser(UserRepository userRepository) {
+  public FollowUserService(UserRepository userRepository) {
     this.userRepository = userRepository;
   }
 }

@@ -1,4 +1,4 @@
-package com.islomar.parrotter.actions;
+package com.islomar.parrotter.services;
 
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @Test
-public class FollowUserShould {
+public class FollowUserServiceShould {
 
   private static final String CHARLIE = "Charlie";
   private static final String BOB = "Bob";

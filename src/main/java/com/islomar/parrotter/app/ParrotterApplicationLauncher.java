@@ -2,15 +2,18 @@ package com.islomar.parrotter.app;
 
 import com.google.common.base.Charsets;
 
-import com.islomar.parrotter.actions.FollowUser;
-import com.islomar.parrotter.actions.PostMessage;
-import com.islomar.parrotter.actions.ReadUserTimeline;
 import com.islomar.parrotter.controller.CommandLineProcessor;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
 import com.islomar.parrotter.model.message.InMemoryMessageRepository;
+import com.islomar.parrotter.model.message.MessageFormatter;
 import com.islomar.parrotter.model.user.InMemoryUserRepository;
+import com.islomar.parrotter.services.FollowUserService;
+import com.islomar.parrotter.services.PostMessageService;
+import com.islomar.parrotter.services.ReadUserTimelineService;
+import com.islomar.parrotter.services.ShowUserWallService;
+import com.islomar.parrotter.services.UserService;
 
 import java.time.Clock;
 import java.util.Scanner;
@@ -52,13 +55,17 @@ public class ParrotterApplicationLauncher {
   private CommandLineProcessor createCommandLineProcessor() {
 
     MessageRepository messageRepository = new InMemoryMessageRepository(Clock.systemUTC());
-    PostMessage postMessage = new PostMessage(messageRepository);
-    ReadUserTimeline readUserTimeline = new ReadUserTimeline(messageRepository, console);
+    PostMessageService postMessageService = new PostMessageService(messageRepository);
+    MessageFormatter messageFormatter = new MessageFormatter(Clock.systemUTC());
+    ReadUserTimelineService readUserTimelineService = new ReadUserTimelineService(messageRepository, console, messageFormatter);
 
     UserRepository userRepository = new InMemoryUserRepository();
-    FollowUser followUser = new FollowUser(userRepository);
+    UserService userService = new UserService(userRepository);
+    FollowUserService followUserService = new FollowUserService(userRepository);
 
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(postMessage, readUserTimeline, followUser);
+    ShowUserWallService showUserWallService = new ShowUserWallService(messageRepository, userRepository, console, messageFormatter);
+
+    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, postMessageService, readUserTimelineService, followUserService, showUserWallService);
 
     return commandLineProcessor;
   }

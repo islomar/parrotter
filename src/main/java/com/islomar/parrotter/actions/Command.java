@@ -1,4 +1,4 @@
-package com.islomar.parrotter.commands;
+package com.islomar.parrotter.actions;
 
 
 public interface Command {

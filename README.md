@@ -62,24 +62,13 @@ Alice - I love the weather today (5 minutes ago)
 # My notes
 http://www.emoji-cheat-sheet.com/
 
-Crafted Design: 15:53
-
-Scanner:
-http://alvinalexander.com/java/edu/pj/pj010005
-
-while (true) {
- executeCommand(scanner.nextLine);
-}
-
-
-Times:
-Clock.systemUTC()
-
-
 
 TO DO:
 * Redesign how the CommandLineProcessor constructor works: we should not pass every new action there... it's crazy.
 * Probably move some actions inside the models, not so aenemic.
+* Use Guava for equals and hashCode
+* Extract enum to its own class.
+* Maybe the enum is not worthy and it is better a constant (symbol() is very annoying).
 * Use Spock.
 * Review I do not return anything MODIFIABLE.
 * Show 1 minute, without S, in singular!

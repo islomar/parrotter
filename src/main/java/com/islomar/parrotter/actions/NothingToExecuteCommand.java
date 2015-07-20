@@ -1,6 +1,4 @@
-package com.islomar.parrotter.commands;
-
-import com.islomar.parrotter.commands.Command;
+package com.islomar.parrotter.actions;
 
 public class NothingToExecuteCommand implements Command {
 

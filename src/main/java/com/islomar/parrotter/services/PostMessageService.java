@@ -1,12 +1,12 @@
-package com.islomar.parrotter.actions;
+package com.islomar.parrotter.services;
 
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 
-public class PostMessage {
+public class PostMessageService {
 
   private MessageRepository messageRepository;
 
-  public PostMessage(MessageRepository messageRepository) {
+  public PostMessageService(MessageRepository messageRepository) {
 
     this.messageRepository = messageRepository;
   }

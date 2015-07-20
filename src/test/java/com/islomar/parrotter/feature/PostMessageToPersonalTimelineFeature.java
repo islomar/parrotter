@@ -1,14 +1,17 @@
 package com.islomar.parrotter.feature;
 
-import com.islomar.parrotter.actions.FollowUser;
-import com.islomar.parrotter.actions.PostMessage;
-import com.islomar.parrotter.actions.ReadUserTimeline;
+import com.islomar.parrotter.model.message.MessageFormatter;
+import com.islomar.parrotter.services.FollowUserService;
+import com.islomar.parrotter.services.PostMessageService;
+import com.islomar.parrotter.services.ReadUserTimelineService;
+import com.islomar.parrotter.services.ShowUserWallService;
 import com.islomar.parrotter.controller.CommandLineProcessor;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
 import com.islomar.parrotter.model.message.InMemoryMessageRepository;
 import com.islomar.parrotter.model.user.InMemoryUserRepository;
+import com.islomar.parrotter.services.UserService;
 
 import org.mockito.Mock;
 import org.testng.annotations.BeforeMethod;
@@ -31,9 +34,11 @@ public class PostMessageToPersonalTimelineFeature {
   @Mock private Console console;
   @Mock private Clock clock;
 
-  private PostMessage postMessage;
-  private ReadUserTimeline readUserTimeline;
-  private FollowUser followUser;
+  private PostMessageService postMessageService;
+  private ReadUserTimelineService readUserTimelineService;
+  private FollowUserService followUserService;
+  private ShowUserWallService showUserWallService;
+  private UserService userService;
 
 
   @BeforeMethod
@@ -41,15 +46,18 @@ public class PostMessageToPersonalTimelineFeature {
     initMocks(this);
 
     MessageRepository messageRepository = new InMemoryMessageRepository(clock);
-    postMessage = new PostMessage(messageRepository);
-    readUserTimeline = new ReadUserTimeline(messageRepository, console);
+    postMessageService = new PostMessageService(messageRepository);
+    MessageFormatter messageFormatter = new MessageFormatter(clock);
+    readUserTimelineService = new ReadUserTimelineService(messageRepository, console, messageFormatter);
     UserRepository userRepository = new InMemoryUserRepository();
-    followUser = new FollowUser(userRepository);
+    userService = new UserService(userRepository);
+    followUserService = new FollowUserService(userRepository);
+    showUserWallService = new ShowUserWallService(messageRepository, userRepository, console, messageFormatter);
   }
 
   public void a_user_publishes_a_message_to_her_personal_timeline() {
 
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(postMessage, readUserTimeline, followUser);
+    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, postMessageService, readUserTimelineService, followUserService, showUserWallService);
     commandLineProcessor.execute(ALICE + " -> " + MESSAGE_TEXT);
 
     verify(console, never()).printMessage(anyString());

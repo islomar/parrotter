@@ -1,11 +1,19 @@
 package com.islomar.parrotter.model.message;
 
+import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
 
 
 public class MessageFormatter {
 
+
+  private Clock clock;
+
+  public MessageFormatter(Clock clock) {
+
+    this.clock = clock;
+  }
 
   /**
    * Formats a Message to be shown in user timeline.
@@ -29,7 +37,7 @@ public class MessageFormatter {
 
   private String renderTimeElapsed(Instant publicationInstant) {
 
-    Duration timeElapsed = Duration.between(publicationInstant, Instant.now());
+    Duration timeElapsed = Duration.between(publicationInstant, clock.instant());
 
     if (timeElapsed.toMinutes() == 0) {
       return "(" + timeElapsed.toMillis() / 1000 + " seconds ago)";
