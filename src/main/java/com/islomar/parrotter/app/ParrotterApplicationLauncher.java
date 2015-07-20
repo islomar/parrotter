@@ -22,8 +22,8 @@ public class ParrotterApplicationLauncher {
 
   private final Console console;
 
-  public ParrotterApplicationLauncher(Console console) {
-    this.console = console;
+  public ParrotterApplicationLauncher() {
+    this.console = new Console();
   }
 
   public void run() {
