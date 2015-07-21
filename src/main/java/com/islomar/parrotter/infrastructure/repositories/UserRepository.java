@@ -7,5 +7,5 @@ public interface UserRepository {
 
   public void saveUser(String username);
 
-  public User getUser(String username);
+  public User findUserByUsername(String username);
 }
