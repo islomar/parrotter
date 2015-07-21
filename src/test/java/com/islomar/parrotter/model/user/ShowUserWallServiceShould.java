@@ -1,10 +1,10 @@
-package com.islomar.parrotter.services;
+package com.islomar.parrotter.model.user;
 
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.model.message.Message;
-import com.islomar.parrotter.model.user.User;
+import com.islomar.parrotter.model.message.MessageService;
 
 import org.mockito.InOrder;
 import org.mockito.Mock;
@@ -60,17 +60,13 @@ public class ShowUserWallServiceShould {
     showUserWallService = new ShowUserWallService(messageService, userService, console, messageFormatter);
   }
 
+  //TODO: maybe here I should just verify calling userService and messageService???
   public void a_user_wall_shows_her_personal_timeline_and_her_followed_user_timelines() {
 
-    userService.saveUser(CHARLIE);
     given(messageService.findPersonalMessagesFor(CHARLIE)).willReturn(charlieMessages());
     given(messageService.findPersonalMessagesFor(BOB)).willReturn(bobMessages());
     given(messageService.findPersonalMessagesFor(ALICE)).willReturn(aliceMessages());
-
-    User charlie = new User(CHARLIE);
-    charlie.follow(ALICE);
-    charlie.follow(BOB);
-    given(userService.findUserByUsername(CHARLIE)).willReturn(charlie);
+    givenThatCharlieFollowsAliceAndBob();
 
     showUserWallService.printUserWallFor(CHARLIE);
 
@@ -79,6 +75,13 @@ public class ShowUserWallServiceShould {
     inOrder.verify(console).printMessage("Bob - Good game though. (1 minute ago)");
     inOrder.verify(console).printMessage("Bob - Damn! We lost! (2 minutes ago)");
     inOrder.verify(console).printMessage("Alice - I love the weather today (5 minutes ago)");
+  }
+
+  private void givenThatCharlieFollowsAliceAndBob() {
+    User charlie = new User(CHARLIE);
+    charlie.follow(ALICE);
+    charlie.follow(BOB);
+    given(userService.findUserByUsername(CHARLIE)).willReturn(charlie);
   }
 
   private List<Message> charlieMessages() {

@@ -2,9 +2,9 @@ package com.islomar.parrotter.controller;
 
 import com.islomar.parrotter.actions.Command;
 import com.islomar.parrotter.controller.utils.CommandGenerator;
-import com.islomar.parrotter.services.MessageService;
-import com.islomar.parrotter.services.ShowUserWallService;
-import com.islomar.parrotter.services.UserService;
+import com.islomar.parrotter.model.message.MessageService;
+import com.islomar.parrotter.model.user.ShowUserWallService;
+import com.islomar.parrotter.model.user.UserService;
 
 
 public class CommandLineProcessor {

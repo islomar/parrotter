@@ -7,9 +7,9 @@ import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
 import com.islomar.parrotter.model.message.InMemoryMessageRepository;
 import com.islomar.parrotter.model.user.InMemoryUserRepository;
-import com.islomar.parrotter.services.MessageService;
-import com.islomar.parrotter.services.ShowUserWallService;
-import com.islomar.parrotter.services.UserService;
+import com.islomar.parrotter.model.message.MessageService;
+import com.islomar.parrotter.model.user.ShowUserWallService;
+import com.islomar.parrotter.model.user.UserService;
 
 import org.mockito.InOrder;
 import org.mockito.Mock;
@@ -71,7 +71,6 @@ public class ShowUserWallFeature {
 
     CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, messageService, showUserWallService);
     given(clock.instant()).willReturn(FIVE_MINUTES_AGO, TWO_SECONDS_AGO);
-
     commandLineProcessor.execute(ALICE + POST.symbol() + ALICE_MESSAGE_TEXT);
     commandLineProcessor.execute(CHARLIE + POST.symbol() + CHARLIE_MESSAGE_TEXT);
     commandLineProcessor.execute(CHARLIE + FOLLOWS.symbol() + ALICE);

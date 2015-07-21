@@ -9,9 +9,9 @@ import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
 import com.islomar.parrotter.model.message.InMemoryMessageRepository;
 import com.islomar.parrotter.model.user.InMemoryUserRepository;
-import com.islomar.parrotter.services.MessageService;
-import com.islomar.parrotter.services.ShowUserWallService;
-import com.islomar.parrotter.services.UserService;
+import com.islomar.parrotter.model.message.MessageService;
+import com.islomar.parrotter.model.user.ShowUserWallService;
+import com.islomar.parrotter.model.user.UserService;
 
 import java.time.Clock;
 import java.util.Scanner;

@@ -1,7 +1,6 @@
-package com.islomar.parrotter.services;
+package com.islomar.parrotter.model.user;
 
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
-import com.islomar.parrotter.model.user.User;
 
 public class UserService {
 
@@ -16,6 +15,6 @@ public class UserService {
   }
 
   public User findUserByUsername(String username) {
-    return userRepository.getUser(username);
+    return userRepository.findUserByUsername(username);
   }
 }

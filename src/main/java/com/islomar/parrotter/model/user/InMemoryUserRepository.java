@@ -20,7 +20,7 @@ public class InMemoryUserRepository implements UserRepository {
   }
 
   @Override
-  public User getUser(String username) {
+  public User findUserByUsername(String username) {
     return users.stream().filter(user -> user.getUsername().equalsIgnoreCase(username)).findFirst().orElse(new NullUser());
   }
 }
