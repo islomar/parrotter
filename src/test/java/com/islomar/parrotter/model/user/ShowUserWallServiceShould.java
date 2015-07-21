@@ -19,6 +19,7 @@ import java.util.List;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @Test
@@ -60,7 +61,6 @@ public class ShowUserWallServiceShould {
     showUserWallService = new ShowUserWallService(messageService, userService, console, messageFormatter);
   }
 
-  //TODO: maybe here I should just verify calling userService and messageService???
   public void a_user_wall_shows_her_personal_timeline_and_her_followed_user_timelines() {
 
     given(messageService.findPersonalMessagesFor(CHARLIE)).willReturn(charlieMessages());
@@ -70,6 +70,9 @@ public class ShowUserWallServiceShould {
 
     showUserWallService.printUserWallFor(CHARLIE);
 
+    verify(messageService).findPersonalMessagesFor(CHARLIE);
+    verify(messageService).findPersonalMessagesFor(BOB);
+    verify(messageService).findPersonalMessagesFor(ALICE);
     InOrder inOrder = inOrder(console);
     inOrder.verify(console).printMessage("Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)");
     inOrder.verify(console).printMessage("Bob - Damn! We lost! (1 minute ago)");
