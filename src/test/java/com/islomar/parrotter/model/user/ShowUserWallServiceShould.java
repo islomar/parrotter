@@ -29,8 +29,8 @@ public class ShowUserWallServiceShould {
   private static final String BOB = "Bob";
   private static final String MESSAGE_TEXT_1 = "I love the weather today";
   private static final String MESSAGE_TEXT_2 = "I'm in New York today! Anyone wants to have a coffee?";
-  private static final String MESSAGE_TEXT_3 = "Good game though.";
-  private static final String MESSAGE_TEXT_4 = "Damn! We lost!";
+  private static final String MESSAGE_TEXT_3 = "Damn! We lost!";
+  private static final String MESSAGE_TEXT_4 = "Good game though.";
   private static final int ONE = 1;
   private static final int TWO = 2;
   private static final int FIVE = 5;
@@ -72,8 +72,8 @@ public class ShowUserWallServiceShould {
 
     InOrder inOrder = inOrder(console);
     inOrder.verify(console).printMessage("Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)");
-    inOrder.verify(console).printMessage("Bob - Good game though. (1 minute ago)");
-    inOrder.verify(console).printMessage("Bob - Damn! We lost! (2 minutes ago)");
+    inOrder.verify(console).printMessage("Bob - Damn! We lost! (1 minute ago)");
+    inOrder.verify(console).printMessage("Bob - Good game though. (2 minutes ago)");
     inOrder.verify(console).printMessage("Alice - I love the weather today (5 minutes ago)");
   }
 
