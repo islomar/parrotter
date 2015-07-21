@@ -1,14 +1,14 @@
 package com.islomar.parrotter.actions;
 
 
-import com.islomar.parrotter.services.ShowUserWallService;
+import com.islomar.parrotter.model.user.ShowUserWallService;
 
-public class ShowWallCommand implements Command {
+public class ShowUserWall implements Command {
 
   private final ShowUserWallService showUserWallService;
   private final String username;
 
-  public ShowWallCommand(ShowUserWallService showUserWallService, String username) {
+  public ShowUserWall(ShowUserWallService showUserWallService, String username) {
 
     this.showUserWallService = showUserWallService;
     this.username = username;

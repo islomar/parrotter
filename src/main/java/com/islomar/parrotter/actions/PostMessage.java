@@ -1,17 +1,17 @@
 package com.islomar.parrotter.actions;
 
 
-import com.islomar.parrotter.services.MessageService;
-import com.islomar.parrotter.services.UserService;
+import com.islomar.parrotter.model.message.MessageService;
+import com.islomar.parrotter.model.user.UserService;
 
-public class PostMessageCommand implements Command {
+public class PostMessage implements Command {
 
-  private final MessageService messageService;
+  private MessageService messageService;
   private final String username;
   private final String message;
   private UserService userService;
 
-  public PostMessageCommand(UserService userService, MessageService messageService, final String username, final String message) {
+  public PostMessage(UserService userService, MessageService messageService, final String username, final String message) {
     this.userService = userService;
     this.messageService = messageService;
 
