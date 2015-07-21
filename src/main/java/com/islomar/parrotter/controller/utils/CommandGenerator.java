@@ -1,15 +1,14 @@
 package com.islomar.parrotter.controller.utils;
 
 import com.islomar.parrotter.actions.Command;
-import com.islomar.parrotter.actions.FollowUserCommand;
-import com.islomar.parrotter.actions.NothingToExecuteCommand;
-import com.islomar.parrotter.actions.PostMessageCommand;
-import com.islomar.parrotter.actions.ReadUserTimelineCommand;
-import com.islomar.parrotter.actions.ShowWallCommand;
+import com.islomar.parrotter.actions.FollowUser;
+import com.islomar.parrotter.actions.PostMessage;
+import com.islomar.parrotter.actions.ReadUserPersonalTimeline;
+import com.islomar.parrotter.actions.ShowUserWall;
 import com.islomar.parrotter.model.user.User;
-import com.islomar.parrotter.services.MessageService;
-import com.islomar.parrotter.services.ShowUserWallService;
-import com.islomar.parrotter.services.UserService;
+import com.islomar.parrotter.model.message.MessageService;
+import com.islomar.parrotter.model.user.ShowUserWallService;
+import com.islomar.parrotter.model.user.UserService;
 
 import static com.islomar.parrotter.controller.utils.CommandType.FOLLOWS;
 import static com.islomar.parrotter.controller.utils.CommandType.POST;
@@ -31,7 +30,7 @@ public class CommandGenerator {
 
   public Command createCommandFromInputLine(String inputCommandLine) {
 
-    Command command = new NothingToExecuteCommand();
+    Command command = null;
     if (inputCommandLine.contains(POST.symbol())) {
       command = generatePublishMessageCommand(inputCommandLine);
     } else if (inputCommandLine.contains(WALL.symbol())) {
@@ -46,7 +45,7 @@ public class CommandGenerator {
   }
 
   private Command generateViewUserTimelineCommand(String username) {
-    return new ReadUserTimelineCommand(messageService, username);
+    return new ReadUserPersonalTimeline(messageService, username);
   }
 
   private Command generateFollowUserCommand(String inputCommandLine) {
@@ -58,13 +57,13 @@ public class CommandGenerator {
 
     followingUser.follow(followedUsername);
 
-    return new FollowUserCommand(userService, followingUsername, followedUsername);
+    return new FollowUser(userService, followingUsername, followedUsername);
   }
 
   private Command generateShowUserWallCommand(String inputCommandLine) {
     String[] inputArguments = inputCommandLine.split(WALL.symbol());
     String username = inputArguments[0].trim();
-    return new ShowWallCommand(showUserWallService, username);
+    return new ShowUserWall(showUserWallService, username);
   }
 
   private Command generatePublishMessageCommand(String inputCommandLine) {
@@ -72,6 +71,6 @@ public class CommandGenerator {
     String[] inputArguments = inputCommandLine.split(POST.symbol());
     String username = inputArguments[0].trim();
     String textMessage = inputArguments[1].trim();
-    return new PostMessageCommand(userService, messageService, username, textMessage);
+    return new PostMessage(userService, messageService, username, textMessage);
   }
 }
