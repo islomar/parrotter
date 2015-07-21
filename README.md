@@ -64,12 +64,12 @@ http://www.emoji-cheat-sheet.com/
 
 
 TO DO:
-* Redesign how the CommandLineProcessor constructor works: we should not pass every new action there... it's crazy.
-
 * Maybe the enum is not worthy and it is better a constant (symbol() is very annoying).
 
 * Review I do not return anything MODIFIABLE >> findUser() should return a user with a save() which calls the userRepository (e.g. after updating the followers).
 * Leave only one model? Add List<Message> to User? User would be an entity and Message a VO. The domain seems to be onlye one.
+* FollowUserShould es una castaña. No puedo dejarlo así.
+
 
 * Review the levels of abstractions.
 * Clean up comments, TODOs, etc.
