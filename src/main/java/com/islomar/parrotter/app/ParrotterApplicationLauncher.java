@@ -39,7 +39,7 @@ public class ParrotterApplicationLauncher {
   }
 
   private void showWelcomeMessageAndInstructions() {
-    console.printMessage("Welcome to Parroter Application!");
+    console.printMessage("Welcome to Parroter!");
     console.printMessage("You can execute any of these commands:\n");
     console.printMessage("posting:\t <user name> -> <message>");
     console.printMessage("reading:\t <user name>");
