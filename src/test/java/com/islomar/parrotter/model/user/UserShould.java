@@ -2,6 +2,9 @@ package com.islomar.parrotter.model.user;
 
 import org.testng.annotations.Test;
 
+import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
@@ -13,6 +16,7 @@ public class UserShould {
 
   private static final String CHARLIE = "Charlie";
   private static final String BOB = "Bob";
+  private static final String ALICE = "Alice";
 
 
   public void not_follow_anyone_after_creation() {
@@ -26,6 +30,20 @@ public class UserShould {
 
     User charlie = new User(CHARLIE);
 
+    charlie.follow(BOB);
+    charlie.follow(ALICE);
+
+    Set<String> followedUsers = charlie.getFollowedUsers();
+    assertThat(followedUsers, hasSize(2));
+    assertThat(followedUsers, hasItem(BOB));
+    assertThat(followedUsers, hasItem(ALICE));
+  }
+
+  public void not_follow_twice_the_same_user() {
+
+    User charlie = new User(CHARLIE);
+
+    charlie.follow(BOB);
     charlie.follow(BOB);
 
     assertThat(charlie.getFollowedUsers(), hasSize(1));
