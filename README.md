@@ -65,10 +65,12 @@ http://www.emoji-cheat-sheet.com/
 
 TO DO:
 * Redesign how the CommandLineProcessor constructor works: we should not pass every new action there... it's crazy.
-* Probably move some actions inside the models, not so aenemic.
+
 * Maybe the enum is not worthy and it is better a constant (symbol() is very annoying).
 * Use Spock.
 * Review I do not return anything MODIFIABLE.
+* Review Feature tests: mock or unmock anything?
+* Review Service tests: mock or unmock anything?
 
 * Review the levels of abstractions.
 * Clean up comments, TODOs, etc.
@@ -82,8 +84,4 @@ TO DO:
 
 
 IN PROGRESS:
-
-
-* http://www.emoji-cheat-sheet.com/
-* Scanner: http://alvinalexander.com/java/edu/pj/pj010005
-* Create a Console implementation with sout, which implements something like OutputWriter.
+* Probably move some actions inside the models, not so aenemic.
