@@ -1,7 +1,6 @@
 package com.islomar.parrotter.actions;
 
 import com.islomar.parrotter.model.message.MessageService;
-import com.islomar.parrotter.model.user.UserService;
 
 import org.mockito.Mock;
 import org.testng.annotations.BeforeMethod;
@@ -11,12 +10,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @Test
-public class PostMessageShould {
+public class ReadUserPersonalTimelineShould {
 
   private static final String ALICE = "Alice";
-  private static final String MESSAGE_TEXT = "I love the weather today";
 
-  @Mock UserService userService;
   @Mock MessageService messageService;
 
 
@@ -25,13 +22,11 @@ public class PostMessageShould {
     initMocks(this);
   }
 
-  public void save_the_user_and_post_the_message() {
-    PostMessage postMessage = new PostMessage(userService, messageService, ALICE, MESSAGE_TEXT);
+  public void show_a_user_wall() {
+    ReadUserPersonalTimeline readUserPersonalTimeline = new ReadUserPersonalTimeline(messageService, ALICE);
 
-    postMessage.execute();
+    readUserPersonalTimeline.execute();
 
-    verify(userService).saveUser(ALICE);
-    verify(messageService).saveMessage(ALICE, MESSAGE_TEXT);
+    verify(messageService).printTimelineFor(ALICE);
   }
-
 }

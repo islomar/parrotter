@@ -67,10 +67,9 @@ TO DO:
 * Redesign how the CommandLineProcessor constructor works: we should not pass every new action there... it's crazy.
 
 * Maybe the enum is not worthy and it is better a constant (symbol() is very annoying).
-* Use Spock.
-* Review I do not return anything MODIFIABLE.
-* Review Feature tests: mock or unmock anything?
-* Review Service tests: mock or unmock anything?
+
+* Review I do not return anything MODIFIABLE >> findUser() should return a user with a save() which calls the userRepository (e.g. after updating the followers).
+* Leave only one model? Add List<Message> to User? User would be an entity and Message a VO. The domain seems to be onlye one.
 
 * Review the levels of abstractions.
 * Clean up comments, TODOs, etc.

@@ -59,4 +59,11 @@ public class MessageServiceShould {
 
     verify(console).printMessage(MESSAGE_TEXT + " (" + TWO + " minutes ago)");
   }
+
+  public void find_a_user_personal_messages() {
+
+    messageService.findPersonalMessagesFor(ALICE);
+
+    verify(messageRepository).findAllMessagesForUser(ALICE);
+  }
 }
