@@ -9,23 +9,17 @@ import com.islomar.parrotter.model.user.UserService;
 
 public class CommandLineProcessor {
 
-  private final MessageService messageService;
-  private final UserService userService;
-  private ShowUserWallService showUserWallService;
+  private final CommandGenerator commandGenerator;
 
   public CommandLineProcessor(UserService userService, MessageService messageService,
                               ShowUserWallService showUserWallService) {
 
-    this.userService = userService;
-    this.messageService = messageService;
-    this.showUserWallService = showUserWallService;
+    commandGenerator = new CommandGenerator(userService, messageService, showUserWallService);
   }
 
   public void execute(String inputCommandLine) {
 
-    CommandGenerator commandGenerator = new CommandGenerator(userService, messageService, showUserWallService);
     Command command = commandGenerator.createCommandFromInputLine(inputCommandLine);
-
     command.execute();
   }
 }
