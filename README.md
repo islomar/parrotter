@@ -5,12 +5,12 @@
 Implement a console-based social networking application (similar to Twitter) satisfying the scenarios below.
 
 ## How to run it
-* You need Java 8.
+* You need **Java 8**.
 * There are two options:
-  * Option 1
+  * **Option 1**
     * First, run 'mvn clean package'
     * Then, run 'java -jar target/parrotter-jar-with-dependencies.jar'
-  * Option 2
+  * **Option 2**
     * Just execute "run-parrotter.sh" or "run-parrotter.bat".
 * Enjoy it.
 
@@ -57,10 +57,10 @@ Alice - I love the weather today (5 minutes ago)
 ##Details
 * The application must use the console for input and output.
 * Users submit commands to the application. There are four commands. “posting”, “reading”, etc. are not part of the commands; commands always start with the user’s name.
- * posting: <user name> -> <message>
- * reading: <user name>
- * following: <user name> follows <another user>
- * wall: <user name> wall
+ * posting: ```<user name> -> <message>```
+ * reading: ```<user name>```
+ * following: ```<user name> follows <another user>```
+ * wall: ```<user name> wall```
 
 
 * Don't worry about handling any exceptions or invalid commands. Assume that the user will always type the correct commands. Just focus on the sunny day scenarios.
