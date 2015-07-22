@@ -95,8 +95,10 @@ Alice - I love the weather today (5 minutes ago)
 * Class **ShowUserWallService**: it's split from UserService and MessageService because it needs to access both "domains", both repositories... but maybe it fit in one of them (or even it should exist only one Service, maybe there is only one Domain here).
 * Maybe the **enum** for the command types is not worthy and here it's enough with constants.
 * The **FollowUserTimelineFeature** test. I'm not sure if it really adds any value...
-
+* Under the package "controller" there is a class called "CommandLineProcessor". This is the class which takes the user input and decides to wich action to redirect the execution flow... That's a kind of "controller" responsibility, but I'm not sure about this solution.
 
 ## TO DO:
 * Review the FIVE, TWO... does it really improve anything?
+* Create jar, sh and bat
 * Create tag!! (1.0.0)
+* Execute one last time!!
