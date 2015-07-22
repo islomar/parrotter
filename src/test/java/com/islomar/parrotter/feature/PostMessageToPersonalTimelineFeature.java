@@ -47,7 +47,6 @@ public class PostMessageToPersonalTimelineFeature {
 
     UserRepository userRepository = new InMemoryUserRepository();
     userService = new UserService(userRepository);
-
     showUserWallService = new ShowUserWallService(messageService, userService, console, messageFormatter);
   }
 

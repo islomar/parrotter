@@ -43,8 +43,8 @@ public class FollowUserTimelineFeature {
     MessageRepository messageRepository = new InMemoryMessageRepository(clock);
     MessageFormatter messageFormatter = new MessageFormatter(clock);
     messageService = new MessageService(messageRepository, console, messageFormatter);
-    UserRepository userRepository = new InMemoryUserRepository();
 
+    UserRepository userRepository = new InMemoryUserRepository();
     userService = new UserService(userRepository);
     showUserWallService = new ShowUserWallService(messageService, userService, console, messageFormatter);
   }

@@ -94,17 +94,9 @@ Alice - I love the weather today (5 minutes ago)
 * I started using **Optional** for the case no User exists. I finally decided to use the Null Object Pattern, which I think leaves a clearer code (though probably that's not happy path and I shouldn't have worried anyway).
 * Class **ShowUserWallService**: it's split from UserService and MessageService because it needs to access both "domains", both repositories... but maybe it fit in one of them (or even it should exist only one Service, maybe there is only one Domain here).
 * Maybe the **enum** for the command types is not worthy and here it's enough with constants.
-
+* The **FollowUserTimelineFeature** test. I'm not sure if it really adds any value...
 
 
 ## TO DO:
-* FollowUserShould es una castaña. No puedo dejarlo así.
-* Review the levels of abstractions.
-* Clean up comments, TODOs, etc.
-* Checkstyle
-* Findbugs
-* Inspect code
-* Organize imports
-* Remove comments
 * Review the FIVE, TWO... does it really improve anything?
 * Create tag!! (1.0.0)
