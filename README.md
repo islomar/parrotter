@@ -64,6 +64,9 @@ http://www.emoji-cheat-sheet.com/
 
 
 TO DO:
+* Not duplicated messages because of redundant follows (Charlie follows Alice, Alice follows Bob, Charlie -> follows Bob)
+* Not duplicated messages because of cyclic follows (Charlie follows Alice, Alice follows Bob, Bob follows Alice, Charlie follows Bob)
+
 * Maybe the enum is not worthy and it is better a constant (symbol() is very annoying).
 
 * Review I do not return anything MODIFIABLE >> findUser() should return a user with a save() which calls the userRepository (e.g. after updating the followers).
