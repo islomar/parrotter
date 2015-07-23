@@ -8,7 +8,7 @@ Implement a console-based social networking application (similar to Twitter) sat
 * You need **Java 8**.
 * There are two options:
   * **Option 1**
-    * First, run 'mvn clean package'
+    * First, run 'mvn clean package'  (you would need having Maven installed)
     * Then, run 'java -jar target/parrotter-jar-with-dependencies.jar'
   * **Option 2**
     * Just execute "run-parrotter.sh" or "run-parrotter.bat".
@@ -92,12 +92,12 @@ Alice - I love the weather today (5 minutes ago)
 * Some other things that I'm not even aware of :-)
 
 ## What I have doubts about
+* Maybe I didn't apply KISS and YAGNI at all. Maybe I should have created just one Entity, one Service and one Repository. Maybe...
 * Having **two models**: User and Message. I wonder if it wouldn't be better just having a User entity and a Message VO which is part of the User (as a Set).
 * It's kind of **anaemic domain**. But I didn't see passing a Repository for each User creation... I didn't see clear a better way to do it (though I know that it exists).
 * I started using **Optional** for the case no User exists. I finally decided to use the Null Object Pattern, which I think leaves a clearer code (though probably that's not happy path and I shouldn't have worried anyway).
 * Class **ShowUserWallService**: it's split from UserService and MessageService because it needs to access both "domains", both repositories... but maybe it fit in one of them (or even it should exist only one Service, maybe there is only one Domain here).
 * Maybe the **enum** for the command types is not worthy and here it's enough with constants.
-* The **FollowUserTimelineFeature** test. I'm not sure if it really adds any value...
 * Under the package "controller" there is a class called "CommandLineProcessor". This is the class which takes the user input and decides to wich action to redirect the execution flow... That's a kind of "controller" responsibility, but I'm not sure about this solution.
 
 ## TO DO:
