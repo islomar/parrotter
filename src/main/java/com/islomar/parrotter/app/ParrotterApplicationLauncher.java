@@ -20,13 +20,11 @@ public class ParrotterApplicationLauncher {
   private final Console console;
   private final Clock clock;
   private final ScannerProxy scanner;
-  protected boolean running;
 
   public ParrotterApplicationLauncher(ScannerProxy scanner, Console console, Clock clock) {
     this.scanner = scanner;
     this.console = console;
     this.clock = clock;
-    this.running = true;
   }
 
   public void run() {
