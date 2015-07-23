@@ -23,7 +23,9 @@ public class InMemoryUserRepositoryShould {
   private static final String ALICE = "Alice";
   private static final String BOB = "Bob";
   private static final String NON_EXISTING_USER = "NonExistingUser";
-  private static final String MESSAGE_TEXT = "I love the weather today";
+  private static final String MESSAGE_TEXT_1 = "I love the weather today 1";
+  private static final String MESSAGE_TEXT_2 = "I love the weather today 2";
+  private static final String MESSAGE_TEXT_3 = "I love the weather today 3";
 
   private InMemoryUserRepository inMemoryUserRepository;
 
@@ -69,8 +71,9 @@ public class InMemoryUserRepositoryShould {
 
     Instant now = Instant.now();
     given(clock.instant()).willReturn(now);
-    Message message = new Message(BOB, MESSAGE_TEXT, now);
-    inMemoryUserRepository.saveMessage(BOB, MESSAGE_TEXT);
+    Message message = new Message(BOB, MESSAGE_TEXT_1, now);
+    inMemoryUserRepository.saveUser(BOB);
+    inMemoryUserRepository.saveMessage(BOB, MESSAGE_TEXT_1);
 
     List<Message> bobMessages = inMemoryUserRepository.findAllMessagesForUser(BOB);
 
@@ -81,14 +84,15 @@ public class InMemoryUserRepositoryShould {
   public void save_three_messages_and_then_find_them() {
 
     Instant now = Instant.now();
-    given(clock.instant()).willReturn(now, now.minus(1, ChronoUnit.HOURS), now.minus(2, ChronoUnit.HOURS));
+    given(clock.instant()).willReturn(now.minus(1, ChronoUnit.HOURS), now.minus(2, ChronoUnit.HOURS), now.minus(3, ChronoUnit.HOURS), now);
 
-    Message message1 = new Message(ALICE, MESSAGE_TEXT + "1", now);
-    Message message2 = new Message(ALICE, MESSAGE_TEXT + "2", now.minus(1, ChronoUnit.HOURS));
-    Message message3 = new Message(ALICE, MESSAGE_TEXT + "3", now.minus(2, ChronoUnit.HOURS));
-    inMemoryUserRepository.saveMessage(ALICE, MESSAGE_TEXT + "1");
-    inMemoryUserRepository.saveMessage(ALICE, MESSAGE_TEXT + "2");
-    inMemoryUserRepository.saveMessage(ALICE, MESSAGE_TEXT + "3");
+    Message message1 = new Message(ALICE, MESSAGE_TEXT_1, now.minus(1, ChronoUnit.HOURS));
+    Message message2 = new Message(ALICE, MESSAGE_TEXT_2, now.minus(2, ChronoUnit.HOURS));
+    Message message3 = new Message(ALICE, MESSAGE_TEXT_3, now.minus(3, ChronoUnit.HOURS));
+    inMemoryUserRepository.saveUser(ALICE);
+    inMemoryUserRepository.saveMessage(ALICE, MESSAGE_TEXT_1);
+    inMemoryUserRepository.saveMessage(ALICE, MESSAGE_TEXT_2);
+    inMemoryUserRepository.saveMessage(ALICE, MESSAGE_TEXT_3);
 
     List<Message> aliceMessages = inMemoryUserRepository.findAllMessagesForUser(ALICE);
 

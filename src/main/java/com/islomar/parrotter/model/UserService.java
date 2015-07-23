@@ -31,6 +31,7 @@ public class UserService {
   }
 
   public void saveMessage(String username, String textMessage) {
+    createNewUserIfItDoesNotExist(username);
     userRepository.saveMessage(username, textMessage);
   }
 
@@ -55,6 +56,16 @@ public class UserService {
     Stream.concat(personalTimelineMessages.stream(), followedUserMessages.stream())
         .sorted()
         .forEach(message -> console.printMessage(messageFormatter.formatForTheWall(message)));
+  }
+
+  private void createNewUserIfItDoesNotExist(String username) {
+    if (userDoesNotExist(username)) {
+      userRepository.saveUser(username);
+    }
+  }
+
+  private boolean userDoesNotExist(String username) {
+    return userRepository.findUserByUsername(username) instanceof NullUser;
   }
 
   private List<Message> getFollowedUserMessages(String username) {

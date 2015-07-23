@@ -1,7 +1,5 @@
 package com.islomar.parrotter.model;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
@@ -11,17 +9,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class InMemoryUserRepository implements UserRepository {
 
   private Set<User> users;
   private final Clock clock;
-  private Multimap<String, Message> messages;
 
   public InMemoryUserRepository(final Clock clock) {
     users = Sets.newHashSet();
     this.clock = clock;
-    this.messages = ArrayListMultimap.create();
   }
 
   @Override
@@ -36,12 +33,14 @@ public class InMemoryUserRepository implements UserRepository {
 
   @Override
   public List<Message> findAllMessagesForUser(final String username) {
-    return Collections.unmodifiableList(new ArrayList<>(messages.get(username)));
+    User user = users.stream().filter(u -> u.getUsername().equals(username)).findFirst().orElse(new NullUser());
+    return Collections.unmodifiableList(new ArrayList<>(user.getPersonalMessages().stream().sorted().collect(Collectors.toList())));
   }
 
   @Override
   public void saveMessage(final String username, final String messageText) {
+    User user = users.stream().filter(u -> u.getUsername().equals(username)).findFirst().get();
     Message message = new Message(username, messageText, clock.instant());
-    messages.put(message.getUsername(), message);
+    user.getPersonalMessages().add(message);
   }
 }

@@ -73,15 +73,15 @@ public class CommandLineProcessorShould {
   public void print_a_user_personal_timeline() {
 
     CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService);
-    given(clock.instant()).willReturn(TWO_MINUTES_AGO, FIVE_SECONDS_AGO, Instant.now());
+    given(clock.instant()).willReturn(TWO_MINUTES_AGO, FIVE_SECONDS_AGO, NOW);
     commandLineProcessor.execute(BOB + " -> " + BOB_MESSAGE_TEXT_1);
     commandLineProcessor.execute(BOB + " -> " + BOB_MESSAGE_TEXT_2);
 
     commandLineProcessor.execute(BOB);
 
     InOrder inOrder = inOrder(console);
-    inOrder.verify(console).printMessage(BOB_MESSAGE_TEXT_1 + " (2 minutes ago)");
     inOrder.verify(console).printMessage(BOB_MESSAGE_TEXT_2 + " (5 seconds ago)");
+    inOrder.verify(console).printMessage(BOB_MESSAGE_TEXT_1 + " (2 minutes ago)");
   }
 
   public void follow_another_user() {
