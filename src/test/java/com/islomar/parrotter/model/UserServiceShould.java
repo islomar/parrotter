@@ -2,7 +2,6 @@ package com.islomar.parrotter.model;
 
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
-import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
 
 import org.mockito.InOrder;
@@ -42,7 +41,6 @@ public class UserServiceShould {
   @Mock UserRepository userRepository;
   @Mock Console console;
   @Mock Clock clock;
-  @Mock MessageRepository messageRepository;
   @Mock MessageFormatter messageFormatter;
 
   private UserService userService;
@@ -54,7 +52,7 @@ public class UserServiceShould {
 
     given(clock.instant()).willReturn(NOW);
     MessageFormatter messageFormatter = new MessageFormatter(clock);
-    userService = new UserService(userRepository, messageRepository, console, messageFormatter);
+    userService = new UserService(userRepository, console, messageFormatter);
   }
 
   public void save_a_user() {
@@ -75,13 +73,13 @@ public class UserServiceShould {
 
     userService.saveMessage(ALICE, MESSAGE_TEXT_1);
 
-    verify(messageRepository).saveMessage(ALICE, MESSAGE_TEXT_1);
+    verify(userRepository).saveMessage(ALICE, MESSAGE_TEXT_1);
   }
 
   public void a_user_can_read_any_user_timeline() {
 
     Message postedMessaged = new Message(ALICE, MESSAGE_TEXT_1, TWO_MINUTES_AGO);
-    given(messageRepository.findAllMessagesForUser(ALICE)).willReturn(Arrays.asList(postedMessaged));
+    given(userRepository.findAllMessagesForUser(ALICE)).willReturn(Arrays.asList(postedMessaged));
 
     userService.printTimelineFor(ALICE);
 
@@ -92,7 +90,7 @@ public class UserServiceShould {
 
     userService.findPersonalMessagesFor(ALICE);
 
-    verify(messageRepository).findAllMessagesForUser(ALICE);
+    verify(userRepository).findAllMessagesForUser(ALICE);
   }
 
   public void a_user_wall_shows_her_personal_timeline_and_her_followed_user_timelines() {

@@ -2,7 +2,6 @@ package com.islomar.parrotter.model;
 
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
-import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
 
 import java.util.List;
@@ -13,14 +12,12 @@ import java.util.stream.Stream;
 public class UserService {
 
   private UserRepository userRepository;
-  private MessageRepository messageRepository;
   private Console console;
   private MessageFormatter messageFormatter;
 
-  public UserService(UserRepository userRepository, MessageRepository messageRepository, Console console, MessageFormatter messageFormatter) {
+  public UserService(UserRepository userRepository, Console console, MessageFormatter messageFormatter) {
 
     this.userRepository = userRepository;
-    this.messageRepository = messageRepository;
     this.console = console;
     this.messageFormatter = messageFormatter;
   }
@@ -34,7 +31,7 @@ public class UserService {
   }
 
   public void saveMessage(String username, String textMessage) {
-    messageRepository.saveMessage(username, textMessage);
+    userRepository.saveMessage(username, textMessage);
   }
 
   public void printTimelineFor(String username) {
@@ -44,7 +41,7 @@ public class UserService {
   }
 
   public List<Message> findPersonalMessagesFor(String username) {
-    return messageRepository.findAllMessagesForUser(username);
+    return userRepository.findAllMessagesForUser(username);
   }
 
   public void printUserWallFor(String username) {

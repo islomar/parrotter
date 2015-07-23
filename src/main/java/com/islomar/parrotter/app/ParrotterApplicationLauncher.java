@@ -4,9 +4,7 @@ import com.islomar.parrotter.controller.CommandLineProcessor;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.ScannerProxy;
 import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
-import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
-import com.islomar.parrotter.model.InMemoryMessageRepository;
 import com.islomar.parrotter.model.InMemoryUserRepository;
 import com.islomar.parrotter.model.UserService;
 
@@ -37,11 +35,10 @@ public class ParrotterApplicationLauncher {
 
   private CommandLineProcessor createCommandLineProcessor() {
 
-    MessageRepository messageRepository = new InMemoryMessageRepository(clock);
-    UserRepository userRepository = new InMemoryUserRepository();
+    UserRepository userRepository = new InMemoryUserRepository(clock);
     MessageFormatter messageFormatter = new MessageFormatter(clock);
 
-    UserService userService = new UserService(userRepository, messageRepository, console, messageFormatter);
+    UserService userService = new UserService(userRepository, console, messageFormatter);
     return new CommandLineProcessor(userService);
   }
 }

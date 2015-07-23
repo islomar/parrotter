@@ -2,9 +2,7 @@ package com.islomar.parrotter.controller;
 
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
-import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
-import com.islomar.parrotter.model.InMemoryMessageRepository;
 import com.islomar.parrotter.model.InMemoryUserRepository;
 import com.islomar.parrotter.model.UserService;
 
@@ -60,10 +58,8 @@ public class CommandLineProcessorShould {
     given(clockForMessageFormatter.instant()).willReturn(NOW);
     MessageFormatter messageFormatter = new MessageFormatter(clockForMessageFormatter);
 
-    MessageRepository messageRepository = new InMemoryMessageRepository(clock);
-
-    UserRepository userRepository = new InMemoryUserRepository();
-    userService = new UserService(userRepository, messageRepository, console, messageFormatter);
+    UserRepository userRepository = new InMemoryUserRepository(clock);
+    userService = new UserService(userRepository, console, messageFormatter);
   }
 
   public void post_a_user_message() {
