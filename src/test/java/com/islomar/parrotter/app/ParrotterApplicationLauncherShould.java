@@ -103,7 +103,6 @@ public class ParrotterApplicationLauncherShould {
     verify(console).printMessage("reading:\t <user name>");
     verify(console).printMessage("following:\t <user name> follows <another user>");
     verify(console).printMessage("wall:\t\t <user name> wall");
-    //verify(console).printMessage("\n");
     verify(console).printMessage("So now, just start parrotting!!");
     verify(console, times(2)).printMessage("\n");
   }
