@@ -6,8 +6,4 @@
 *.ipr
 atlassian-ide-plugin.xml
 
-# Package Files #
-*.jar
-
-
 target/

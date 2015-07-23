@@ -68,11 +68,12 @@ Alice - I love the weather today (5 minutes ago)
 * Non-existing users should be created as they post their first message. Application should not start with a pre-defined list of users.
  
 
-## Some personal notes
+## Technical thougths and considerations
 * I called it "**parrotter**", because in Spanish we use the expression "to talk like a parrot" for someone who talks a looot. And because "Twitter" was already taken.
 * Some things that I learnt during this exercise:
   * I played around a little bit more with **Java 8 streams**.
   * I didn't know that Mockito had the **given()**. I had always used when() for that (which now I see it's wrong,it doesn't respect the "when" meaning in Given-When-Then of BDD).
+  * I had to think how to test a method with a while(true) and a Scanner which reads from System.in.
   * I saw the "Crafted Design" video some days ago. I wanted to try that "**Interaction Driven-Design**" idea, with Actions, Services, Repositories, Domain Entities, Feature tests... I saw several benefits and I will probably keep on practicing about it.
 * I tried to have some **immutability**, e.g. in lists returned or the Message objects.
 * I focused on the "**happy path**".
@@ -86,6 +87,8 @@ Alice - I love the weather today (5 minutes ago)
 * The way it is decided which action to execute. I don't like much that "**CommandGenerator**".
 * The **FollowUser** action. The User is updated because it's a reference, but neither a Service nor Repository is called.
 * Having a "**utils**" package. Shame on me, but I didn't find a better name.
+* About end to end tests, I'm not testing the REAL application launcher. In other words: the app might stop working while having all the tests green.
+  * I tried several approaches and I succeeded on sending text to the System.in from the test, but I would have had to mock the Clock...
 * Some other things that I'm not even aware of :-)
 
 ## What I have doubts about
@@ -98,7 +101,5 @@ Alice - I love the weather today (5 minutes ago)
 * Under the package "controller" there is a class called "CommandLineProcessor". This is the class which takes the user input and decides to wich action to redirect the execution flow... That's a kind of "controller" responsibility, but I'm not sure about this solution.
 
 ## TO DO:
-* Review the FIVE, TWO... does it really improve anything?
-* Create jar, sh and bat
 * Create tag!! (1.0.0)
 * Execute one last time!!
