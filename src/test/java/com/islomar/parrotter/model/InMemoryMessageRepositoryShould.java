@@ -1,4 +1,4 @@
-package com.islomar.parrotter.model.message;
+package com.islomar.parrotter.model;
 
 
 import org.mockito.Mock;

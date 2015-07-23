@@ -1,7 +1,7 @@
 package com.islomar.parrotter.actions;
 
 
-import com.islomar.parrotter.model.user.ShowUserWallService;
+import com.islomar.parrotter.model.ShowUserWallService;
 
 public class ShowUserWall implements Command {
 

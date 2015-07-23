@@ -1,6 +1,6 @@
 package com.islomar.parrotter.actions;
 
-import com.islomar.parrotter.model.message.MessageService;
+import com.islomar.parrotter.model.UserService;
 
 import org.mockito.Mock;
 import org.testng.annotations.BeforeMethod;
@@ -14,7 +14,7 @@ public class ReadUserPersonalTimelineShould {
 
   private static final String ALICE = "Alice";
 
-  @Mock MessageService messageService;
+  @Mock UserService userService;
 
 
   @BeforeMethod
@@ -23,10 +23,10 @@ public class ReadUserPersonalTimelineShould {
   }
 
   public void show_a_user_wall() {
-    ReadUserPersonalTimeline readUserPersonalTimeline = new ReadUserPersonalTimeline(messageService, ALICE);
+    ReadUserPersonalTimeline readUserPersonalTimeline = new ReadUserPersonalTimeline(userService, ALICE);
 
     readUserPersonalTimeline.execute();
 
-    verify(messageService).printTimelineFor(ALICE);
+    verify(userService).printTimelineFor(ALICE);
   }
 }

@@ -1,22 +1,33 @@
-package com.islomar.parrotter.model.message;
+package com.islomar.parrotter.model;
 
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
+import com.islomar.parrotter.infrastructure.repositories.UserRepository;
 
 import java.util.List;
 
-public class MessageService {
+public class UserService {
 
+  private UserRepository userRepository;
   private MessageRepository messageRepository;
   private Console console;
   private MessageFormatter messageFormatter;
 
-  public MessageService(MessageRepository messageRepository, Console console, MessageFormatter messageFormatter) {
+  public UserService(UserRepository userRepository, MessageRepository messageRepository, Console console, MessageFormatter messageFormatter) {
 
+    this.userRepository = userRepository;
     this.messageRepository = messageRepository;
     this.console = console;
     this.messageFormatter = messageFormatter;
+  }
+
+  public void saveUser(String username) {
+    userRepository.saveUser(username);
+  }
+
+  public User findUserByUsername(String username) {
+    return userRepository.findUserByUsername(username);
   }
 
   public void saveMessage(String username, String textMessage) {

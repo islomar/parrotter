@@ -1,6 +1,6 @@
 package com.islomar.parrotter.actions;
 
-import com.islomar.parrotter.model.user.ShowUserWallService;
+import com.islomar.parrotter.model.ShowUserWallService;
 
 import org.mockito.Mock;
 import org.testng.annotations.BeforeMethod;

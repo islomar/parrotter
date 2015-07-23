@@ -6,11 +6,10 @@ import com.islomar.parrotter.infrastructure.ScannerProxy;
 import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
-import com.islomar.parrotter.model.message.InMemoryMessageRepository;
-import com.islomar.parrotter.model.message.MessageService;
-import com.islomar.parrotter.model.user.InMemoryUserRepository;
-import com.islomar.parrotter.model.user.ShowUserWallService;
-import com.islomar.parrotter.model.user.UserService;
+import com.islomar.parrotter.model.InMemoryMessageRepository;
+import com.islomar.parrotter.model.UserService;
+import com.islomar.parrotter.model.InMemoryUserRepository;
+import com.islomar.parrotter.model.ShowUserWallService;
 
 import java.time.Clock;
 
@@ -43,10 +42,9 @@ public class ParrotterApplicationLauncher {
     UserRepository userRepository = new InMemoryUserRepository();
     MessageFormatter messageFormatter = new MessageFormatter(clock);
 
-    UserService userService = new UserService(userRepository);
-    MessageService messageService = new MessageService(messageRepository, console, messageFormatter);
-    ShowUserWallService showUserWallService = new ShowUserWallService(messageService, userService, console, messageFormatter);
+    UserService userService = new UserService(userRepository, messageRepository, console, messageFormatter);
+    ShowUserWallService showUserWallService = new ShowUserWallService(userService, console, messageFormatter);
 
-    return new CommandLineProcessor(userService, messageService, showUserWallService);
+    return new CommandLineProcessor(userService, showUserWallService);
   }
 }

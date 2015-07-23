@@ -1,6 +1,6 @@
 package com.islomar.parrotter.infrastructure.formatters;
 
-import com.islomar.parrotter.model.message.Message;
+import com.islomar.parrotter.model.Message;
 
 import java.time.Clock;
 import java.time.Duration;

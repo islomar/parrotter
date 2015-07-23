@@ -6,9 +6,8 @@ import com.islomar.parrotter.actions.PostMessage;
 import com.islomar.parrotter.actions.ReadUserPersonalTimeline;
 import com.islomar.parrotter.actions.ShowUserWall;
 import com.islomar.parrotter.controller.utils.CommandGenerator;
-import com.islomar.parrotter.model.message.MessageService;
-import com.islomar.parrotter.model.user.ShowUserWallService;
-import com.islomar.parrotter.model.user.UserService;
+import com.islomar.parrotter.model.UserService;
+import com.islomar.parrotter.model.ShowUserWallService;
 
 import org.mockito.Mock;
 import org.testng.annotations.BeforeMethod;
@@ -23,14 +22,13 @@ public class CommandGeneratorShould {
 
   private CommandGenerator commandGenerator;
   @Mock private UserService userService;
-  @Mock private MessageService messageService;
   @Mock private ShowUserWallService userWallService;
 
   @BeforeMethod
   public void setUpMethod() {
     initMocks(this);
 
-    commandGenerator = new CommandGenerator(userService, messageService, userWallService);
+    commandGenerator = new CommandGenerator(userService, userWallService);
   }
 
   public void create_PostMessage_object_for_post_command_line() {

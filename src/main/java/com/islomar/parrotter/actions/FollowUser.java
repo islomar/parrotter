@@ -1,7 +1,7 @@
 package com.islomar.parrotter.actions;
 
-import com.islomar.parrotter.model.user.User;
-import com.islomar.parrotter.model.user.UserService;
+import com.islomar.parrotter.model.User;
+import com.islomar.parrotter.model.UserService;
 
 public class FollowUser implements Command {
 

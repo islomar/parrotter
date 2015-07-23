@@ -1,4 +1,4 @@
-package com.islomar.parrotter.model.user;
+package com.islomar.parrotter.model;
 
 import com.google.common.collect.Sets;
 

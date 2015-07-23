@@ -1,4 +1,4 @@
-package com.islomar.parrotter.model.user;
+package com.islomar.parrotter.model;
 
 import com.google.common.collect.Sets;
 
@@ -9,6 +9,7 @@ public class User {
 
   private final String username;
   private Set<String> followedUsers = Sets.newHashSet();
+  private Set<Message> personalMessages = Sets.newHashSet();
 
   public User(final String username) {
 
@@ -17,6 +18,10 @@ public class User {
 
   public String getUsername() {
     return username;
+  }
+
+  public Set<Message> getPersonalMessages() {
+    return personalMessages;
   }
 
   public Set<String> getFollowedUsers() {

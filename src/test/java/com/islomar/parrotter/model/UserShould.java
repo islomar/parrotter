@@ -1,4 +1,6 @@
-package com.islomar.parrotter.model.user;
+package com.islomar.parrotter.model;
+
+import com.islomar.parrotter.model.User;
 
 import org.testng.annotations.Test;
 

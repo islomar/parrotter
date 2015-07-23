@@ -1,10 +1,8 @@
-package com.islomar.parrotter.model.user;
+package com.islomar.parrotter.model;
 
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
-import com.islomar.parrotter.model.message.Message;
-import com.islomar.parrotter.model.message.MessageService;
 
 import org.mockito.InOrder;
 import org.mockito.Mock;
@@ -42,7 +40,6 @@ public class ShowUserWallServiceShould {
   @Mock Clock clock;
   @Mock MessageRepository messageRepository;
   @Mock UserService userService;
-  @Mock MessageService messageService;
 
   private ShowUserWallService showUserWallService;
 
@@ -54,21 +51,21 @@ public class ShowUserWallServiceShould {
     given(clock.instant()).willReturn(NOW);
     MessageFormatter messageFormatter = new MessageFormatter(clock);
 
-    showUserWallService = new ShowUserWallService(messageService, userService, console, messageFormatter);
+    showUserWallService = new ShowUserWallService(userService, console, messageFormatter);
   }
 
   public void a_user_wall_shows_her_personal_timeline_and_her_followed_user_timelines() {
 
-    given(messageService.findPersonalMessagesFor(CHARLIE)).willReturn(charlieMessages());
-    given(messageService.findPersonalMessagesFor(BOB)).willReturn(bobMessages());
-    given(messageService.findPersonalMessagesFor(ALICE)).willReturn(aliceMessages());
+    given(userService.findPersonalMessagesFor(CHARLIE)).willReturn(charlieMessages());
+    given(userService.findPersonalMessagesFor(BOB)).willReturn(bobMessages());
+    given(userService.findPersonalMessagesFor(ALICE)).willReturn(aliceMessages());
     givenThatCharlieFollowsAliceAndBob();
 
     showUserWallService.printUserWallFor(CHARLIE);
 
-    verify(messageService).findPersonalMessagesFor(CHARLIE);
-    verify(messageService).findPersonalMessagesFor(BOB);
-    verify(messageService).findPersonalMessagesFor(ALICE);
+    verify(userService).findPersonalMessagesFor(CHARLIE);
+    verify(userService).findPersonalMessagesFor(BOB);
+    verify(userService).findPersonalMessagesFor(ALICE);
     InOrder inOrder = inOrder(console);
     inOrder.verify(console).printMessage("Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)");
     inOrder.verify(console).printMessage("Bob - Damn! We lost! (1 minute ago)");
