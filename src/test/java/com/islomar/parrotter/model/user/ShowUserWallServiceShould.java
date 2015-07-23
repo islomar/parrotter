@@ -32,15 +32,11 @@ public class ShowUserWallServiceShould {
   private static final String MESSAGE_TEXT_2 = "I'm in New York today! Anyone wants to have a coffee?";
   private static final String MESSAGE_TEXT_3 = "Damn! We lost!";
   private static final String MESSAGE_TEXT_4 = "Good game though.";
-  private static final int ONE = 1;
-  private static final int TWO = 2;
-  private static final int FIVE = 5;
-  private static final int FIFTEEN = 15;
   private static final java.time.Instant NOW = Instant.now();
-  private static final java.time.Instant TWO_MINUTES_AGO = NOW.minus(TWO, ChronoUnit.MINUTES);
-  private static final java.time.Instant FIVE_MINUTES_AGO = NOW.minus(FIVE, ChronoUnit.MINUTES);
-  private static final java.time.Instant ONE_MINUTE_AGO = NOW.minus(ONE, ChronoUnit.MINUTES);
-  private static final java.time.Instant FIFTEEN_SECONDS_AGO = NOW.minus(FIFTEEN, ChronoUnit.SECONDS);
+  private static final java.time.Instant TWO_MINUTES_AGO = NOW.minus(2, ChronoUnit.MINUTES);
+  private static final java.time.Instant FIVE_MINUTES_AGO = NOW.minus(5, ChronoUnit.MINUTES);
+  private static final java.time.Instant ONE_MINUTE_AGO = NOW.minus(1, ChronoUnit.MINUTES);
+  private static final java.time.Instant FIFTEEN_SECONDS_AGO = NOW.minus(15, ChronoUnit.SECONDS);
 
   @Mock Console console;
   @Mock Clock clock;

@@ -22,9 +22,8 @@ public class MessageServiceShould {
 
   private static final String ALICE = "Alice";
   private static final String MESSAGE_TEXT = "I love the weather today";
-  private static final int TWO = 2;
   private static final java.time.Instant NOW = Instant.now();
-  private static final java.time.Instant TWO_MINUTES_AGO = NOW.minus(TWO, ChronoUnit.MINUTES);
+  private static final java.time.Instant TWO_MINUTES_AGO = NOW.minus(2, ChronoUnit.MINUTES);
 
   @Mock MessageRepository messageRepository;
   @Mock Console console;
@@ -57,7 +56,7 @@ public class MessageServiceShould {
 
     messageService.printTimelineFor(ALICE);
 
-    verify(console).printMessage(MESSAGE_TEXT + " (" + TWO + " minutes ago)");
+    verify(console).printMessage(MESSAGE_TEXT + " (2 minutes ago)");
   }
 
   public void find_a_user_personal_messages() {
