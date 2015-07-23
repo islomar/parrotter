@@ -37,7 +37,7 @@ public class FollowUserTimelineFeature {
     initMocks(this);
   }
 
-  public void users_see_their_published_messages_into_their_personal_timeline() {
+  public void a_user_follows_another_user() {
 
     given(clock.instant()).willReturn(SAVED_ALICE_MESSAGE_TIME,
                                       SAVED_BOB_MESSAGE_TIME);

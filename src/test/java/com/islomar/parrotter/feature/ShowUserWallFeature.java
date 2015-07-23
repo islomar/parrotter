@@ -46,7 +46,7 @@ public class ShowUserWallFeature {
     initMocks(this);
   }
 
-  public void when_charlie_follows_alice_then_his_wall_shows_both_his_personal_timeline_and_alice_timeline() {
+  public void when_charlie_follows_alice_and_bob_then_his_wall_shows_both_his_personal_timeline_and_alice_and_bob_timelines() {
 
     given(clock.instant()).willReturn(POST_CHARLIE_MESSAGE_TIME,
                                       POST_BOB_MESSAGE_1_TIME,

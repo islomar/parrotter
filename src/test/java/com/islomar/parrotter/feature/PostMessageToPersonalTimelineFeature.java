@@ -34,7 +34,7 @@ public class PostMessageToPersonalTimelineFeature {
     initMocks(this);
   }
 
-  public void users_see_their_published_messages_into_their_personal_timeline() {
+  public void users_post_message_to_their_personal_timeline() {
 
     given(clock.instant()).willReturn(POST_ALICE_MESSAGE_TIME);
 
