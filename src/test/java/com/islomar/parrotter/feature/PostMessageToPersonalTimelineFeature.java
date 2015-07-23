@@ -1,61 +1,55 @@
 package com.islomar.parrotter.feature;
 
-import com.islomar.parrotter.controller.CommandLineProcessor;
+import com.islomar.parrotter.app.ParrotterApplicationLauncher;
 import com.islomar.parrotter.infrastructure.Console;
-import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
-import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
-import com.islomar.parrotter.infrastructure.repositories.UserRepository;
-import com.islomar.parrotter.model.message.InMemoryMessageRepository;
-import com.islomar.parrotter.model.user.InMemoryUserRepository;
-import com.islomar.parrotter.model.message.MessageService;
-import com.islomar.parrotter.model.user.ShowUserWallService;
-import com.islomar.parrotter.model.user.UserService;
+import com.islomar.parrotter.infrastructure.ScannerProxy;
 
+import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Clock;
+import java.time.Instant;
 
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
+import static org.testng.Assert.fail;
 
 
 @Test
 public class PostMessageToPersonalTimelineFeature {
 
-  private static final String ALICE = "Alice";
-  private static final String MESSAGE_TEXT = "I love the weather today";
+  private static final java.time.Instant POST_ALICE_MESSAGE_TIME = Instant.now();
 
-  @Mock Console console;
-  @Mock Clock clock;
-
-  private MessageService messageService;
-  private ShowUserWallService showUserWallService;
-  private UserService userService;
-
+  @Mock private ScannerProxy scannerProxy;
+  @Mock private Console console;
+  @Mock private Clock clock;
 
   @BeforeMethod
   public void setUpMethod() {
     initMocks(this);
-
-    MessageRepository messageRepository = new InMemoryMessageRepository(clock);
-    MessageFormatter messageFormatter = new MessageFormatter(clock);
-    messageService = new MessageService(messageRepository, console, messageFormatter);
-
-    UserRepository userRepository = new InMemoryUserRepository();
-    userService = new UserService(userRepository);
-    showUserWallService = new ShowUserWallService(messageService, userService, console, messageFormatter);
   }
 
-  public void a_user_publishes_a_message_to_her_personal_timeline() {
+  public void users_see_their_published_messages_into_their_personal_timeline() {
 
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, messageService, showUserWallService);
-    commandLineProcessor.execute(ALICE + " -> " + MESSAGE_TEXT);
+    given(clock.instant()).willReturn(POST_ALICE_MESSAGE_TIME);
 
-    verify(console, never()).printMessage(anyString());
+    given(scannerProxy.nextLine())
+        .willReturn("Alice -> hello")
+        .willThrow(InterruptedException.class);
+
+    try {
+      ParrotterApplicationLauncher parrotterApplicationLauncher = new ParrotterApplicationLauncher(scannerProxy, console, clock);
+      parrotterApplicationLauncher.run();
+      fail();
+    } catch (Exception ex) {
+      InOrder inOrder = inOrder(console);
+      inOrder.verify(console, never()).printMessage(anyString());
+    }
   }
 
 }

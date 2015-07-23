@@ -31,26 +31,12 @@ public class ParrotterApplicationLauncher {
 
   public void run() {
 
-    showWelcomeMessageAndInstructions();
-
     CommandLineProcessor commandLineProcessor = createCommandLineProcessor();
 
     while (true) {
       String inputCommandLine = scanner.nextLine();
       commandLineProcessor.execute(inputCommandLine);
     }
-  }
-
-  private void showWelcomeMessageAndInstructions() {
-    console.printMessage("Welcome to Parroter!");
-    console.printMessage("You can execute any of these commands:\n");
-    console.printMessage("posting:\t <user name> -> <message>");
-    console.printMessage("reading:\t <user name>");
-    console.printMessage("following:\t <user name> follows <another user>");
-    console.printMessage("wall:\t\t <user name> wall");
-    console.printMessage("\n");
-    console.printMessage("So now, just start parrotting!!");
-    console.printMessage("\n");
   }
 
   private CommandLineProcessor createCommandLineProcessor() {

@@ -14,8 +14,6 @@ import java.time.temporal.ChronoUnit;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.testng.Assert.fail;
 
@@ -60,7 +58,6 @@ public class ParrotterApplicationLauncherShould {
       parrotterApplicationLauncher.run();
       fail();
     } catch (Exception ex) {
-      verifyWelcomeMessage();
       InOrder inOrder = inOrder(console);
       inOrder.verify(console).printMessage("hello (15 seconds ago)");
       inOrder.verify(console).printMessage("bye bye (2 minutes ago)");
@@ -88,23 +85,11 @@ public class ParrotterApplicationLauncherShould {
       parrotterApplicationLauncher.run();
       fail();
     } catch (Exception ex) {
-      verifyWelcomeMessage();
       InOrder inOrder = inOrder(console);
       inOrder.verify(console).printMessage("Alice - hello (30 seconds ago)");
       inOrder.verify(console).printMessage("Bob - bye bye (5 minutes ago)");
       inOrder.verify(console).printMessage("Alice - hello (7 minutes ago)");
     }
-  }
-
-  private void verifyWelcomeMessage() {
-    verify(console).printMessage("Welcome to Parroter!");
-    verify(console).printMessage("You can execute any of these commands:\n");
-    verify(console).printMessage("posting:\t <user name> -> <message>");
-    verify(console).printMessage("reading:\t <user name>");
-    verify(console).printMessage("following:\t <user name> follows <another user>");
-    verify(console).printMessage("wall:\t\t <user name> wall");
-    verify(console).printMessage("So now, just start parrotting!!");
-    verify(console, times(2)).printMessage("\n");
   }
 
 }
