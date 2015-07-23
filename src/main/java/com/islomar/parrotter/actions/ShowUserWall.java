@@ -1,21 +1,21 @@
 package com.islomar.parrotter.actions;
 
 
-import com.islomar.parrotter.model.ShowUserWallService;
+import com.islomar.parrotter.model.UserService;
 
 public class ShowUserWall implements Command {
 
-  private final ShowUserWallService showUserWallService;
+  private final UserService userService;
   private final String username;
 
-  public ShowUserWall(ShowUserWallService showUserWallService, String username) {
+  public ShowUserWall(UserService userService, String username) {
 
-    this.showUserWallService = showUserWallService;
+    this.userService = userService;
     this.username = username;
   }
 
   @Override
   public void execute() {
-    showUserWallService.printUserWallFor(username);
+    userService.printUserWallFor(username);
   }
 }

@@ -7,7 +7,6 @@ import com.islomar.parrotter.actions.ReadUserPersonalTimeline;
 import com.islomar.parrotter.actions.ShowUserWall;
 import com.islomar.parrotter.model.User;
 import com.islomar.parrotter.model.UserService;
-import com.islomar.parrotter.model.ShowUserWallService;
 
 import static com.islomar.parrotter.controller.utils.CommandType.FOLLOWS;
 import static com.islomar.parrotter.controller.utils.CommandType.POST;
@@ -15,14 +14,11 @@ import static com.islomar.parrotter.controller.utils.CommandType.WALL;
 
 public class CommandGenerator {
 
-  private final ShowUserWallService showUserWallService;
   private final UserService userService;
 
-  public CommandGenerator(UserService userService,
-                          ShowUserWallService showUserWallService) {
+  public CommandGenerator(UserService userService) {
 
     this.userService = userService;
-    this.showUserWallService = showUserWallService;
   }
 
   public Command createCommandFromInputLine(String inputCommandLine) {
@@ -60,7 +56,7 @@ public class CommandGenerator {
   private Command generateShowUserWallCommand(String inputCommandLine) {
     String[] inputArguments = inputCommandLine.split(WALL.symbol());
     String username = inputArguments[0].trim();
-    return new ShowUserWall(showUserWallService, username);
+    return new ShowUserWall(userService, username);
   }
 
   private Command generatePublishMessageCommand(String inputCommandLine) {

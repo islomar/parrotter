@@ -6,7 +6,6 @@ import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
 import com.islomar.parrotter.model.InMemoryMessageRepository;
 import com.islomar.parrotter.model.InMemoryUserRepository;
-import com.islomar.parrotter.model.ShowUserWallService;
 import com.islomar.parrotter.model.UserService;
 
 import org.mockito.InOrder;
@@ -51,7 +50,6 @@ public class CommandLineProcessorShould {
   @Mock Clock clock;
   @Mock Clock clockForMessageFormatter;
 
-  private ShowUserWallService showUserWallService;
   private UserService userService;
 
 
@@ -66,12 +64,11 @@ public class CommandLineProcessorShould {
 
     UserRepository userRepository = new InMemoryUserRepository();
     userService = new UserService(userRepository, messageRepository, console, messageFormatter);
-    showUserWallService = new ShowUserWallService(userService, console, messageFormatter);
   }
 
   public void post_a_user_message() {
 
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, showUserWallService);
+    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService);
     commandLineProcessor.execute(ALICE + " -> " + ALICE_MESSAGE_TEXT);
 
     verify(console, never()).printMessage(anyString());
@@ -79,7 +76,7 @@ public class CommandLineProcessorShould {
 
   public void print_a_user_personal_timeline() {
 
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, showUserWallService);
+    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService);
     given(clock.instant()).willReturn(TWO_MINUTES_AGO, FIVE_SECONDS_AGO, Instant.now());
     commandLineProcessor.execute(BOB + " -> " + BOB_MESSAGE_TEXT_1);
     commandLineProcessor.execute(BOB + " -> " + BOB_MESSAGE_TEXT_2);
@@ -93,7 +90,7 @@ public class CommandLineProcessorShould {
 
   public void follow_another_user() {
 
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, showUserWallService);
+    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService);
     commandLineProcessor.execute(ALICE + " follows " + BOB);
 
     verify(console, never()).printMessage(anyString());
@@ -101,7 +98,7 @@ public class CommandLineProcessorShould {
 
   public void show_a_user_wall() {
 
-    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, showUserWallService);
+    CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService);
     given(clock.instant()).willReturn(FIFTEEN_SECONDS_AGO, ONE_MINUTE_AGO, TWO_MINUTES_AGO, FIVE_MINUTES_AGO);
     commandLineProcessor.execute(CHARLIE + POST.symbol() + CHARLIE_MESSAGE_TEXT);
     commandLineProcessor.execute(BOB + POST.symbol() + BOB_MESSAGE_TEXT_1);

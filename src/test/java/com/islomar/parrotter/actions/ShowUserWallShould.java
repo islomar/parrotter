@@ -1,6 +1,6 @@
 package com.islomar.parrotter.actions;
 
-import com.islomar.parrotter.model.ShowUserWallService;
+import com.islomar.parrotter.model.UserService;
 
 import org.mockito.Mock;
 import org.testng.annotations.BeforeMethod;
@@ -14,7 +14,7 @@ public class ShowUserWallShould {
 
   private static final String ALICE = "Alice";
 
-  @Mock ShowUserWallService showUserWallService;
+  @Mock UserService userService;
 
 
   @BeforeMethod
@@ -23,10 +23,10 @@ public class ShowUserWallShould {
   }
 
   public void show_a_user_wall() {
-    ShowUserWall showUserWall = new ShowUserWall(showUserWallService, ALICE);
+    ShowUserWall showUserWall = new ShowUserWall(userService, ALICE);
 
     showUserWall.execute();
 
-    verify(showUserWallService).printUserWallFor(ALICE);
+    verify(userService).printUserWallFor(ALICE);
   }
 }

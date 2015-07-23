@@ -6,6 +6,9 @@ import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class UserService {
 
@@ -42,6 +45,28 @@ public class UserService {
 
   public List<Message> findPersonalMessagesFor(String username) {
     return messageRepository.findAllMessagesForUser(username);
+  }
+
+  public void printUserWallFor(String username) {
+    List<Message> personalTimelineMessages = findPersonalMessagesFor(username);
+    List<Message> followedUserMessages = getFollowedUserMessages(username);
+
+    printMessages(personalTimelineMessages, followedUserMessages);
+  }
+
+  private void printMessages(List<Message> personalTimelineMessages, List<Message> followedUserMessages) {
+    Stream.concat(personalTimelineMessages.stream(), followedUserMessages.stream())
+        .sorted()
+        .forEach(message -> console.printMessage(messageFormatter.formatForTheWall(message)));
+  }
+
+  private List<Message> getFollowedUserMessages(String username) {
+    Set<String> followedUsers = findUserByUsername(username).getFollowedUsers();
+
+    return followedUsers.stream()
+        .map(user -> findPersonalMessagesFor(user))
+        .flatMap(messages -> messages.stream())
+        .collect(Collectors.toList());
   }
 
   private void printListOfMessages(List<Message> messages) {
