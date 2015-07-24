@@ -5,6 +5,7 @@ import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MessageService {
 
@@ -26,7 +27,8 @@ public class MessageService {
   public void printTimelineFor(String username) {
 
     List<Message> personalMessages = findPersonalMessagesFor(username);
-    printListOfMessages(personalMessages);
+    List<Message> sortedPersonalMessages = personalMessages.stream().sorted().collect(Collectors.toList());
+    printListOfMessages(sortedPersonalMessages);
   }
 
   public List<Message> findPersonalMessagesFor(String username) {

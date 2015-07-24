@@ -22,10 +22,12 @@ import static org.testng.Assert.fail;
 public class ReadUserTimelineFeature {
 
   private static final java.time.Instant NOW = Instant.now();
-  private static final java.time.Instant SAVED_ALICE_MESSAGE_TIME = NOW;
-  private static final Instant VIEW_ALICE_TIMELINE_TIME = SAVED_ALICE_MESSAGE_TIME.plus(15, ChronoUnit.SECONDS);
-  private static final Instant SAVED_BOB_MESSAGE_TIME = NOW.plus(2, ChronoUnit.MINUTES);
-  private static final Instant VIEW_BOB_TIMELINE_TIME = SAVED_BOB_MESSAGE_TIME.plus(2, ChronoUnit.MINUTES);
+  private static final Instant VIEW_ALICE_TIMELINE_TIME = NOW;
+  private static final java.time.Instant SAVED_ALICE_MESSAGE_1_TIME = VIEW_ALICE_TIMELINE_TIME.minus(45, ChronoUnit.SECONDS);
+  private static final java.time.Instant SAVED_ALICE_MESSAGE_2_TIME = VIEW_ALICE_TIMELINE_TIME.minus(15, ChronoUnit.SECONDS);
+
+  private static final Instant VIEW_BOB_TIMELINE_TIME = NOW;
+  private static final Instant SAVED_BOB_MESSAGE_TIME = VIEW_BOB_TIMELINE_TIME.minus(2, ChronoUnit.MINUTES);
 
   @Mock private ScannerProxy scannerProxy;
   @Mock private Console console;
@@ -38,7 +40,9 @@ public class ReadUserTimelineFeature {
 
   public void users_see_their_published_messages_into_their_personal_timeline() {
 
-    given(clock.instant()).willReturn(SAVED_ALICE_MESSAGE_TIME,
+    given(clock.instant()).willReturn(SAVED_ALICE_MESSAGE_1_TIME,
+                                      SAVED_ALICE_MESSAGE_2_TIME,
+                                      VIEW_ALICE_TIMELINE_TIME,
                                       VIEW_ALICE_TIMELINE_TIME,
                                       SAVED_BOB_MESSAGE_TIME,
                                       VIEW_BOB_TIMELINE_TIME);
@@ -46,6 +50,7 @@ public class ReadUserTimelineFeature {
     given(scannerProxy.nextLine())
         .willReturn("Alice")
         .willReturn("Alice -> hello")
+        .willReturn("Alice -> hello again")
         .willReturn("Alice")
         .willReturn("Bob -> bye bye")
         .willReturn("Bob")
@@ -57,7 +62,8 @@ public class ReadUserTimelineFeature {
       fail();
     } catch (Exception ex) {
       InOrder inOrder = inOrder(console);
-      inOrder.verify(console).printMessage("hello (15 seconds ago)");
+      inOrder.verify(console).printMessage("hello again (15 seconds ago)");
+      inOrder.verify(console).printMessage("hello (45 seconds ago)");
       inOrder.verify(console).printMessage("bye bye (2 minutes ago)");
     }
   }

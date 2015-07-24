@@ -41,7 +41,7 @@ public class CommandLineProcessorShould {
   private static final String BOB_MESSAGE_TEXT_2 = "Good game though.";
 
   private static final java.time.Instant NOW = Instant.now();
-  private static final java.time.Instant FIVE_SECONDS_AGO = Instant.now().minus(5, ChronoUnit.SECONDS);
+  private static final java.time.Instant FIVE_SECONDS_AGO = NOW.minus(5, ChronoUnit.SECONDS);
   private static final java.time.Instant FIVE_MINUTES_AGO = NOW.minus(5, ChronoUnit.MINUTES);
   private static final java.time.Instant TWO_MINUTES_AGO = NOW.minus(2, ChronoUnit.MINUTES);
   private static final java.time.Instant ONE_MINUTE_AGO = NOW.minus(1, ChronoUnit.MINUTES);
@@ -83,15 +83,15 @@ public class CommandLineProcessorShould {
   public void print_a_user_personal_timeline() {
 
     CommandLineProcessor commandLineProcessor = new CommandLineProcessor(userService, messageService, showUserWallService);
-    given(clock.instant()).willReturn(TWO_MINUTES_AGO, FIVE_SECONDS_AGO, Instant.now());
+    given(clock.instant()).willReturn(FIVE_SECONDS_AGO, TWO_MINUTES_AGO, Instant.now());
     commandLineProcessor.execute(BOB + " -> " + BOB_MESSAGE_TEXT_1);
     commandLineProcessor.execute(BOB + " -> " + BOB_MESSAGE_TEXT_2);
 
     commandLineProcessor.execute(BOB);
 
     InOrder inOrder = inOrder(console);
-    inOrder.verify(console).printMessage(BOB_MESSAGE_TEXT_1 + " (2 minutes ago)");
-    inOrder.verify(console).printMessage(BOB_MESSAGE_TEXT_2 + " (5 seconds ago)");
+    inOrder.verify(console).printMessage(BOB_MESSAGE_TEXT_1 + " (5 seconds ago)");
+    inOrder.verify(console).printMessage(BOB_MESSAGE_TEXT_2 + " (2 minutes ago)");
   }
 
   public void follow_another_user() {
