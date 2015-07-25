@@ -26,6 +26,7 @@ public class InMemoryUserRepositoryShould {
     inMemoryUserRepository.saveUser(ALICE);
 
     User alice = inMemoryUserRepository.findUserByUsername(ALICE);
+
     assertThat(alice.getUsername(), is(ALICE));
   }
 

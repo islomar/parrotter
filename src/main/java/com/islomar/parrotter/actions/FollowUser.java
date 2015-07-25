@@ -5,21 +5,34 @@ import com.islomar.parrotter.model.user.UserService;
 
 public class FollowUser implements Command {
 
-  private final UserService userService;
-  private final String followingUsername;
-  private final String followedUsername;
+  public static final String FOLLOWS = " follows ";
 
-  public FollowUser(UserService userService, String followingUsername, String followedUsername) {
+  private final UserService userService;
+  private String followingUsername;
+  private String followedUsername;
+
+  public FollowUser(final UserService userService) {
 
     this.userService = userService;
-    this.followingUsername = followingUsername;
-    this.followedUsername = followedUsername;
   }
 
   @Override
-  public void execute() {
+  public void execute(String inputCommandLine) {
+
+    extractFollowingAndFollowedUsers(inputCommandLine);
 
     User followingUser = userService.findUserByUsername(followingUsername);
     followingUser.follow(followedUsername);
+  }
+
+  @Override
+  public boolean canExecuteCommandline(String inputCommandLine) {
+    return inputCommandLine.contains(FOLLOWS);
+  }
+
+  private void extractFollowingAndFollowedUsers(String inputCommandLine) {
+    String[] inputArguments = inputCommandLine.split(FOLLOWS);
+    this.followingUsername = inputArguments[0].trim();
+    this.followedUsername = inputArguments[1].trim();
   }
 }

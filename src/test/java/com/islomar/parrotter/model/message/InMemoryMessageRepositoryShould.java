@@ -31,7 +31,9 @@ public class InMemoryMessageRepositoryShould {
 
   @BeforeClass
   public void setUpClass() {
+
     initMocks(this);
+
     inMemoryMessageRepository = new InMemoryMessageRepository(clock);
   }
 

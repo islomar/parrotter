@@ -21,8 +21,10 @@ import static org.mockito.MockitoAnnotations.initMocks;
 public class MessageServiceShould {
 
   private static final String ALICE = "Alice";
-  private static final String MESSAGE_TEXT = "I love the weather today";
+  private static final String MESSAGE_TEXT_1 = "I love the weather today";
+  private static final String MESSAGE_TEXT_2 = "I'm in New York today! Anyone wants to have a coffee?";
   private static final java.time.Instant NOW = Instant.now();
+  private static final java.time.Instant FIVE_SECONDS_AGO = NOW.minus(5, ChronoUnit.SECONDS);
   private static final java.time.Instant TWO_MINUTES_AGO = NOW.minus(2, ChronoUnit.MINUTES);
 
   @Mock MessageRepository messageRepository;
@@ -44,19 +46,21 @@ public class MessageServiceShould {
 
   public void save_a_message_and_show_it_on_timeline() {
 
-    messageService.saveMessage(ALICE, MESSAGE_TEXT);
+    messageService.saveMessage(ALICE, MESSAGE_TEXT_1);
 
-    verify(messageRepository).saveMessage(ALICE, MESSAGE_TEXT);
+    verify(messageRepository).saveMessage(ALICE, MESSAGE_TEXT_1);
   }
 
   public void a_user_can_read_any_user_timeline() {
 
-    Message postedMessaged = new Message(ALICE, MESSAGE_TEXT, TWO_MINUTES_AGO);
-    given(messageRepository.findAllMessagesForUser(ALICE)).willReturn(Arrays.asList(postedMessaged));
+    Message postedMessagedTwoMinutesAgo = new Message(ALICE, MESSAGE_TEXT_1, TWO_MINUTES_AGO);
+    Message postedMessagedFiveSecondsAgo = new Message(ALICE, MESSAGE_TEXT_2, FIVE_SECONDS_AGO);
+    given(messageRepository.findAllMessagesForUser(ALICE)).willReturn(Arrays.asList(postedMessagedFiveSecondsAgo, postedMessagedTwoMinutesAgo));
 
     messageService.printTimelineFor(ALICE);
 
-    verify(console).printMessage(MESSAGE_TEXT + " (2 minutes ago)");
+    verify(console).printMessage(MESSAGE_TEXT_2 + " (5 seconds ago)");
+    verify(console).printMessage(MESSAGE_TEXT_1 + " (2 minutes ago)");
   }
 
   public void find_a_user_personal_messages() {

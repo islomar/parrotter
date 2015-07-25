@@ -3,5 +3,7 @@ package com.islomar.parrotter.actions;
 
 public interface Command {
 
-  public void execute();
+  void execute(String inputCommandLine);
+
+  boolean canExecuteCommandline(String inputCommandLine);
 }
