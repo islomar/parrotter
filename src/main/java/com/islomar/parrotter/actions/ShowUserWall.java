@@ -5,17 +5,30 @@ import com.islomar.parrotter.model.UserService;
 
 public class ShowUserWall implements Command {
 
-  private final UserService userService;
-  private final String username;
+  public static final String WALL = " wall";
 
-  public ShowUserWall(UserService userService, String username) {
+  private final UserService userService;
+
+  public ShowUserWall(UserService userService) {
 
     this.userService = userService;
-    this.username = username;
+  }
+
+
+  @Override
+  public void execute(String inputCommandLine) {
+
+    String username = extractUsername(inputCommandLine);
+    userService.printUserWallFor(username);
   }
 
   @Override
-  public void execute() {
-    userService.printUserWallFor(username);
+  public boolean canExecuteCommandline(String inputCommandLine) {
+    return inputCommandLine.contains(WALL);
+  }
+
+  private String extractUsername(String inputCommandLine) {
+    String[] inputArguments = inputCommandLine.split(WALL);
+    return inputArguments[0].trim();
   }
 }

@@ -1,5 +1,8 @@
 package com.islomar.parrotter.feature;
 
+import com.islomar.parrotter.actions.FollowUser;
+import com.islomar.parrotter.actions.PostMessage;
+import com.islomar.parrotter.actions.ShowUserWall;
 import com.islomar.parrotter.app.ParrotterApplicationLauncher;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.ScannerProxy;
@@ -13,7 +16,6 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
-import static com.islomar.parrotter.controller.utils.CommandType.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -55,13 +57,13 @@ public class ShowUserWallFeature {
                                       VIEW_BOB_WALL_TIME);
 
     given(scannerProxy.nextLine())
-        .willReturn(CHARLIE + POST.symbol() + CHARLIE_MESSAGE_TEXT)
-        .willReturn(BOB + POST.symbol() + BOB_MESSAGE_TEXT_1)
-        .willReturn(BOB + POST.symbol() + BOB_MESSAGE_TEXT_2)
-        .willReturn(ALICE + POST.symbol() + ALICE_MESSAGE_TEXT)
-        .willReturn(CHARLIE + FOLLOWS.symbol() + ALICE)
-        .willReturn(CHARLIE + FOLLOWS.symbol() + BOB)
-        .willReturn(CHARLIE + WALL.symbol())
+        .willReturn(CHARLIE + PostMessage.POST + CHARLIE_MESSAGE_TEXT)
+        .willReturn(BOB + PostMessage.POST + BOB_MESSAGE_TEXT_1)
+        .willReturn(BOB + PostMessage.POST + BOB_MESSAGE_TEXT_2)
+        .willReturn(ALICE + PostMessage.POST + ALICE_MESSAGE_TEXT)
+        .willReturn(CHARLIE + FollowUser.FOLLOWS + ALICE)
+        .willReturn(CHARLIE + FollowUser.FOLLOWS + BOB)
+        .willReturn(CHARLIE + ShowUserWall.WALL)
         .willThrow(InterruptedException.class);
 
     try {

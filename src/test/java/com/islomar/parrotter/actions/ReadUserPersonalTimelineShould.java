@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 @Test
 public class ReadUserPersonalTimelineShould {
@@ -15,18 +17,40 @@ public class ReadUserPersonalTimelineShould {
   private static final String ALICE = "Alice";
 
   @Mock UserService userService;
+  private ReadUserPersonalTimeline readUserPersonalTimeline;
 
 
   @BeforeMethod
   public void setUpMethod() {
     initMocks(this);
+
+    readUserPersonalTimeline = new ReadUserPersonalTimeline(userService);
   }
 
   public void show_a_user_wall() {
-    ReadUserPersonalTimeline readUserPersonalTimeline = new ReadUserPersonalTimeline(userService, ALICE);
 
-    readUserPersonalTimeline.execute();
+    readUserPersonalTimeline.execute(ALICE);
 
     verify(userService).printTimelineFor(ALICE);
+  }
+
+  public void be_able_to_execute_a_view_timeline_command() {
+
+    assertTrue(readUserPersonalTimeline.canExecuteCommandline(ALICE));
+  }
+
+  public void be_able_to_execute_a_follow_command() {
+
+    assertFalse(readUserPersonalTimeline.canExecuteCommandline(ALICE + " follow Bob"));
+  }
+
+  public void be_able_to_execute_a_wall_command() {
+
+    assertFalse(readUserPersonalTimeline.canExecuteCommandline(ALICE + " wall"));
+  }
+
+  public void be_able_to_execute_a_post_command() {
+
+    assertFalse(readUserPersonalTimeline.canExecuteCommandline(ALICE + " -> Hello"));
   }
 }

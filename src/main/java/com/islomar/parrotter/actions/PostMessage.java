@@ -5,20 +5,33 @@ import com.islomar.parrotter.model.UserService;
 
 public class PostMessage implements Command {
 
-  private final String username;
-  private final String message;
+  public static final String POST = " -> ";
+  private String username;
+  private String message;
   private UserService userService;
 
-  public PostMessage(UserService userService, final String username, final String message) {
+  public PostMessage(UserService userService) {
     this.userService = userService;
-
-    this.username = username;
-    this.message = message;
   }
 
   @Override
-  public void execute() {
+  public void execute(String inputCommandLine) {
+
+    extractUsernameAndMessage(inputCommandLine);
+
     userService.saveUser(username);
     userService.saveMessage(username, message);
+  }
+
+  @Override
+  public boolean canExecuteCommandline(String inputCommandLine) {
+    return inputCommandLine.contains(POST);
+  }
+
+  private void extractUsernameAndMessage(String inputCommandLine) {
+
+    String[] inputArguments = inputCommandLine.split(POST);
+    this.username = inputArguments[0].trim();
+    this.message = inputArguments[1].trim();
   }
 }

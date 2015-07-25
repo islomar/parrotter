@@ -87,8 +87,6 @@ Alice - I love the weather today (5 minutes ago)
 * The way it is decided which action to execute. I don't like much that "**CommandGenerator**".
 * The **FollowUser** action. The User is updated because it's a reference, but neither a Service nor Repository is called.
 * Having a "**utils**" package. Shame on me, but I didn't find a better name.
-* About end to end tests, I'm not testing the REAL application launcher. In other words: the app might stop working while having all the tests green.
-  * I tried several approaches and I succeeded on sending text to the System.in from the test, but I would have had to mock the Clock...
 * Some other things that I'm not even aware of :-)
 
 ## What I have doubts about
@@ -97,9 +95,3 @@ Alice - I love the weather today (5 minutes ago)
 * It's kind of **anaemic domain**. But I didn't see passing a Repository for each User creation... I didn't see clear a better way to do it (though I know that it exists).
 * I started using **Optional** for the case no User exists. I finally decided to use the Null Object Pattern, which I think leaves a clearer code (though probably that's not happy path and I shouldn't have worried anyway).
 * Class **ShowUserWallService**: it's split from UserService and MessageService because it needs to access both "domains", both repositories... but maybe it fit in one of them (or even it should exist only one Service, maybe there is only one Domain here).
-* Maybe the **enum** for the command types is not worthy and here it's enough with constants.
-* Under the package "controller" there is a class called "CommandLineProcessor". This is the class which takes the user input and decides to wich action to redirect the execution flow... That's a kind of "controller" responsibility, but I'm not sure about this solution.
-
-## TO DO:
-* Create tag!! (1.0.0)
-* Execute one last time!!

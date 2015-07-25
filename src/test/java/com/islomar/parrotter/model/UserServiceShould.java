@@ -128,5 +128,4 @@ public class UserServiceShould {
   private List<Message> aliceMessages() {
     return Arrays.asList(new Message(ALICE, MESSAGE_TEXT_1, FIVE_MINUTES_AGO));
   }
-
 }

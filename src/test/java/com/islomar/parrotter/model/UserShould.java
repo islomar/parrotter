@@ -1,7 +1,5 @@
 package com.islomar.parrotter.model;
 
-import com.islomar.parrotter.model.User;
-
 import org.testng.annotations.Test;
 
 import java.util.Set;

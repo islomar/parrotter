@@ -4,7 +4,6 @@ import com.islomar.parrotter.app.ParrotterApplicationLauncher;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.ScannerProxy;
 
-import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -15,8 +14,8 @@ import java.time.temporal.ChronoUnit;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.testng.Assert.fail;
 
@@ -51,8 +50,7 @@ public class FollowUserTimelineFeature {
       parrotterApplicationLauncher.run();
       fail();
     } catch (Exception ex) {
-      InOrder inOrder = inOrder(console);
-      inOrder.verify(console, never()).printMessage(anyString());
+      verify(console, never()).printMessage(anyString());
     }
   }
 
