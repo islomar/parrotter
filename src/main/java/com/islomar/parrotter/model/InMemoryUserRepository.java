@@ -33,13 +33,13 @@ public class InMemoryUserRepository implements UserRepository {
 
   @Override
   public List<Message> findAllMessagesForUser(final String username) {
-    User user = users.stream().filter(u -> u.getUsername().equals(username)).findFirst().orElse(new NullUser());
+    User user = findUserByUsername(username);
     return Collections.unmodifiableList(new ArrayList<>(user.getPersonalMessages().stream().sorted().collect(Collectors.toList())));
   }
 
   @Override
   public void saveMessage(final String username, final String messageText) {
-    User user = users.stream().filter(u -> u.getUsername().equals(username)).findFirst().get();
+    User user = findUserByUsername(username);
     Message message = new Message(username, messageText, clock.instant());
     user.getPersonalMessages().add(message);
   }
