@@ -90,7 +90,7 @@ Alice - I love the weather today (5 minutes ago)
 * Some other things that I'm not even aware of :-)
 
 ## What I have doubts about
-* Maybe I didn't apply KISS and YAGNI at all. Maybe I should have created just one Entity, one Service and one Repository. I tried that variant in the "one-model" branch.
+* Maybe I didn't apply KISS and YAGNI at all. Maybe I should have created just one User Entity, Message as a VO, one Service and one Repository. I tried that variant in the "one-model" branch.
 * Having **two models**: User and Message. I wonder if it wouldn't be better just having a User entity and a Message VO which is part of the User (as a Set).
 * It's kind of **anaemic domain**. But I didn't see passing a Repository for each User creation... I didn't see clear a better way to do it (though I know that it exists).
 * I started using **Optional** for the case no User exists. I finally decided to use the Null Object Pattern, which I think leaves a clearer code (though probably that's not happy path and I shouldn't have worried anyway).
