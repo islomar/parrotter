@@ -32,7 +32,7 @@ public class ParrotterApplicationLauncher {
     Clock clock = Clock.systemUTC();
     List<Command> commands = generateCommands(clock, console);
 
-    new ParrotterApplication(commands, scannerProxy, console, clock).run();
+    new ParrotterApplication(commands, scannerProxy).run();
   }
 
   private static ScannerProxy generateScanner() {

@@ -59,7 +59,7 @@ public class ReadUserTimelineFeature extends BaseFeature {
     List<Command> commandList = generateCommands(clock, console);
 
     try {
-      ParrotterApplication parrotterApplication = new ParrotterApplication(commandList, scannerProxy, console, clock);
+      ParrotterApplication parrotterApplication = new ParrotterApplication(commandList, scannerProxy);
       parrotterApplication.run();
       fail();
     } catch (Exception ex) {

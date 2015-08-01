@@ -24,16 +24,12 @@ import java.util.List;
 
 public class ParrotterApplication {
 
-  private final Console console;
-  private final Clock clock;
   private final ScannerProxy scanner;
   private final List<Command> commands;
 
-  public ParrotterApplication(List<Command> commands, ScannerProxy scanner, Console console, Clock clock) {
+  public ParrotterApplication(List<Command> commands, ScannerProxy scanner) {
     this.commands = commands;
     this.scanner = scanner;
-    this.console = console;
-    this.clock = clock;
   }
 
   public void run() {
