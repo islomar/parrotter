@@ -45,7 +45,6 @@ public class CommandRunnerShould {
 
   @Mock Console console;
   @Mock Clock clock;
-  @Mock Clock clockForMessageFormatter;
 
   @Mock PostMessage postMessage;
   @Mock ReadUserPersonalTimeline readUserPersonalTimeline;
@@ -64,7 +63,7 @@ public class CommandRunnerShould {
   public void setUpMethod() {
     initMocks(this);
 
-    given(clockForMessageFormatter.instant()).willReturn(NOW);
+    given(clock.instant()).willReturn(NOW);
     commands = generateCommands();
     commandRunner = new CommandRunner(commands);
   }
@@ -98,7 +97,7 @@ public class CommandRunnerShould {
   }
 
   private List<Command> generateCommands() {
-    MessageFormatter messageFormatter = new MessageFormatter(clockForMessageFormatter);
+    MessageFormatter messageFormatter = new MessageFormatter(clock);
 
     MessageRepository messageRepository = new InMemoryMessageRepository();
     messageService = new MessageService(clock, messageRepository, console, messageFormatter);
