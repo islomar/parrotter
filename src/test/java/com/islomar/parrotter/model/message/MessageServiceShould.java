@@ -14,6 +14,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
@@ -29,7 +30,8 @@ public class MessageServiceShould {
 
   @Mock MessageRepository messageRepository;
   @Mock Console console;
-  @Mock private Clock clock;
+  @Mock Clock clock;
+  @Mock MessageFormatter messageFormatter;
 
   private MessageService messageService;
 
@@ -40,7 +42,6 @@ public class MessageServiceShould {
     initMocks(this);
 
     given(clock.instant()).willReturn(NOW);
-    MessageFormatter messageFormatter = new MessageFormatter(clock);
     messageService = new MessageService(clock, messageRepository, console, messageFormatter);
   }
 
@@ -54,14 +55,18 @@ public class MessageServiceShould {
 
   public void a_user_can_read_any_user_timeline() {
 
-    Message postedMessagedTwoMinutesAgo = new Message(ALICE, MESSAGE_TEXT_1, TWO_MINUTES_AGO);
-    Message postedMessagedFiveSecondsAgo = new Message(ALICE, MESSAGE_TEXT_2, FIVE_SECONDS_AGO);
-    given(messageRepository.findAllMessagesForUser(ALICE)).willReturn(Arrays.asList(postedMessagedFiveSecondsAgo, postedMessagedTwoMinutesAgo));
+    Message messageFromTwoMinutesAgo = new Message(ALICE, MESSAGE_TEXT_1, TWO_MINUTES_AGO);
+    Message messageFromFiveSecondsAgo = new Message(ALICE, MESSAGE_TEXT_2, FIVE_SECONDS_AGO);
+    given(messageRepository.findAllMessagesForUser(ALICE)).willReturn(Arrays.asList(messageFromFiveSecondsAgo, messageFromTwoMinutesAgo));
+    String printedmessageFromTwoMinutesAgo = MESSAGE_TEXT_2 + " (5 seconds ago)";
+    String printedmessageFromFiveSecondsAgo = MESSAGE_TEXT_1 + " (2 minutes ago)";
+    given(messageFormatter.formatForViewUserTimeline(messageFromTwoMinutesAgo)).willReturn(printedmessageFromTwoMinutesAgo);
+    given(messageFormatter.formatForViewUserTimeline(messageFromFiveSecondsAgo)).willReturn(printedmessageFromFiveSecondsAgo);
 
     messageService.printTimelineFor(ALICE);
 
-    verify(console).printMessage(MESSAGE_TEXT_2 + " (5 seconds ago)");
-    verify(console).printMessage(MESSAGE_TEXT_1 + " (2 minutes ago)");
+    verify(console).printMessage(printedmessageFromFiveSecondsAgo);
+    verify(console).printMessage(printedmessageFromTwoMinutesAgo);
   }
 
   public void find_a_user_personal_messages() {
