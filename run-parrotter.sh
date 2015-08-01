@@ -1,1 +1,1 @@
-java -jar target/parrotter-jar-with-dependencies.jar
+java -jar ./parrotter-jar-with-dependencies.jar
