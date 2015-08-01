@@ -62,7 +62,6 @@ public class InMemoryMessageRepositoryShould {
     given(clock.instant()).willReturn(now,
                                       now.minus(1, ChronoUnit.HOURS),
                                       now.minus(2, ChronoUnit.HOURS));
-
     Message message1 = new Message(ALICE, MESSAGE_TEXT + "1", now);
     Message message2 = new Message(ALICE, MESSAGE_TEXT + "2", now.minus(1, ChronoUnit.HOURS));
     Message message3 = new Message(ALICE, MESSAGE_TEXT + "3", now.minus(2, ChronoUnit.HOURS));
