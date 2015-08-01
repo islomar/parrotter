@@ -78,7 +78,7 @@
                     <!-- MainClass in manifest make a executable jar -->
                     <archive>
                         <manifest>
-                            <mainClass>com.islomar.parrotter.app.ParrotterApplication</mainClass>
+                            <mainClass>com.islomar.parrotter.app.ParrotterApplicationLauncher</mainClass>
                         </manifest>
                     </archive>
 

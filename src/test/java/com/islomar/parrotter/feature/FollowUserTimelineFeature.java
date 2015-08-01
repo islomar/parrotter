@@ -1,6 +1,6 @@
 package com.islomar.parrotter.feature;
 
-import com.islomar.parrotter.app.ParrotterApplicationLauncher;
+import com.islomar.parrotter.app.ParrotterApplication;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.ScannerProxy;
 
@@ -46,8 +46,8 @@ public class FollowUserTimelineFeature {
         .willThrow(InterruptedException.class);
 
     try {
-      ParrotterApplicationLauncher parrotterApplicationLauncher = new ParrotterApplicationLauncher(scannerProxy, console, clock);
-      parrotterApplicationLauncher.run();
+      ParrotterApplication parrotterApplication = new ParrotterApplication(scannerProxy, console, clock);
+      parrotterApplication.run();
       fail();
     } catch (Exception ex) {
       verify(console, never()).printMessage(anyString());

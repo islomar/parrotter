@@ -3,7 +3,7 @@ package com.islomar.parrotter.feature;
 import com.islomar.parrotter.actions.FollowUser;
 import com.islomar.parrotter.actions.PostMessage;
 import com.islomar.parrotter.actions.ShowUserWall;
-import com.islomar.parrotter.app.ParrotterApplicationLauncher;
+import com.islomar.parrotter.app.ParrotterApplication;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.ScannerProxy;
 
@@ -67,8 +67,8 @@ public class ShowUserWallFeature {
         .willThrow(InterruptedException.class);
 
     try {
-      ParrotterApplicationLauncher parrotterApplicationLauncher = new ParrotterApplicationLauncher(scannerProxy, console, clock);
-      parrotterApplicationLauncher.run();
+      ParrotterApplication parrotterApplication = new ParrotterApplication(scannerProxy, console, clock);
+      parrotterApplication.run();
       fail();
     } catch (Exception ex) {
       InOrder inOrder = inOrder(console);
