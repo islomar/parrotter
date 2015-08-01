@@ -2,6 +2,7 @@ package com.islomar.parrotter.model.user;
 
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
 import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.hasItem;
@@ -34,9 +35,7 @@ public class UserShould {
     charlie.follow(ALICE);
 
     Set<String> followedUsers = charlie.getFollowedUsers();
-    assertThat(followedUsers, hasSize(2));
-    assertThat(followedUsers, hasItem(BOB));
-    assertThat(followedUsers, hasItem(ALICE));
+    assertThat(followedUsers, is(Arrays.asList(BOB, ALICE)));
   }
 
   public void not_follow_twice_the_same_user() {
@@ -46,8 +45,7 @@ public class UserShould {
     charlie.follow(BOB);
     charlie.follow(BOB);
 
-    assertThat(charlie.getFollowedUsers(), hasSize(1));
-    assertThat(charlie.getFollowedUsers(), contains(BOB));
+    assertThat(charlie.getFollowedUsers(), is(BOB));
   }
 
   public void get_his_username() {

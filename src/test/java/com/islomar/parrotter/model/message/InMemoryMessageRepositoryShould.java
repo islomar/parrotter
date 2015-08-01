@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -71,10 +72,7 @@ public class InMemoryMessageRepositoryShould {
 
     List<Message> aliceMessages = inMemoryMessageRepository.findAllMessagesForUser(ALICE);
 
-    assertThat(aliceMessages, hasSize(3));
-    assertThat(aliceMessages.get(0), is(message1));
-    assertThat(aliceMessages.get(1), is(message2));
-    assertThat(aliceMessages.get(2), is(message3));
+    assertThat(aliceMessages, is(Arrays.asList(message1, message2, message3)));
   }
 
 }
