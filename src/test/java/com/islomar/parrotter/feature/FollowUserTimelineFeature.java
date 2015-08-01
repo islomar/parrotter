@@ -1,5 +1,6 @@
 package com.islomar.parrotter.feature;
 
+import com.islomar.parrotter.actions.Command;
 import com.islomar.parrotter.app.ParrotterApplication;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.ScannerProxy;
@@ -11,6 +12,7 @@ import org.testng.annotations.Test;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyString;
@@ -20,7 +22,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 import static org.testng.Assert.fail;
 
 @Test
-public class FollowUserTimelineFeature {
+public class FollowUserTimelineFeature extends BaseFeature {
 
   private static final java.time.Instant NOW = Instant.now();
   private static final java.time.Instant SAVED_ALICE_MESSAGE_TIME = NOW;
@@ -44,9 +46,10 @@ public class FollowUserTimelineFeature {
     given(scannerProxy.nextLine())
         .willReturn("Alice follows Bob")
         .willThrow(InterruptedException.class);
+    List<Command> commandList = generateCommands(clock, console);
 
     try {
-      ParrotterApplication parrotterApplication = new ParrotterApplication(scannerProxy, console, clock);
+      ParrotterApplication parrotterApplication = new ParrotterApplication(commandList, scannerProxy, console, clock);
       parrotterApplication.run();
       fail();
     } catch (Exception ex) {

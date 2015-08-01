@@ -27,8 +27,10 @@ public class ParrotterApplication {
   private final Console console;
   private final Clock clock;
   private final ScannerProxy scanner;
+  private final List<Command> commands;
 
-  public ParrotterApplication(ScannerProxy scanner, Console console, Clock clock) {
+  public ParrotterApplication(List<Command> commands, ScannerProxy scanner, Console console, Clock clock) {
+    this.commands = commands;
     this.scanner = scanner;
     this.console = console;
     this.clock = clock;
@@ -36,7 +38,6 @@ public class ParrotterApplication {
 
   public void run() {
 
-    List<Command> commands = generateCommands();
     CommandSelector commandSelector = new CommandSelector(commands);
 
     while (true) {
@@ -45,24 +46,5 @@ public class ParrotterApplication {
       Command command = commandSelector.selectCommandForInputCommandLine(inputCommandLine);
       command.execute(inputCommandLine);
     }
-  }
-
-  private List<Command> generateCommands() {
-
-    MessageRepository messageRepository = new InMemoryMessageRepository();
-    UserRepository userRepository = new InMemoryUserRepository();
-    MessageFormatter messageFormatter = new MessageFormatter(clock);
-
-    UserService userService = new UserService(userRepository);
-    MessageService messageService = new MessageService(clock, messageRepository, console, messageFormatter);
-    ShowUserWallService showUserWallService = new ShowUserWallService(messageService, userService, console, messageFormatter);
-
-    List<Command> commands = new ArrayList<>();
-    commands.add(new PostMessage(userService, messageService));
-    commands.add(new ReadUserPersonalTimeline(messageService));
-    commands.add(new FollowUser(userService));
-    commands.add(new ShowUserWall(showUserWallService));
-
-    return commands;
   }
 }
