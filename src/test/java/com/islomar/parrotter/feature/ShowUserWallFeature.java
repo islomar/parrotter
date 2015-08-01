@@ -57,13 +57,13 @@ public class ShowUserWallFeature {
                                       VIEW_BOB_WALL_TIME);
 
     given(scannerProxy.nextLine())
-        .willReturn(CHARLIE + PostMessage.POST + CHARLIE_MESSAGE_TEXT)
-        .willReturn(BOB + PostMessage.POST + BOB_MESSAGE_TEXT_1)
-        .willReturn(BOB + PostMessage.POST + BOB_MESSAGE_TEXT_2)
-        .willReturn(ALICE + PostMessage.POST + ALICE_MESSAGE_TEXT)
-        .willReturn(CHARLIE + FollowUser.FOLLOWS + ALICE)
-        .willReturn(CHARLIE + FollowUser.FOLLOWS + BOB)
-        .willReturn(CHARLIE + ShowUserWall.WALL)
+        .willReturn(CHARLIE + PostMessage.POST + CHARLIE_MESSAGE_TEXT,
+                    BOB + PostMessage.POST + BOB_MESSAGE_TEXT_1,
+                    BOB + PostMessage.POST + BOB_MESSAGE_TEXT_2,
+                    ALICE + PostMessage.POST + ALICE_MESSAGE_TEXT,
+                    CHARLIE + FollowUser.FOLLOWS + ALICE,
+                    CHARLIE + FollowUser.FOLLOWS + BOB,
+                    CHARLIE + ShowUserWall.WALL)
         .willThrow(InterruptedException.class);
 
     try {

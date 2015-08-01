@@ -48,12 +48,12 @@ public class ReadUserTimelineFeature {
                                       VIEW_BOB_TIMELINE_TIME);
 
     given(scannerProxy.nextLine())
-        .willReturn("Alice")
-        .willReturn("Alice -> hello")
-        .willReturn("Alice -> hello again")
-        .willReturn("Alice")
-        .willReturn("Bob -> bye bye")
-        .willReturn("Bob")
+        .willReturn("Alice",
+                    "Alice -> hello",
+                    "Alice -> hello again",
+                    "Alice",
+                    "Bob -> bye bye",
+                    "Bob")
         .willThrow(InterruptedException.class);
 
     try {

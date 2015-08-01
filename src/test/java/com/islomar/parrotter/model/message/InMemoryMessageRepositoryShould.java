@@ -58,7 +58,9 @@ public class InMemoryMessageRepositoryShould {
   public void save_three_messages_and_then_find_them() {
 
     Instant now = Instant.now();
-    given(clock.instant()).willReturn(now, now.minus(1, ChronoUnit.HOURS), now.minus(2, ChronoUnit.HOURS));
+    given(clock.instant()).willReturn(now,
+                                      now.minus(1, ChronoUnit.HOURS),
+                                      now.minus(2, ChronoUnit.HOURS));
 
     Message message1 = new Message(ALICE, MESSAGE_TEXT + "1", now);
     Message message2 = new Message(ALICE, MESSAGE_TEXT + "2", now.minus(1, ChronoUnit.HOURS));
