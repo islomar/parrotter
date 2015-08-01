@@ -1,5 +1,7 @@
 package com.islomar.parrotter.model.user;
 
+import com.google.common.collect.Sets;
+
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -35,7 +37,7 @@ public class UserShould {
     charlie.follow(ALICE);
 
     Set<String> followedUsers = charlie.getFollowedUsers();
-    assertThat(followedUsers, is(Arrays.asList(BOB, ALICE)));
+    assertThat(followedUsers, is(Sets.newHashSet(BOB, ALICE)));
   }
 
   public void not_follow_twice_the_same_user() {
@@ -45,7 +47,7 @@ public class UserShould {
     charlie.follow(BOB);
     charlie.follow(BOB);
 
-    assertThat(charlie.getFollowedUsers(), is(BOB));
+    assertThat(charlie.getFollowedUsers(), is(Sets.newHashSet(BOB)));
   }
 
   public void get_his_username() {
