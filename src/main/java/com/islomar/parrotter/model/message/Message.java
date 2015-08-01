@@ -3,7 +3,7 @@ package com.islomar.parrotter.model.message;
 import java.time.Instant;
 
 
-final public class Message implements Comparable {
+final public class Message implements Comparable<Message> {
 
   private final String username;
   private final String textMessage;
@@ -30,9 +30,8 @@ final public class Message implements Comparable {
 
 
   @Override
-  public int compareTo(Object o) {
-    Message anotherMessage = (Message) o;
-    return anotherMessage.getPublicationInstant().compareTo(publicationInstant);
+  public int compareTo(Message otherMessage) {
+    return otherMessage.getPublicationInstant().compareTo(publicationInstant);
   }
 
   @Override
