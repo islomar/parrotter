@@ -84,7 +84,6 @@ Alice - I love the weather today (5 minutes ago)
 ## What I'm not proud about
 * Having a "**Command**" interface with an "execute" method might lead to confusion: obviously it's not a real Command pattern (I don’t need to decouple the sender and the receiver and everything is executed in "real time").
 * I tried to apply the **Outside-In TDD** approach... but I'm afraid that I failed miserably :-) I moved back and forth between Outside-In, Inside-Out, no TDD...
-* The way it is decided which action to execute. I don't like much that "**CommandGenerator**".
 * The **FollowUser** action. The User is updated because it's a reference, but neither a Service nor Repository is called.
 * Having a "**utils**" package. Shame on me, but I didn't find a better name.
 * Some other things that I'm not even aware of :-)
