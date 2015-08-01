@@ -1,10 +1,8 @@
 package com.islomar.parrotter.feature;
 
-import com.islomar.parrotter.actions.Command;
 import com.islomar.parrotter.actions.utils.CommandSelector;
 import com.islomar.parrotter.app.ParrotterApplication;
 import com.islomar.parrotter.infrastructure.Console;
-import com.islomar.parrotter.infrastructure.ScannerProxy;
 
 import org.mockito.InOrder;
 import org.mockito.Mock;
@@ -13,7 +11,6 @@ import org.testng.annotations.Test;
 
 import java.time.Clock;
 import java.time.Instant;
-import java.util.List;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyString;
@@ -28,7 +25,6 @@ public class PostMessageToPersonalTimelineFeature extends BaseFeature {
 
   private static final java.time.Instant POST_ALICE_MESSAGE_TIME = Instant.now();
 
-  @Mock private ScannerProxy scannerProxy;
   @Mock private Console console;
   @Mock private Clock clock;
 
@@ -41,13 +37,13 @@ public class PostMessageToPersonalTimelineFeature extends BaseFeature {
 
     given(clock.instant()).willReturn(POST_ALICE_MESSAGE_TIME);
 
-    given(scannerProxy.nextLine())
+    given(console.nextLine())
         .willReturn("Alice -> hello")
         .willThrow(InterruptedException.class);
     CommandSelector commandSelector = generateCommandSelector(clock, console);
 
     try {
-      ParrotterApplication parrotterApplication = new ParrotterApplication(commandSelector, scannerProxy);
+      ParrotterApplication parrotterApplication = new ParrotterApplication(commandSelector, console);
       parrotterApplication.run();
       fail();
     } catch (Exception ex) {

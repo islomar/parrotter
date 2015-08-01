@@ -6,7 +6,6 @@ import com.islomar.parrotter.actions.ShowUserWall;
 import com.islomar.parrotter.actions.utils.CommandSelector;
 import com.islomar.parrotter.app.ParrotterApplication;
 import com.islomar.parrotter.infrastructure.Console;
-import com.islomar.parrotter.infrastructure.ScannerProxy;
 
 import org.mockito.InOrder;
 import org.mockito.Mock;
@@ -40,7 +39,6 @@ public class ShowUserWallFeature extends BaseFeature {
   private static final String BOB_MESSAGE_TEXT_1 = "Damn! We lost!";
   private static final String BOB_MESSAGE_TEXT_2 = "Good game though.";
 
-  @Mock private ScannerProxy scannerProxy;
   @Mock private Console console;
   @Mock private Clock clock;
 
@@ -57,7 +55,7 @@ public class ShowUserWallFeature extends BaseFeature {
                                       POST_ALICE_MESSAGE_TIME,
                                       VIEW_BOB_WALL_TIME);
 
-    given(scannerProxy.nextLine())
+    given(console.nextLine())
         .willReturn(CHARLIE + PostMessage.POST + CHARLIE_MESSAGE_TEXT,
                     BOB + PostMessage.POST + BOB_MESSAGE_TEXT_1,
                     BOB + PostMessage.POST + BOB_MESSAGE_TEXT_2,
@@ -69,7 +67,7 @@ public class ShowUserWallFeature extends BaseFeature {
     CommandSelector commandSelector = generateCommandSelector(clock, console);
 
     try {
-      ParrotterApplication parrotterApplication = new ParrotterApplication(commandSelector, scannerProxy);
+      ParrotterApplication parrotterApplication = new ParrotterApplication(commandSelector, console);
       parrotterApplication.run();
       fail();
     } catch (Exception ex) {

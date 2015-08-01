@@ -1,10 +1,8 @@
 package com.islomar.parrotter.feature;
 
-import com.islomar.parrotter.actions.Command;
 import com.islomar.parrotter.actions.utils.CommandSelector;
 import com.islomar.parrotter.app.ParrotterApplication;
 import com.islomar.parrotter.infrastructure.Console;
-import com.islomar.parrotter.infrastructure.ScannerProxy;
 
 import org.mockito.InOrder;
 import org.mockito.Mock;
@@ -14,7 +12,6 @@ import org.testng.annotations.Test;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.inOrder;
@@ -32,7 +29,6 @@ public class ReadUserTimelineFeature extends BaseFeature {
   private static final Instant VIEW_BOB_TIMELINE_TIME = NOW;
   private static final Instant SAVED_BOB_MESSAGE_TIME = VIEW_BOB_TIMELINE_TIME.minus(2, ChronoUnit.MINUTES);
 
-  @Mock private ScannerProxy scannerProxy;
   @Mock private Console console;
   @Mock private Clock clock;
 
@@ -49,7 +45,7 @@ public class ReadUserTimelineFeature extends BaseFeature {
                                       VIEW_ALICE_TIMELINE_TIME,
                                       SAVED_BOB_MESSAGE_TIME,
                                       VIEW_BOB_TIMELINE_TIME);
-    given(scannerProxy.nextLine())
+    given(console.nextLine())
         .willReturn("Alice",
                     "Alice -> hello",
                     "Alice -> hello again",
@@ -60,7 +56,7 @@ public class ReadUserTimelineFeature extends BaseFeature {
     CommandSelector commandSelector = generateCommandSelector(clock, console);
 
     try {
-      ParrotterApplication parrotterApplication = new ParrotterApplication(commandSelector, scannerProxy);
+      ParrotterApplication parrotterApplication = new ParrotterApplication(commandSelector, console);
       parrotterApplication.run();
       fail();
     } catch (Exception ex) {
