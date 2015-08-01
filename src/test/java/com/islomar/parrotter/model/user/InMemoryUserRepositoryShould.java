@@ -31,18 +31,6 @@ public class InMemoryUserRepositoryShould {
     assertThat(alice.getUsername(), is(ALICE_USERNAME));
   }
 
-  public void update_a_user() {
-    inMemoryUserRepository.saveUser(ALICE);
-
-    User alice = inMemoryUserRepository.findUserByUsername(ALICE_USERNAME);
-
-    assertThat(alice.getFollowedUsers(), is(empty()));
-
-    alice.follow(BOB_USERNAME);
-
-    assertThat(alice.getFollowedUsers(), hasSize(1));
-  }
-
   public void not_find_a_non_existing_user_by_username() {
     User nonExistingUser = inMemoryUserRepository.findUserByUsername(ALICE_USERNAME);
 
