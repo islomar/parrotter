@@ -27,6 +27,6 @@ public class InMemoryMessageRepository implements MessageRepository {
 
   public void saveMessage(final String username, final String messageText) {
     Message message = new Message(username, messageText, clock.instant());
-    messages.put(message.getUsername(), message);
+    messages.put(username, message);
   }
 }
