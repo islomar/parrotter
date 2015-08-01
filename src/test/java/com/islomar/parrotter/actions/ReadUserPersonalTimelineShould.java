@@ -39,17 +39,17 @@ public class ReadUserPersonalTimelineShould {
     assertTrue(readUserPersonalTimeline.canExecuteCommandline(ALICE));
   }
 
-  public void be_able_to_execute_a_follow_command() {
+  public void not_be_able_to_execute_a_follow_command() {
 
     assertFalse(readUserPersonalTimeline.canExecuteCommandline(ALICE + " follow Bob"));
   }
 
-  public void be_able_to_execute_a_wall_command() {
+  public void not_be_able_to_execute_a_wall_command() {
 
     assertFalse(readUserPersonalTimeline.canExecuteCommandline(ALICE + " wall"));
   }
 
-  public void be_able_to_execute_a_post_command() {
+  public void not_be_able_to_execute_a_post_command() {
 
     assertFalse(readUserPersonalTimeline.canExecuteCommandline(ALICE + " -> Hello"));
   }

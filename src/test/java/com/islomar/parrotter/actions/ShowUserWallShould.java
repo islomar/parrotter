@@ -39,17 +39,17 @@ public class ShowUserWallShould {
     assertTrue(showUserWall.canExecuteCommandline(ALICE + WALL));
   }
 
-  public void be_able_to_execute_a_follow_command() {
+  public void not_be_able_to_execute_a_follow_command() {
 
     assertFalse(showUserWall.canExecuteCommandline(ALICE + " follow Bob"));
   }
 
-  public void be_able_to_execute_a_post_command() {
+  public void not_be_able_to_execute_a_post_command() {
 
     assertFalse(showUserWall.canExecuteCommandline(ALICE + " -> Hello"));
   }
 
-  public void be_able_to_execute_a_view_timeline_command() {
+  public void not_be_able_to_execute_a_view_timeline_command() {
 
     assertFalse(showUserWall.canExecuteCommandline(ALICE));
   }
