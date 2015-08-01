@@ -1,6 +1,7 @@
 package com.islomar.parrotter.feature;
 
 import com.islomar.parrotter.actions.Command;
+import com.islomar.parrotter.actions.utils.CommandSelector;
 import com.islomar.parrotter.app.ParrotterApplication;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.ScannerProxy;
@@ -56,10 +57,10 @@ public class ReadUserTimelineFeature extends BaseFeature {
                     "Bob -> bye bye",
                     "Bob")
         .willThrow(InterruptedException.class);
-    List<Command> commandList = generateCommands(clock, console);
+    CommandSelector commandSelector = generateCommandSelector(clock, console);
 
     try {
-      ParrotterApplication parrotterApplication = new ParrotterApplication(commandList, scannerProxy);
+      ParrotterApplication parrotterApplication = new ParrotterApplication(commandSelector, scannerProxy);
       parrotterApplication.run();
       fail();
     } catch (Exception ex) {

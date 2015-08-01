@@ -1,10 +1,10 @@
 package com.islomar.parrotter.feature;
 
 import com.islomar.parrotter.actions.Command;
+import com.islomar.parrotter.actions.utils.CommandSelector;
 import com.islomar.parrotter.app.ParrotterApplication;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.ScannerProxy;
-import com.sun.xml.internal.rngom.parse.host.Base;
 
 import org.mockito.InOrder;
 import org.mockito.Mock;
@@ -44,10 +44,10 @@ public class PostMessageToPersonalTimelineFeature extends BaseFeature {
     given(scannerProxy.nextLine())
         .willReturn("Alice -> hello")
         .willThrow(InterruptedException.class);
-    List<Command> commandList = generateCommands(clock, console);
+    CommandSelector commandSelector = generateCommandSelector(clock, console);
 
     try {
-      ParrotterApplication parrotterApplication = new ParrotterApplication(commandList, scannerProxy);
+      ParrotterApplication parrotterApplication = new ParrotterApplication(commandSelector, scannerProxy);
       parrotterApplication.run();
       fail();
     } catch (Exception ex) {

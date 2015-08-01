@@ -25,16 +25,14 @@ import java.util.List;
 public class ParrotterApplication {
 
   private final ScannerProxy scanner;
-  private final List<Command> commands;
+  private final CommandSelector commandSelector;
 
-  public ParrotterApplication(List<Command> commands, ScannerProxy scanner) {
-    this.commands = commands;
+  public ParrotterApplication(CommandSelector commandSelector, ScannerProxy scanner) {
+    this.commandSelector = commandSelector;
     this.scanner = scanner;
   }
 
   public void run() {
-
-    CommandSelector commandSelector = new CommandSelector(commands);
 
     while (true) {
       String inputCommandLine = scanner.nextLine();

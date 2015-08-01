@@ -1,9 +1,9 @@
 package com.islomar.parrotter.feature;
 
-import com.islomar.parrotter.actions.Command;
 import com.islomar.parrotter.actions.FollowUser;
 import com.islomar.parrotter.actions.PostMessage;
 import com.islomar.parrotter.actions.ShowUserWall;
+import com.islomar.parrotter.actions.utils.CommandSelector;
 import com.islomar.parrotter.app.ParrotterApplication;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.ScannerProxy;
@@ -16,7 +16,6 @@ import org.testng.annotations.Test;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.inOrder;
@@ -67,10 +66,10 @@ public class ShowUserWallFeature extends BaseFeature {
                     CHARLIE + FollowUser.FOLLOWS + BOB,
                     CHARLIE + ShowUserWall.WALL)
         .willThrow(InterruptedException.class);
-    List<Command> commandList = generateCommands(clock, console);
+    CommandSelector commandSelector = generateCommandSelector(clock, console);
 
     try {
-      ParrotterApplication parrotterApplication = new ParrotterApplication(commandList, scannerProxy);
+      ParrotterApplication parrotterApplication = new ParrotterApplication(commandSelector, scannerProxy);
       parrotterApplication.run();
       fail();
     } catch (Exception ex) {

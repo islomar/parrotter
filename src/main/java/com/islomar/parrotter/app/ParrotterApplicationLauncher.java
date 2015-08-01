@@ -7,6 +7,7 @@ import com.islomar.parrotter.actions.FollowUser;
 import com.islomar.parrotter.actions.PostMessage;
 import com.islomar.parrotter.actions.ReadUserPersonalTimeline;
 import com.islomar.parrotter.actions.ShowUserWall;
+import com.islomar.parrotter.actions.utils.CommandSelector;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.ScannerProxy;
 import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
@@ -31,8 +32,9 @@ public class ParrotterApplicationLauncher {
     Console console = new Console();
     Clock clock = Clock.systemUTC();
     List<Command> commands = generateCommands(clock, console);
+    CommandSelector commandSelector = new CommandSelector(commands);
 
-    new ParrotterApplication(commands, scannerProxy).run();
+    new ParrotterApplication(commandSelector, scannerProxy).run();
   }
 
   private static ScannerProxy generateScanner() {
