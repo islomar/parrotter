@@ -16,6 +16,9 @@ public class FollowUser implements Command {
 
   @Override
   public void execute(String inputCommandLine) {
+    if (canNotExecute(inputCommandLine)) {
+      return;
+    }
 
     String[] inputArguments = inputCommandLine.split(FOLLOWS);
     String followingUsername = inputArguments[0].trim();
@@ -25,9 +28,8 @@ public class FollowUser implements Command {
     followingUser.follow(followedUsername);
   }
 
-  @Override
-  public boolean canExecuteCommandline(String inputCommandLine) {
-    return inputCommandLine.contains(FOLLOWS);
+  public boolean canNotExecute(String inputCommandLine) {
+    return !inputCommandLine.contains(FOLLOWS);
   }
 
 }

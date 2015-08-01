@@ -1,17 +1,17 @@
 package com.islomar.parrotter.app;
 
 import com.islomar.parrotter.actions.Command;
-import com.islomar.parrotter.actions.utils.CommandSelector;
+import com.islomar.parrotter.actions.utils.CommandRunner;
 import com.islomar.parrotter.infrastructure.Console;
 
 
 public class ParrotterApplication {
 
   private final Console console;
-  private final CommandSelector commandSelector;
+  private final CommandRunner commandRunner;
 
-  public ParrotterApplication(CommandSelector commandSelector, Console console) {
-    this.commandSelector = commandSelector;
+  public ParrotterApplication(CommandRunner commandRunner, Console console) {
+    this.commandRunner = commandRunner;
     this.console = console;
   }
 
@@ -19,9 +19,7 @@ public class ParrotterApplication {
 
     while (true) {
       String inputCommandLine = console.nextLine();
-
-      Command command = commandSelector.selectCommandForInputCommandLine(inputCommandLine);
-      command.execute(inputCommandLine);
+      commandRunner.execute(inputCommandLine);
     }
   }
 }

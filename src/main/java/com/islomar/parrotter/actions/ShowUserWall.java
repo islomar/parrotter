@@ -16,18 +16,20 @@ public class ShowUserWall implements Command {
 
   @Override
   public void execute(String inputCommandLine) {
+    if (canNotExecute(inputCommandLine)) {
+      return;
+    }
 
     String username = extractUsername(inputCommandLine);
     showUserWallService.printUserWallFor(username);
   }
 
-  @Override
-  public boolean canExecuteCommandline(String inputCommandLine) {
-    return inputCommandLine.contains(WALL);
-  }
-
   private String extractUsername(String inputCommandLine) {
     String[] inputArguments = inputCommandLine.split(WALL);
     return inputArguments[0].trim();
+  }
+
+  public boolean canNotExecute(String inputCommandLine) {
+    return !inputCommandLine.contains(WALL);
   }
 }

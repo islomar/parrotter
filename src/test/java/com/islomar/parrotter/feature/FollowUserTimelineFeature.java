@@ -1,6 +1,6 @@
 package com.islomar.parrotter.feature;
 
-import com.islomar.parrotter.actions.utils.CommandSelector;
+import com.islomar.parrotter.actions.utils.CommandRunner;
 import com.islomar.parrotter.app.ParrotterApplication;
 import com.islomar.parrotter.infrastructure.Console;
 
@@ -43,10 +43,10 @@ public class FollowUserTimelineFeature extends BaseFeature {
     given(console.nextLine())
         .willReturn("Alice follows Bob")
         .willThrow(InterruptedException.class);
-    CommandSelector commandSelector = generateCommandSelector(clock, console);
+    CommandRunner commandRunner = generateCommandSelector(clock, console);
 
     try {
-      ParrotterApplication parrotterApplication = new ParrotterApplication(commandSelector, console);
+      ParrotterApplication parrotterApplication = new ParrotterApplication(commandRunner, console);
       parrotterApplication.run();
       fail();
     } catch (Exception ex) {

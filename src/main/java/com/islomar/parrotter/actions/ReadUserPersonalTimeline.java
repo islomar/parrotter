@@ -18,15 +18,17 @@ public class ReadUserPersonalTimeline implements Command {
 
   @Override
   public void execute(String inputCommandLine) {
+    if (canNotExecute(inputCommandLine)) {
+      return;
+    }
 
     String username = inputCommandLine;
 
     messageService.printTimelineFor(username);
   }
 
-  @Override
-  public boolean canExecuteCommandline(String inputCommandLine) {
 
-    return Pattern.matches(ONLY_LETTERS_REGEXP, inputCommandLine);
+  public boolean canNotExecute(String inputCommandLine) {
+    return !Pattern.matches(ONLY_LETTERS_REGEXP, inputCommandLine);
   }
 }

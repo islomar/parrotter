@@ -26,13 +26,17 @@ import java.util.List;
 
 import static com.islomar.parrotter.actions.FollowUser.FOLLOWS;
 import static com.islomar.parrotter.actions.PostMessage.POST;
+import static com.islomar.parrotter.actions.ShowUserWall.WALL;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 @Test
-public class CommandSelectorShould {
+public class CommandRunnerShould {
 
   private static final String ALICE = "Alice";
   private static final String BOB = "Bob";
@@ -43,11 +47,17 @@ public class CommandSelectorShould {
   @Mock Clock clock;
   @Mock Clock clockForMessageFormatter;
 
+  @Mock PostMessage postMessage;
+  @Mock ReadUserPersonalTimeline readUserPersonalTimeline;
+  @Mock FollowUser followUser;
+  @Mock ShowUserWall showUserWall;
+
   private MessageService messageService;
   private ShowUserWallService showUserWallService;
   private UserService userService;
 
-  private CommandSelector commandSelector;
+  private CommandRunner commandRunner;
+  private List<Command> commands;
 
 
   @BeforeMethod
@@ -55,36 +65,36 @@ public class CommandSelectorShould {
     initMocks(this);
 
     given(clockForMessageFormatter.instant()).willReturn(NOW);
-    List<Command> commands = generateCommands();
-    commandSelector = new CommandSelector(commands);
+    commands = generateCommands();
+    commandRunner = new CommandRunner(commands);
   }
 
-  public void create_a_postmessage_command_for_post_commandline() {
+  public void execute_a_postmessage_command_for_post_commandline() {
 
-    Command command = commandSelector.selectCommandForInputCommandLine(ALICE + POST + ALICE_MESSAGE_TEXT);
+    commandRunner.execute(ALICE + POST + ALICE_MESSAGE_TEXT);
 
-    assertThat(command, instanceOf(PostMessage.class));
+    verify(postMessage).execute(ALICE + POST + ALICE_MESSAGE_TEXT);
   }
 
-  public void create_a_readuserpersonaltimeline_command_for_read_personal_timeline_commandline() {
+  public void execute_a_readuserpersonaltimeline_command_for_read_personal_timeline_commandline() {
 
-    Command command = commandSelector.selectCommandForInputCommandLine(ALICE);
+    commandRunner.execute(ALICE);
 
-    assertThat(command, instanceOf(ReadUserPersonalTimeline.class));
+    verify(readUserPersonalTimeline).execute(ALICE);
   }
 
-  public void follow_another_user() {
+  public void execute_another_user() {
 
-    Command command = commandSelector.selectCommandForInputCommandLine(ALICE + FOLLOWS + BOB);
+    commandRunner.execute(ALICE + FOLLOWS + BOB);
 
-    assertThat(command, instanceOf(FollowUser.class));
+    verify(followUser).execute(ALICE + FOLLOWS + BOB);
   }
 
-  public void show_a_user_wall() {
+  public void execute_a_user_wall() {
 
-    Command command = commandSelector.selectCommandForInputCommandLine(ALICE + ShowUserWall.WALL);
+    commandRunner.execute(ALICE + WALL);
 
-    assertThat(command, instanceOf(ShowUserWall.class));
+    verify(showUserWall).execute(ALICE + WALL);
   }
 
   private List<Command> generateCommands() {
@@ -98,10 +108,10 @@ public class CommandSelectorShould {
     showUserWallService = new ShowUserWallService(messageService, userService, console, messageFormatter);
 
     List<Command> commands = new ArrayList<>();
-    commands.add(new PostMessage(userService, messageService));
-    commands.add(new ReadUserPersonalTimeline(messageService));
-    commands.add(new FollowUser(userService));
-    commands.add(new ShowUserWall(showUserWallService));
+    commands.add(postMessage);
+    commands.add(readUserPersonalTimeline);
+    commands.add(followUser);
+    commands.add(showUserWall);
 
     return commands;
   }

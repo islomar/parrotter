@@ -5,7 +5,7 @@ import com.islomar.parrotter.actions.FollowUser;
 import com.islomar.parrotter.actions.PostMessage;
 import com.islomar.parrotter.actions.ReadUserPersonalTimeline;
 import com.islomar.parrotter.actions.ShowUserWall;
-import com.islomar.parrotter.actions.utils.CommandSelector;
+import com.islomar.parrotter.actions.utils.CommandRunner;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
 import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
@@ -22,9 +22,9 @@ import java.util.List;
 
 public class BaseFeature {
 
-  protected CommandSelector generateCommandSelector(Clock clock, Console console) {
+  protected CommandRunner generateCommandSelector(Clock clock, Console console) {
     List<Command> commands = generateCommands(clock, console);
-    return new CommandSelector(commands);
+    return new CommandRunner(commands);
   }
 
   private List<Command> generateCommands(Clock clock, Console console) {

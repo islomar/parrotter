@@ -47,23 +47,4 @@ public class FollowUserShould {
     assertThat(alice.getFollowedUsers(), is(Sets.newHashSet(BOB_USERNAME)));
   }
 
-  public void be_able_to_execute_a_follow_command() {
-
-    assertTrue(followUser.canExecuteCommandline(ALICE_USERNAME + FOLLOWS + BOB_USERNAME));
-  }
-
-  public void not_be_able_to_execute_a_wall_command() {
-
-    assertFalse(followUser.canExecuteCommandline(ALICE_USERNAME + WALL));
-  }
-
-  public void not_be_able_to_execute_a_post_command() {
-
-    assertFalse(followUser.canExecuteCommandline(ALICE_USERNAME + POST + "Hello"));
-  }
-
-  public void not_be_able_to_execute_a_view_timeline_command() {
-
-    assertFalse(followUser.canExecuteCommandline(ALICE_USERNAME));
-  }
 }

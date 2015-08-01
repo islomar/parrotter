@@ -18,6 +18,9 @@ public class PostMessage implements Command {
 
   @Override
   public void execute(String inputCommandLine) {
+    if (canNotExecute(inputCommandLine)) {
+      return;
+    }
 
     String[] inputArguments = inputCommandLine.split(POST);
     String username = inputArguments[0].trim();
@@ -27,9 +30,8 @@ public class PostMessage implements Command {
     messageService.saveMessage(username, message);
   }
 
-  @Override
-  public boolean canExecuteCommandline(String inputCommandLine) {
-    return inputCommandLine.contains(POST);
+  public boolean canNotExecute(String inputCommandLine) {
+    return !inputCommandLine.contains(POST);
   }
 
 }

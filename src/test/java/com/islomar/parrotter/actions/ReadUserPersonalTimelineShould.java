@@ -33,24 +33,4 @@ public class ReadUserPersonalTimelineShould {
 
     verify(messageService).printTimelineFor(ALICE);
   }
-
-  public void be_able_to_execute_a_view_timeline_command() {
-
-    assertTrue(readUserPersonalTimeline.canExecuteCommandline(ALICE));
-  }
-
-  public void not_be_able_to_execute_a_follow_command() {
-
-    assertFalse(readUserPersonalTimeline.canExecuteCommandline(ALICE + " follow Bob"));
-  }
-
-  public void not_be_able_to_execute_a_wall_command() {
-
-    assertFalse(readUserPersonalTimeline.canExecuteCommandline(ALICE + " wall"));
-  }
-
-  public void not_be_able_to_execute_a_post_command() {
-
-    assertFalse(readUserPersonalTimeline.canExecuteCommandline(ALICE + " -> Hello"));
-  }
 }

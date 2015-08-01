@@ -33,24 +33,4 @@ public class ShowUserWallShould {
 
     verify(showUserWallService).printUserWallFor(ALICE);
   }
-
-  public void be_able_to_execute_a_wall_command() {
-
-    assertTrue(showUserWall.canExecuteCommandline(ALICE + WALL));
-  }
-
-  public void not_be_able_to_execute_a_follow_command() {
-
-    assertFalse(showUserWall.canExecuteCommandline(ALICE + " follow Bob"));
-  }
-
-  public void not_be_able_to_execute_a_post_command() {
-
-    assertFalse(showUserWall.canExecuteCommandline(ALICE + " -> Hello"));
-  }
-
-  public void not_be_able_to_execute_a_view_timeline_command() {
-
-    assertFalse(showUserWall.canExecuteCommandline(ALICE));
-  }
 }

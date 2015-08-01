@@ -3,7 +3,7 @@ package com.islomar.parrotter.feature;
 import com.islomar.parrotter.actions.FollowUser;
 import com.islomar.parrotter.actions.PostMessage;
 import com.islomar.parrotter.actions.ShowUserWall;
-import com.islomar.parrotter.actions.utils.CommandSelector;
+import com.islomar.parrotter.actions.utils.CommandRunner;
 import com.islomar.parrotter.app.ParrotterApplication;
 import com.islomar.parrotter.infrastructure.Console;
 
@@ -64,10 +64,10 @@ public class ShowUserWallFeature extends BaseFeature {
                     CHARLIE + FollowUser.FOLLOWS + BOB,
                     CHARLIE + ShowUserWall.WALL)
         .willThrow(InterruptedException.class);
-    CommandSelector commandSelector = generateCommandSelector(clock, console);
+    CommandRunner commandRunner = generateCommandSelector(clock, console);
 
     try {
-      ParrotterApplication parrotterApplication = new ParrotterApplication(commandSelector, console);
+      ParrotterApplication parrotterApplication = new ParrotterApplication(commandRunner, console);
       parrotterApplication.run();
       fail();
     } catch (Exception ex) {
