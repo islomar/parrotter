@@ -9,8 +9,6 @@ public class PostMessage implements Command {
   public static final String POST = " -> ";
 
   private MessageService messageService;
-  private String username;
-  private String message;
   private UserService userService;
 
   public PostMessage(UserService userService, MessageService messageService) {
@@ -21,7 +19,9 @@ public class PostMessage implements Command {
   @Override
   public void execute(String inputCommandLine) {
 
-    extractUsernameAndMessage(inputCommandLine);
+    String[] inputArguments = inputCommandLine.split(POST);
+    String username = inputArguments[0].trim();
+    String message = inputArguments[1].trim();
 
     userService.saveUser(username);
     messageService.saveMessage(username, message);
@@ -32,10 +32,4 @@ public class PostMessage implements Command {
     return inputCommandLine.contains(POST);
   }
 
-  private void extractUsernameAndMessage(String inputCommandLine) {
-
-    String[] inputArguments = inputCommandLine.split(POST);
-    this.username = inputArguments[0].trim();
-    this.message = inputArguments[1].trim();
-  }
 }
