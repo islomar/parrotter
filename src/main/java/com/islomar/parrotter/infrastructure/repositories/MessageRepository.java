@@ -9,6 +9,6 @@ public interface MessageRepository {
 
   public List<Message> findAllMessagesForUser(String username);
 
-  public void saveMessage(String username, String messageText);
+  public void saveMessage(Message message);
 
 }

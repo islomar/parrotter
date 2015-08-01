@@ -90,8 +90,8 @@ public class CommandSelectorShould {
   private List<Command> generateCommands() {
     MessageFormatter messageFormatter = new MessageFormatter(clockForMessageFormatter);
 
-    MessageRepository messageRepository = new InMemoryMessageRepository(clock);
-    messageService = new MessageService(messageRepository, console, messageFormatter);
+    MessageRepository messageRepository = new InMemoryMessageRepository();
+    messageService = new MessageService(clock, messageRepository, console, messageFormatter);
 
     UserRepository userRepository = new InMemoryUserRepository();
     userService = new UserService(userRepository);

@@ -41,14 +41,15 @@ public class MessageServiceShould {
 
     given(clock.instant()).willReturn(NOW);
     MessageFormatter messageFormatter = new MessageFormatter(clock);
-    messageService = new MessageService(messageRepository, console, messageFormatter);
+    messageService = new MessageService(clock, messageRepository, console, messageFormatter);
   }
 
   public void save_a_message_and_show_it_on_timeline() {
 
     messageService.saveMessage(ALICE, MESSAGE_TEXT_1);
 
-    verify(messageRepository).saveMessage(ALICE, MESSAGE_TEXT_1);
+    Message message = new Message(ALICE, MESSAGE_TEXT_1, clock.instant());
+    verify(messageRepository).saveMessage(message);
   }
 
   public void a_user_can_read_any_user_timeline() {

@@ -49,12 +49,12 @@ public class ParrotterApplicationLauncher {
 
   private List<Command> generateCommands() {
 
-    MessageRepository messageRepository = new InMemoryMessageRepository(clock);
+    MessageRepository messageRepository = new InMemoryMessageRepository();
     UserRepository userRepository = new InMemoryUserRepository();
     MessageFormatter messageFormatter = new MessageFormatter(clock);
 
     UserService userService = new UserService(userRepository);
-    MessageService messageService = new MessageService(messageRepository, console, messageFormatter);
+    MessageService messageService = new MessageService(clock, messageRepository, console, messageFormatter);
     ShowUserWallService showUserWallService = new ShowUserWallService(messageService, userService, console, messageFormatter);
 
     List<Command> commands = new ArrayList<>();

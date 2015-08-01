@@ -13,7 +13,8 @@ import static org.mockito.MockitoAnnotations.initMocks;
 @Test
 public class UserServiceShould {
 
-  private static final String CHARLIE = "Charlie";
+  private static final String CHARLIE_USERNAME = "Charlie";
+  private static final User CHARLIE = new User(CHARLIE_USERNAME);
 
   @Mock UserRepository userRepository;
   @Mock Console console;
@@ -30,16 +31,16 @@ public class UserServiceShould {
 
   public void save_a_user() {
 
-    userService.saveUser(CHARLIE);
+    userService.saveUser(CHARLIE_USERNAME);
 
     verify(userRepository).saveUser(CHARLIE);
   }
 
   public void find_a_user() {
 
-    userService.findUserByUsername(CHARLIE);
+    userService.findUserByUsername(CHARLIE_USERNAME);
 
-    verify(userRepository).findUserByUsername(CHARLIE);
+    verify(userRepository).findUserByUsername(CHARLIE_USERNAME);
   }
 
 }

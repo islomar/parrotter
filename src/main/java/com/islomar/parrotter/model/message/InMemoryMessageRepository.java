@@ -13,11 +13,9 @@ import java.util.List;
 
 public class InMemoryMessageRepository implements MessageRepository {
 
-  private final Clock clock;
   private Multimap<String, Message> messages;
 
-  public InMemoryMessageRepository(final Clock clock) {
-    this.clock = clock;
+  public InMemoryMessageRepository() {
     this.messages = ArrayListMultimap.create();
   }
 
@@ -25,8 +23,7 @@ public class InMemoryMessageRepository implements MessageRepository {
     return Collections.unmodifiableList(new ArrayList<>(messages.get(username)));
   }
 
-  public void saveMessage(final String username, final String messageText) {
-    Message message = new Message(username, messageText, clock.instant());
-    messages.put(username, message);
+  public void saveMessage(Message message) {
+    messages.put(message.getUsername(), message);
   }
 }

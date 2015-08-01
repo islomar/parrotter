@@ -11,7 +11,8 @@ public class UserService {
   }
 
   public void saveUser(String username) {
-    userRepository.saveUser(username);
+    User user = new User(username);
+    userRepository.saveUser(user);
   }
 
   public User findUserByUsername(String username) {

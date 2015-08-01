@@ -34,7 +34,7 @@ public class InMemoryMessageRepositoryShould {
 
     initMocks(this);
 
-    inMemoryMessageRepository = new InMemoryMessageRepository(clock);
+    inMemoryMessageRepository = new InMemoryMessageRepository();
   }
 
   public void a_non_existing_user_has_no_messages_saved() {
@@ -47,7 +47,7 @@ public class InMemoryMessageRepositoryShould {
     Instant now = Instant.now();
     given(clock.instant()).willReturn(now);
     Message message = new Message(BOB, MESSAGE_TEXT, now);
-    inMemoryMessageRepository.saveMessage(BOB, MESSAGE_TEXT);
+    inMemoryMessageRepository.saveMessage(message);
 
     List<Message> bobMessages = inMemoryMessageRepository.findAllMessagesForUser(BOB);
 
@@ -65,9 +65,9 @@ public class InMemoryMessageRepositoryShould {
     Message message1 = new Message(ALICE, MESSAGE_TEXT + "1", now);
     Message message2 = new Message(ALICE, MESSAGE_TEXT + "2", now.minus(1, ChronoUnit.HOURS));
     Message message3 = new Message(ALICE, MESSAGE_TEXT + "3", now.minus(2, ChronoUnit.HOURS));
-    inMemoryMessageRepository.saveMessage(ALICE, MESSAGE_TEXT + "1");
-    inMemoryMessageRepository.saveMessage(ALICE, MESSAGE_TEXT + "2");
-    inMemoryMessageRepository.saveMessage(ALICE, MESSAGE_TEXT + "3");
+    inMemoryMessageRepository.saveMessage(message1);
+    inMemoryMessageRepository.saveMessage(message2);
+    inMemoryMessageRepository.saveMessage(message3);
 
     List<Message> aliceMessages = inMemoryMessageRepository.findAllMessagesForUser(ALICE);
 
