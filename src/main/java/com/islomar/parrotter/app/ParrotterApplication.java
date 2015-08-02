@@ -18,7 +18,10 @@ public class ParrotterApplication {
   public void run() {
 
     while (true) {
+      console.showPrompt();
+
       String inputCommandLine = console.nextLine();
+
       commandRunner.execute(inputCommandLine);
     }
   }

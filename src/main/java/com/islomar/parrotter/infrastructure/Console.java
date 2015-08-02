@@ -19,6 +19,10 @@ public class Console {
     System.out.println(text);
   }
 
+  public void showPrompt() {
+    System.out.print("> ");
+  }
+
   public String nextLine() {
     return scanner.nextLine();
   }
