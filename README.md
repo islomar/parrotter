@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/islomar/parrotter.svg)](https://travis-ci.org/islomar/parrotter)
+[![Coverage Status](https://coveralls.io/repos/islomar/parrotter/badge.svg?branch=master&service=github)](https://coveralls.io/github/islomar/parrotter?branch=master)
 
 # Exercise
 
@@ -66,7 +67,7 @@ Alice - I love the weather today (5 minutes ago)
 * Don't worry about handling any exceptions or invalid commands. Assume that the user will always type the correct commands. Just focus on the sunny day scenarios.
 * Don’t bother making it work over a network or across processes. It can all be done in memory, assuming that users will all use the same terminal.
 * Non-existing users should be created as they post their first message. Application should not start with a pre-defined list of users.
- 
+
 
 ## Technical thougths and considerations
 * I called it "**parrotter**", because in Spanish we use the expression "to talk like a parrot" for someone who talks a looot. And because "Twitter" was already taken.
