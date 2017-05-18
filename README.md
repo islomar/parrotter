@@ -95,3 +95,6 @@ Alice - I love the weather today (5 minutes ago)
 * It's kind of **anaemic domain**. But I didn't see passing a Repository for each User creation... I didn't see clear a better way to do it (though I know that it exists).
 * I started using **Optional** for the case no User exists. I finally decided to use the Null Object Pattern, which I think leaves a clearer code (though probably that's not happy path and I shouldn't have worried anyway).
 * Class **ShowUserWallService**: it's split from UserService and MessageService because it needs to access both "domains", both repositories... but maybe it fit in one of them (or even it should exist only one Service, maybe there is only one Domain here).
+
+## Mutation testing
+Run `mvn org.pitest:pitest-maven:mutationCoverage`
