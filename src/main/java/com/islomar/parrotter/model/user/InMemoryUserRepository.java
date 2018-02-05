@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class InMemoryUserRepository implements UserRepository {
 
-  private Set<User> users;
+  private final Set<User> users;
 
   public InMemoryUserRepository() {
     users = Sets.newHashSet();

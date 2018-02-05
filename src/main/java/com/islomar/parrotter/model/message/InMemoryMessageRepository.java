@@ -12,7 +12,7 @@ import java.util.List;
 
 public class InMemoryMessageRepository implements MessageRepository {
 
-  private Multimap<String, Message> messages;
+  private final Multimap<String, Message> messages;
 
   public InMemoryMessageRepository() {
     this.messages = ArrayListMultimap.create();

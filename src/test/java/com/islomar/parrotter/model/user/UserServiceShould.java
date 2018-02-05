@@ -1,6 +1,5 @@
 package com.islomar.parrotter.model.user;
 
-import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.repositories.UserRepository;
 
 import org.mockito.Mock;

@@ -8,8 +8,8 @@ public class PostMessage implements Command {
 
   public static final String POST = " -> ";
 
-  private MessageService messageService;
-  private UserService userService;
+  private final MessageService messageService;
+  private final UserService userService;
 
   public PostMessage(UserService userService, MessageService messageService) {
     this.userService = userService;

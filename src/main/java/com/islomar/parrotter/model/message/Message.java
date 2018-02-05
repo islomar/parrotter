@@ -51,11 +51,7 @@ public final class Message implements Comparable<Message> {
     if (textMessage != null ? !textMessage.equals(message.textMessage) : message.textMessage != null) {
       return false;
     }
-    if (username != null ? !username.equals(message.username) : message.username != null) {
-      return false;
-    }
-
-    return true;
+    return username != null ? username.equals(message.username) : message.username == null;
   }
 
   @Override

@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
 public class MessageService {
 
   private final Clock clock;
-  private MessageRepository messageRepository;
-  private Console console;
-  private MessageFormatter messageFormatter;
+  private final MessageRepository messageRepository;
+  private final Console console;
+  private final MessageFormatter messageFormatter;
 
   public MessageService(final Clock clock, MessageRepository messageRepository, Console console, MessageFormatter messageFormatter) {
 

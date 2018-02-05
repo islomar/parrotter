@@ -11,7 +11,7 @@ public class MessageFormatter {
 
   private static final int MILLISECONDS_IN_A_SECOND = 1000;
 
-  private Clock clock;
+  private final Clock clock;
 
   public MessageFormatter(Clock clock) {
 

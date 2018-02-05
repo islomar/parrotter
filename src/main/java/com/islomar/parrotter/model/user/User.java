@@ -8,7 +8,7 @@ import java.util.Set;
 public class User {
 
   private final String username;
-  private Set<String> followedUsers = Sets.newHashSet();
+  private final Set<String> followedUsers = Sets.newHashSet();
 
   public User(final String username) {
 
@@ -38,11 +38,7 @@ public class User {
 
     User user = (User) o;
 
-    if (username != null ? !username.equals(user.username) : user.username != null) {
-      return false;
-    }
-
-    return true;
+    return username != null ? username.equals(user.username) : user.username == null;
   }
 
   @Override

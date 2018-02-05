@@ -13,11 +13,11 @@ import java.util.stream.Stream;
 
 public class ShowUserWallService {
 
-  private MessageService messageService;
-  private UserService userService;
+  private final MessageService messageService;
+  private final UserService userService;
 
-  private Console console;
-  private MessageFormatter messageFormatter;
+  private final Console console;
+  private final MessageFormatter messageFormatter;
 
   public ShowUserWallService(MessageService messageService, UserService userService, Console console, MessageFormatter messageFormatter) {
 
@@ -44,7 +44,7 @@ public class ShowUserWallService {
     Set<String> followedUsers = userService.findUserByUsername(username).getFollowedUsers();
 
     return followedUsers.stream()
-        .map(user -> messageService.findPersonalMessagesFor(user))
+        .map(messageService::findPersonalMessagesFor)
         .flatMap(Collection::stream)
         .collect(Collectors.toList());
   }
