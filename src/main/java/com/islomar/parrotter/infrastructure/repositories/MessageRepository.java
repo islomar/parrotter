@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface MessageRepository {
 
-  public List<Message> findAllMessagesForUser(String username);
+  List<Message> findAllMessagesForUser(String username);
 
-  public void saveMessage(Message message);
+  void saveMessage(Message message);
 
 }
