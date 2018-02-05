@@ -17,5 +17,6 @@ public class NullUser extends User {
 
   @Override
   public void follow(String username) {
+    // Nothing happens
   }
 }
