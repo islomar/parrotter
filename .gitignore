@@ -1,4 +1,7 @@
 *.class
+.classpath
+.project
+.settings/
 
 #IntelliJ files
 *.iml
@@ -12,3 +15,4 @@ target/
 
 mnw*
 .mvn/
+

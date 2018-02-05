@@ -40,7 +40,7 @@ public class MessageService {
   }
 
   private void printListOfMessages(List<Message> messages) {
-    messages.stream().forEach(message -> printMessage(message));
+    messages.forEach(this::printMessage);
   }
 
   private void printMessage(Message message) {

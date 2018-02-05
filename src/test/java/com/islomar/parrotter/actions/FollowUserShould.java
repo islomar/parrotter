@@ -10,15 +10,11 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.islomar.parrotter.actions.FollowUser.FOLLOWS;
-import static com.islomar.parrotter.actions.PostMessage.POST;
-import static com.islomar.parrotter.actions.ShowUserWall.WALL;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.MockitoAnnotations.initMocks;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
 
 @Test
 public class FollowUserShould {

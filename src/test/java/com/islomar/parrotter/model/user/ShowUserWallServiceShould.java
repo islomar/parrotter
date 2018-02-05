@@ -15,6 +15,7 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
@@ -40,7 +41,6 @@ public class ShowUserWallServiceShould {
 
   @Mock Console console;
   @Mock Clock clock;
-  @Mock MessageRepository messageRepository;
   @Mock UserService userService;
   @Mock MessageService messageService;
 
@@ -84,7 +84,7 @@ public class ShowUserWallServiceShould {
   }
 
   private List<Message> charlieMessages() {
-    return Arrays.asList(new Message(CHARLIE, MESSAGE_TEXT_2, FIFTEEN_SECONDS_AGO));
+    return Collections.singletonList(new Message(CHARLIE, MESSAGE_TEXT_2, FIFTEEN_SECONDS_AGO));
   }
 
   private List<Message> bobMessages() {
@@ -93,6 +93,6 @@ public class ShowUserWallServiceShould {
   }
 
   private List<Message> aliceMessages() {
-    return Arrays.asList(new Message(ALICE, MESSAGE_TEXT_1, FIVE_MINUTES_AGO));
+    return Collections.singletonList(new Message(ALICE, MESSAGE_TEXT_1, FIVE_MINUTES_AGO));
   }
 }

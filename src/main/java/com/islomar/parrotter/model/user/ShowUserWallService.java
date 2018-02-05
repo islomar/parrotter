@@ -5,6 +5,7 @@ import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
 import com.islomar.parrotter.model.message.Message;
 import com.islomar.parrotter.model.message.MessageService;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -44,7 +45,7 @@ public class ShowUserWallService {
 
     return followedUsers.stream()
         .map(user -> messageService.findPersonalMessagesFor(user))
-        .flatMap(messages -> messages.stream())
+        .flatMap(Collection::stream)
         .collect(Collectors.toList());
   }
 }

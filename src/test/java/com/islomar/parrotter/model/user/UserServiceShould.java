@@ -17,7 +17,6 @@ public class UserServiceShould {
   private static final User CHARLIE = new User(CHARLIE_USERNAME);
 
   @Mock UserRepository userRepository;
-  @Mock Console console;
 
   private UserService userService;
 

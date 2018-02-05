@@ -16,6 +16,6 @@ public class CommandRunner {
 
   public void execute(final String inputCommandLine) {
 
-    commands.stream().forEach(command -> command.execute(inputCommandLine));
+    commands.forEach(command -> command.execute(inputCommandLine));
   }
 }

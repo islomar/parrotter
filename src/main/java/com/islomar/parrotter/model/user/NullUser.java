@@ -11,11 +11,6 @@ public class NullUser extends User {
   }
 
   @Override
-  public String getUsername() {
-    return super.getUsername();
-  }
-
-  @Override
   public Set<String> getFollowedUsers() {
     return Sets.newHashSet();
   }

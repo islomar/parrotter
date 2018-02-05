@@ -4,8 +4,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 
@@ -14,7 +12,6 @@ public class InMemoryUserRepositoryShould {
 
   private static final String ALICE_USERNAME = "Alice";
   private static final User ALICE = new User(ALICE_USERNAME);
-  private static final String BOB_USERNAME = "Bob";
 
   private InMemoryUserRepository inMemoryUserRepository;
 
