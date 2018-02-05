@@ -4,8 +4,7 @@ jdk:
 addons:
   sonarcloud:
     organization: islomar-github
-    token:
-      secure: $SONARCLOUD_TOKEN
+    token: $SONARCLOUD_TOKEN
 script:
 - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
 after_success:
