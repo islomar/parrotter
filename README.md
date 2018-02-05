@@ -1,6 +1,9 @@
 [![Build Status](https://travis-ci.org/islomar/parrotter.svg)](https://travis-ci.org/islomar/parrotter)
 [![Coverage Status](https://coveralls.io/repos/islomar/parrotter/badge.svg?branch=master&service=github)](https://coveralls.io/github/islomar/parrotter?branch=master)
-[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=islomar-github:parrotter)](https://sonarcloud.io/dashboard/index/islomar-github:parrotter)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=com.islomar.parrotter%3Aparrotter&metric=alert_status)](https://sonarcloud.io/dashboard?id=com.islomar.parrotter%3Aparrotter)
+
+
+https://sonarcloud.io/api/project_badges/measure?project=com.islomar.parrotter%3Aparrotter&metric=alert_status
 
 # Exercise
 
