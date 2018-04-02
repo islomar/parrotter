@@ -8,11 +8,11 @@ import com.islomar.parrotter.actions.ShowUserWall;
 import com.islomar.parrotter.actions.utils.CommandRunner;
 import com.islomar.parrotter.infrastructure.Console;
 import com.islomar.parrotter.infrastructure.formatters.MessageFormatter;
-import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
-import com.islomar.parrotter.infrastructure.repositories.UserRepository;
-import com.islomar.parrotter.model.message.InMemoryMessageRepository;
+import com.islomar.parrotter.model.message.MessageRepository;
+import com.islomar.parrotter.model.user.UserRepository;
+import com.islomar.parrotter.infrastructure.repositories.InMemoryMessageRepository;
 import com.islomar.parrotter.model.message.MessageService;
-import com.islomar.parrotter.model.user.InMemoryUserRepository;
+import com.islomar.parrotter.infrastructure.repositories.InMemoryUserRepository;
 import com.islomar.parrotter.model.user.ShowUserWallService;
 import com.islomar.parrotter.model.user.UserService;
 

@@ -1,8 +1,10 @@
-package com.islomar.parrotter.model.user;
+package com.islomar.parrotter.infrastructure.repositories;
 
 import com.google.common.collect.Sets;
 
-import com.islomar.parrotter.infrastructure.repositories.UserRepository;
+import com.islomar.parrotter.model.user.UserRepository;
+import com.islomar.parrotter.model.user.NullUser;
+import com.islomar.parrotter.model.user.User;
 
 import java.util.Set;
 

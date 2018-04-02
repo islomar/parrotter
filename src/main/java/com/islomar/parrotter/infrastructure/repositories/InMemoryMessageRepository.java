@@ -1,9 +1,10 @@
-package com.islomar.parrotter.model.message;
+package com.islomar.parrotter.infrastructure.repositories;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
-import com.islomar.parrotter.infrastructure.repositories.MessageRepository;
+import com.islomar.parrotter.model.message.MessageRepository;
+import com.islomar.parrotter.model.message.Message;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,7 +1,5 @@
 package com.islomar.parrotter.model.user;
 
-import com.islomar.parrotter.infrastructure.repositories.UserRepository;
-
 import org.mockito.Mock;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

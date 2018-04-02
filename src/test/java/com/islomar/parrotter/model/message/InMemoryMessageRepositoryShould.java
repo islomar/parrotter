@@ -1,6 +1,7 @@
 package com.islomar.parrotter.model.message;
 
 
+import com.islomar.parrotter.infrastructure.repositories.InMemoryMessageRepository;
 import org.mockito.Mock;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

@@ -1,7 +1,5 @@
 package com.islomar.parrotter.model.user;
 
-import com.islomar.parrotter.infrastructure.repositories.UserRepository;
-
 public class UserService {
 
   private final UserRepository userRepository;

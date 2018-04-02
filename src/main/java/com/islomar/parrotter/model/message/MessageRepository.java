@@ -1,4 +1,4 @@
-package com.islomar.parrotter.infrastructure.repositories;
+package com.islomar.parrotter.model.message;
 
 import com.islomar.parrotter.model.message.Message;
 
