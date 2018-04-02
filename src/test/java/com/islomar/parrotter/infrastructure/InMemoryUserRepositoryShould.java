@@ -1,6 +1,8 @@
-package com.islomar.parrotter.model.user;
+package com.islomar.parrotter.infrastructure;
 
 import com.islomar.parrotter.infrastructure.repositories.InMemoryUserRepository;
+import com.islomar.parrotter.model.user.NullUser;
+import com.islomar.parrotter.model.user.User;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
