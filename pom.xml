@@ -118,7 +118,7 @@
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.2.0</version>
+                <version>1.4.10</version>
              </plugin>
         </plugins>
     </build>
@@ -128,7 +128,7 @@
             <plugin>
                 <groupId>org.pitest</groupId>
                 <artifactId>pitest-maven</artifactId>
-                <version>1.2.0</version>
+                <version>1.4.10</version>
                 <configuration>
                     <skip>false</skip>
                     <reportsDirectory>${project.build.directory}/pit-custom-output-dir</reportsDirectory>
