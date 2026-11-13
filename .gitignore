@@ -16,8 +16,5 @@ target/
 mnw*
 .mvn/
 
-test-output
-
-
 # TestNG reports
 test-output/
